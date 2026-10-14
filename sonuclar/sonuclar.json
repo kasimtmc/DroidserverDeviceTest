@@ -1,0 +1,468 @@
+{
+  "bicim": 1,
+  "guncelleme": "2026-10-14T14:00:45.505Z",
+  "sonuclar": {
+    "a1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:20:18.963Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "a2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:20:14.847Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "a3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:20:25.399Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "a4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:20:33.055Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ag1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:45:03.327Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ak1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:58:19.850Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ak2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:59:05.610Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ar1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:56:53.467Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "bt1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:44:18.439Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "e1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:35:57.495Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "e2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T19:58:31.873Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "e3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T19:58:28.455Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "e4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:12:41.286Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "e5": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:22:39.313Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "e6": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:02.177Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ep1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:35:57.495Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ep2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:41:05.380Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "f1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:28:02.625Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "f2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:31:47.968Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "f3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:33:06.600Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "f4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:33:27.928Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "f5": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:35:09.023Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "f6": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:20:55.725Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "g1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T01:37:46.827Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "g2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T01:38:22.218Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "gz1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:53:25.279Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "h1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:10:29.205Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "h2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:10:44.180Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "h3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:10:57.972Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ie1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:54:53.147Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "ie2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:55:00.715Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "j1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:22:50.156Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "j2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:24:43.435Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "j3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:28:22.857Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "j4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:29:49.152Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "k1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:21:21.174Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "k2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:23:52.676Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "kk1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:49:54.943Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "le1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T01:36:42.563Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "m1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:34:00.677Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:43.696Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:45.240Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:46.248Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:47.776Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o5": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:48.768Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o6": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:50.784Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o7": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:55.712Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "o8": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T20:23:57.200Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "oa1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:42:56.059Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:24:15.963Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:25:06.706Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:26:23.025Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T17:53:57.654Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p5": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T17:54:58.685Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p6": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T18:08:45.667Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "p7": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T18:12:31.487Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "pr1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T14:00:45.505Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "r1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:27:53.691Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "s1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:54:16.400Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "s2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:11:35.804Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "s3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T16:12:17.075Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "sg1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:59:39.378Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:10:27.645Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:15:39.146Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:17:48.953Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u4": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T02:19:01.374Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u5": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:19:25.401Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u6": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:23:57.161Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "u7": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-13T23:25:12.921Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "uz1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T14:00:19.593Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "w1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:38:50.601Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "w2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:40:15.537Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "wh1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:41:38.390Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "wp1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T13:59:43.441Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "y1": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:30:53.367Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "y2": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:31:40.414Z",
+      "kaynak": "claude.ai test sayfası"
+    },
+    "y3": {
+      "durum": "ok",
+      "not": "",
+      "zaman": "2026-10-14T00:32:20.918Z",
+      "kaynak": "claude.ai test sayfası"
+    }
+  }
+}

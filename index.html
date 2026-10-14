@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>DroidServer Cihaz Testi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Düzen: tek sütun, telefonda elde tutulan bir test föyü; üstte ilerleme, altında bölüm bölüm adımlar. */
+:root {
+  --bg: #f4f7f6;
+  --surface: #ffffff;
+  --fg: #16201e;
+  --muted: #5b6b67;
+  --line: #d7e1de;
+  --accent: #0f766e;
+  --accent-soft: #e0f2ef;
+  --ok: #15803d;
+  --ok-soft: #e3f4e8;
+  --bad: #b42318;
+  --bad-soft: #fde8e6;
+  --skip: #8a6d1d;
+  --skip-soft: #f7efd9;
+  --code-bg: #eef3f1;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1513; --surface: #151f1c; --fg: #e3ece9; --muted: #93a6a1; --line: #263532;
+    --accent: #2dd4bf; --accent-soft: #123430; --ok: #4ade80; --ok-soft: #12301d;
+    --bad: #f87171; --bad-soft: #3a1714; --skip: #e3b341; --skip-soft: #33290f; --code-bg: #0b1210;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1513; --surface: #151f1c; --fg: #e3ece9; --muted: #93a6a1; --line: #263532;
+  --accent: #2dd4bf; --accent-soft: #123430; --ok: #4ade80; --ok-soft: #12301d;
+  --bad: #f87171; --bad-soft: #3a1714; --skip: #e3b341; --skip-soft: #33290f; --code-bg: #0b1210;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--font-body); }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 56px; display: grid; gap: 20px; }
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
+h1 { font-size: 1.9rem; line-height: 1.15; }
+h2 { font-size: 1.25rem; }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 62ch; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.meter { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; display: flex; }
+.meter span { display: block; height: 100%; }
+.meter .m-ok { background: var(--ok); } .meter .m-bad { background: var(--bad); } .meter .m-skip { background: var(--skip); }
+.counts { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.counts b { color: var(--fg); }
+.sync { font-size: 0.8rem; color: var(--muted); }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.fields label { display: grid; gap: 4px; font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+input, textarea { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; text-transform: none; letter-spacing: normal; }
+input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hint { font-size: 0.8rem; color: var(--muted); grid-column: 1 / -1; }
+section { display: grid; gap: 10px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.sec-head .sec-count { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sec-note { color: var(--muted); font-size: 0.9rem; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.step[data-status="ok"] { border-left: 4px solid var(--ok); }
+.step[data-status="fail"] { border-left: 4px solid var(--bad); background: linear-gradient(var(--bad-soft), var(--bad-soft)) padding-box; }
+.step[data-status="skip"] { border-left: 4px solid var(--skip); }
+.step-top { display: flex; gap: 10px; align-items: baseline; }
+.sid { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
+.title { font-weight: 600; }
+.body { display: grid; gap: 6px; min-width: 0; }
+.body ul { margin: 0; padding-left: 1.2em; display: grid; gap: 3px; }
+.expect { font-size: 0.9rem; color: var(--muted); }
+.expect strong { color: var(--fg); font-weight: 600; }
+.cmd { display: flex; gap: 8px; align-items: stretch; min-width: 0; }
+.cmd pre { margin: 0; flex: 1; min-width: 0; overflow-x: auto; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: 0.8rem/1.5 var(--font-mono); white-space: pre; }
+code { font-family: var(--font-mono); font-size: 0.85em; background: var(--code-bg); padding: 0 4px; border-radius: 4px; overflow-wrap: anywhere; }
+button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); padding: 6px 12px; }
+.copy { font-size: 0.8rem; padding: 4px 10px; align-self: flex-start; }
+.actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.actions button[aria-pressed="true"].b-ok { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.actions button[aria-pressed="true"].b-fail { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+.actions button[aria-pressed="true"].b-skip { background: var(--skip-soft); border-color: var(--skip); color: var(--skip); }
+.note textarea { min-height: 64px; resize: vertical; }
+.warn { background: var(--skip-soft); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; }
+.footer { color: var(--muted); font-size: 0.85rem; }
+.store { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.store button { font-size: 0.8rem; padding: 4px 10px; }
+.store .primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+:root[data-theme="dark"] .store .primary { color: #04201c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .store .primary { color: #04201c; } }
+.sync[data-kind="warn"] { color: var(--skip); }
+.sync[data-kind="err"] { color: var(--bad); }
+@media (prefers-reduced-motion: no-preference) { .step { transition: border-color .15s ease; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header style="display:grid;gap:8px">
+    <h1>DroidServer cihaz testi</h1>
+    <p class="lead">Her adımı telefonda uygulayın ve <b>Tamam</b>, <b>Sorun</b> ya da <b>Atla</b> ile işaretleyin. Sorunlu adımlara ne gördüğünüzü yazın; Loglar ekranının görüntüsü de çok işe yarar. Sonuçlar <code>sonuclar/</code> klasörüne yazılır; bitince asistanınıza "sonuçlara bak" demeniz yeterli.</p>
+  </header>
+
+  <div class="bar" aria-live="polite">
+    <div class="meter" id="meter"><span class="m-ok"></span><span class="m-bad"></span><span class="m-skip"></span></div>
+    <div class="counts" id="counts"></div>
+    <div class="sync" id="sync">Sonuçlar yükleniyor…</div>
+    <div class="store">
+      <button type="button" id="b-folder" class="primary" hidden>Sonuç klasörüne bağla</button>
+      <button type="button" id="b-copy">Özeti kopyala</button>
+      <button type="button" id="b-export">Dışa aktar (JSON)</button>
+      <button type="button" id="b-import">İçe aktar</button>
+      <input type="file" id="f-import" accept=".json,application/json" hidden>
+    </div>
+  </div>
+
+  <div class="fields">
+    <label for="ip">Telefonun IP adresi
+      <input id="ip" inputmode="decimal" placeholder="192.168.1.42" autocomplete="off">
+    </label>
+    <label for="key">API anahtarı
+      <input id="key" placeholder="ds_…" autocomplete="off" spellcheck="false">
+    </label>
+    <p class="hint">Komutlar bu iki değerle dolar. IP Durum ekranında yazar; anahtarı Sihirbaz &gt; Güvenlik'te "Kopyala" ile alırsınız. Anahtar hiçbir yere kaydedilmez, yalnızca bu sayfa açıkken kullanılır.</p>
+  </div>
+
+  <div id="sections"></div>
+
+  <p class="footer">Adımlar <code>adimlar.json</code>'da, sonuçlar <code>sonuclar/sonuclar.json</code>'da. Asistanlar için açıklama: <code>AGENTS.md</code>. Paket adı <code>dev.droidserver.app</code>.</p>
+</div>
+
+<script src="adimlar.js"></script>
+<script src="sayfa.js"></script>
+</body>
+</html>

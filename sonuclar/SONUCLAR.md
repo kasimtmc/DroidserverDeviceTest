@@ -1,0 +1,218 @@
+# DroidServer cihaz testi: sonuçlar
+
+> Bu dosya `sonuclar/sonuclar.json`'dan otomatik üretilir; elle düzenlemeyin.
+
+- Son güncelleme: 2026-10-14T14:00:45.505Z
+- 120 adım: Tamam 77, Sorun 0, Atlandı 0, Bekliyor 43
+
+## Sorunlar (0)
+
+Yok.
+
+## Atlananlar (0)
+
+Yok.
+
+## Bekleyenler (43)
+
+- **fk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Seçim alanı ve kurallar
+- **fk2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Hesaplanan alan
+- **gc1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Geçmiş
+- **gc2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Çöp kutusu
+- **kt1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Kotalar
+- **td1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › İki adımlı doğrulama
+- **td2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › E-postayla kodla giriş
+- **td3** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Panelde doğrulayıcı kodu
+- **pf1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Tam metin dizini
+- **pf2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › ETag ve sıkıştırma
+- **by1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Bulut yedeği
+- **by2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Buluttan geri yükleme
+- **sdk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › İstemci SDK'sı
+- **sm1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Panelden şema düzenleme
+- **f13a1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Denetim kaydı
+- **f13g1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Güvenlik duvarı: otomatik engel
+- **f13g2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Güvenlik duvarı: izin listesi
+- **f13s1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Sağlık uyarıları: Telegram
+- **f13s2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Sağlık uyarıları: gerçek durum
+- **f13j1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Arka plan iş kuyruğu
+- **f13t1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Hazır uygulama şablonu
+- **f13q1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › QR ile bağlanma ve panel girişi
+- **f13q2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Yerel ağ keşfi
+- **f13r1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Canlı kopya: kurulum
+- **f13r2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Canlı kopya: devralma
+- **f13l1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › İngilizce arayüz
+- **f14r1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Özel rol
+- **f14e1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Şifreli alan
+- **f14t1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Saklama süresi
+- **f14v1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Görünüm ve rapor
+- **f14w1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › WebSocket kanalı
+- **f14s1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › SMS ve konum
+- **f14l1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Uygulama kilidi
+- **f14d1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Sorun giderici
+- **f15e1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Ortam ve sırlar
+- **f15e2** · Ortam, kendi uygulamalar ve katalog (Faz 15) › .env metni, içe ve dışa aktarma
+- **f15k1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Katalog: Node.js kur
+- **f15a1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › İlk uygulama (zip)
+- **f15a2** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Bozuk sürüm geri alınır
+- **f15a3** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Giriş gerektiren uygulama
+- **f15g1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Git'ten deploy (isteğe bağlı)
+- **f15r1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Redis
+- **f15p1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Python ve Java (isteğe bağlı)
+
+## Tamamlananlar (77)
+
+- **h1** · Hazırlık › APK'yı kur
+  - Zaman: 2026-10-13T16:10:29.205Z
+- **h2** · Hazırlık › Ağ ve bilgisayar
+  - Zaman: 2026-10-13T16:10:44.180Z
+- **h3** · Hazırlık › İzinler
+  - Zaman: 2026-10-13T16:10:57.972Z
+- **s1** · İlk kurulum (SQLite) › Sihirbaz: Genel ve Veritabanı
+  - Zaman: 2026-10-14T02:54:16.400Z
+- **s2** · İlk kurulum (SQLite) › Sihirbaz: Koleksiyon, Güvenlik, Erişim
+  - Zaman: 2026-10-13T16:11:35.804Z
+- **s3** · İlk kurulum (SQLite) › Özet ve deploy
+  - Zaman: 2026-10-13T16:12:17.075Z
+- **a1** · API (bilgisayardan) › Sağlık kontrolü
+  - Zaman: 2026-10-13T16:20:18.963Z
+- **a2** · API (bilgisayardan) › Kayıt ekle
+  - Zaman: 2026-10-13T16:20:14.847Z
+- **a3** · API (bilgisayardan) › Anahtarsız istek reddedilir
+  - Zaman: 2026-10-13T16:20:25.399Z
+- **a4** · API (bilgisayardan) › Listele
+  - Zaman: 2026-10-13T16:20:33.055Z
+- **k1** · Kalıcılık › Uygulamayı kapatıp aç
+  - Zaman: 2026-10-13T16:21:21.174Z
+- **k2** · Kalıcılık › Telefonu yeniden başlat
+  - Zaman: 2026-10-13T16:23:52.676Z
+- **p1** · PostgreSQL › Bileşen deposu adresi dolu
+  - Zaman: 2026-10-13T16:24:15.963Z
+- **p2** · PostgreSQL › Bileşeni kur
+  - Zaman: 2026-10-13T16:25:06.706Z
+- **p3** · PostgreSQL › Taşıma seçimleri
+  - Zaman: 2026-10-13T16:26:23.025Z
+- **p4** · PostgreSQL › Deploy ve veri taşıma
+  - Zaman: 2026-10-13T17:53:57.654Z
+- **p5** · PostgreSQL › Kayıtlar taşındı
+  - Zaman: 2026-10-13T17:54:58.685Z
+- **p6** · PostgreSQL › Yeniden başlatmalarda Postgres geri gelir
+  - Zaman: 2026-10-13T18:08:45.667Z
+- **p7** · PostgreSQL › Postgres çökerse (isteğe bağlı, adb gerekir)
+  - Zaman: 2026-10-13T18:12:31.487Z
+- **e1** · İnternetten erişim › Cloudflare hızlı tünel
+  - Zaman: 2026-10-14T02:35:57.495Z
+- **e2** · İnternetten erişim › Doğrudan erişim: Wi-Fi
+  - Zaman: 2026-10-13T19:58:31.873Z
+- **e3** · İnternetten erişim › Doğrudan erişim: mobil veri
+  - Zaman: 2026-10-13T19:58:28.455Z
+- **e4** · İnternetten erişim › Tailscale
+  - Zaman: 2026-10-13T20:12:41.286Z
+- **e5** · İnternetten erişim › Hatalı anahtar engeli
+  - Zaman: 2026-10-13T20:22:39.313Z
+- **e6** · İnternetten erişim › Kimlik doğrulamasız onay
+  - Zaman: 2026-10-13T20:23:02.177Z
+- **u1** · Kullanıcılar ve kurallar (Faz 5) › Sihirbaz: kullanıcı hesaplarını aç
+  - Zaman: 2026-10-13T23:10:27.645Z
+- **u2** · Kullanıcılar ve kurallar (Faz 5) › Kayıt ol
+  - Zaman: 2026-10-13T23:15:39.146Z
+- **u3** · Kullanıcılar ve kurallar (Faz 5) › Kullanıcı olarak kayıt ekle ve listele
+  - Zaman: 2026-10-13T23:17:48.953Z
+- **u4** · Kullanıcılar ve kurallar (Faz 5) › Başka kullanıcı göremez
+  - Zaman: 2026-10-14T02:19:01.374Z
+- **u5** · Kullanıcılar ve kurallar (Faz 5) › Yenileme token'ı tek kullanımlık
+  - Zaman: 2026-10-13T23:19:25.401Z
+- **u6** · Kullanıcılar ve kurallar (Faz 5) › Uygulamadan parola sıfırla
+  - Zaman: 2026-10-13T23:23:57.161Z
+- **u7** · Kullanıcılar ve kurallar (Faz 5) › Giriş denemesi sınırı
+  - Zaman: 2026-10-13T23:25:12.921Z
+- **f1** · Dosyalar ve statik site (Faz 6) › Sihirbaz: fotoğraf koleksiyonu
+  - Zaman: 2026-10-13T23:28:02.625Z
+- **f2** · Dosyalar ve statik site (Faz 6) › Fotoğraf yükle
+  - Zaman: 2026-10-13T23:31:47.968Z
+- **f3** · Dosyalar ve statik site (Faz 6) › Tarayıcıda aç ve küçük resim
+  - Zaman: 2026-10-13T23:33:06.600Z
+- **f4** · Dosyalar ve statik site (Faz 6) › Sahte uzantı ve büyük dosya reddedilir
+  - Zaman: 2026-10-13T23:33:27.928Z
+- **f5** · Dosyalar ve statik site (Faz 6) › Kayıt silinince dosya da silinir
+  - Zaman: 2026-10-13T23:35:09.023Z
+- **f6** · Dosyalar ve statik site (Faz 6) › Statik site
+  - Zaman: 2026-10-14T00:20:55.725Z
+- **j1** · Script'ler (Faz 7) › Script'leri aç ve örneği yükle
+  - Zaman: 2026-10-14T00:22:50.156Z
+- **j2** · Script'ler (Faz 7) › Sözdizimi hatası deploy'u reddeder
+  - Zaman: 2026-10-14T00:24:43.435Z
+- **j3** · Script'ler (Faz 7) › Kayıt olayı
+  - Zaman: 2026-10-14T00:28:22.857Z
+- **j4** · Script'ler (Faz 7) › Sonsuz döngü sunucuyu düşürmez
+  - Zaman: 2026-10-14T00:29:49.152Z
+- **y1** · Yedek, metrikler, web paneli (Faz 8) › Yedek al ve klasöre kopyala
+  - Zaman: 2026-10-14T00:30:53.367Z
+- **y2** · Yedek, metrikler, web paneli (Faz 8) › Geri yükle
+  - Zaman: 2026-10-14T00:31:40.414Z
+- **y3** · Yedek, metrikler, web paneli (Faz 8) › Zamanlanmış yedek
+  - Zaman: 2026-10-14T00:32:20.918Z
+- **m1** · Yedek, metrikler, web paneli (Faz 8) › Metrikler
+  - Zaman: 2026-10-14T00:34:00.677Z
+- **w1** · Yedek, metrikler, web paneli (Faz 8) › Web paneline giriş
+  - Zaman: 2026-10-14T00:38:50.601Z
+- **w2** · Yedek, metrikler, web paneli (Faz 8) › Panelden işler
+  - Zaman: 2026-10-14T00:40:15.537Z
+- **le1** · Sertifika ve güncelleme (Faz 9) › Let's Encrypt sertifikası
+  - Zaman: 2026-10-14T01:36:42.563Z
+- **g1** · Sertifika ve güncelleme (Faz 9) › Güncelleme denetimi
+  - Zaman: 2026-10-14T01:37:46.827Z
+- **g2** · Sertifika ve güncelleme (Faz 9) › Yayın sürümüyle güncelleme (isteğe bağlı)
+  - Zaman: 2026-10-14T01:38:22.218Z
+- **r1** · Canlı, arama, e-posta, API (Faz 10) › Canlı abonelik
+  - Zaman: 2026-10-14T02:27:53.691Z
+- **ar1** · Canlı, arama, e-posta, API (Faz 10) › Arama
+  - Zaman: 2026-10-14T02:56:53.467Z
+- **ep1** · Canlı, arama, e-posta, API (Faz 10) › E-posta ayarı ve deneme
+  - Zaman: 2026-10-14T02:35:57.495Z
+- **ep2** · Canlı, arama, e-posta, API (Faz 10) › Parola sıfırlama
+  - Zaman: 2026-10-14T02:41:05.380Z
+- **oa1** · Canlı, arama, e-posta, API (Faz 10) › OpenAPI ve API sekmesi
+  - Zaman: 2026-10-14T02:42:56.059Z
+- **wh1** · Entegrasyon ve ince yetki (Faz 11) › Webhook
+  - Zaman: 2026-10-14T13:41:38.390Z
+- **bt1** · Entegrasyon ve ince yetki (Faz 11) › Toplu işlem
+  - Zaman: 2026-10-14T13:44:18.439Z
+- **ag1** · Entegrasyon ve ince yetki (Faz 11) › Özet
+  - Zaman: 2026-10-14T13:45:03.327Z
+- **kk1** · Entegrasyon ve ince yetki (Faz 11) › Koşullu kural
+  - Zaman: 2026-10-14T13:49:54.943Z
+- **gz1** · Entegrasyon ve ince yetki (Faz 11) › Gizli alan
+  - Zaman: 2026-10-14T13:53:25.279Z
+- **ie1** · Entegrasyon ve ince yetki (Faz 11) › Dışa aktar (Excel)
+  - Zaman: 2026-10-14T13:54:53.147Z
+- **ie2** · Entegrasyon ve ince yetki (Faz 11) › İçe aktar
+  - Zaman: 2026-10-14T13:55:00.715Z
+- **ak1** · Entegrasyon ve ince yetki (Faz 11) › Adlandırılmış anahtar
+  - Zaman: 2026-10-14T13:58:19.850Z
+- **ak2** · Entegrasyon ve ince yetki (Faz 11) › Anahtarı iptal et
+  - Zaman: 2026-10-14T13:59:05.610Z
+- **sg1** · Entegrasyon ve ince yetki (Faz 11) › Google ile giriş (isteğe bağlı)
+  - Zaman: 2026-10-14T13:59:39.378Z
+- **wp1** · Entegrasyon ve ince yetki (Faz 11) › Web push (isteğe bağlı)
+  - Zaman: 2026-10-14T13:59:43.441Z
+- **uz1** · Entegrasyon ve ince yetki (Faz 11) › Uzman modu
+  - Zaman: 2026-10-14T14:00:19.593Z
+- **pr1** · Entegrasyon ve ince yetki (Faz 11) › Sunucu profilleri
+  - Zaman: 2026-10-14T14:00:45.505Z
+- **o1** · Kullanıcı seçenekleri › Alan ekle ve veri gir
+  - Zaman: 2026-10-13T20:23:43.696Z
+- **o2** · Kullanıcı seçenekleri › Tipi değiştir: Dönüştür
+  - Zaman: 2026-10-13T20:23:45.240Z
+- **o3** · Kullanıcı seçenekleri › Parolayı değiştir
+  - Zaman: 2026-10-13T20:23:46.248Z
+- **o4** · Kullanıcı seçenekleri › Parolayı sıfırla
+  - Zaman: 2026-10-13T20:23:47.776Z
+- **o5** · Kullanıcı seçenekleri › Dolu hedefe taşıma: durdur
+  - Zaman: 2026-10-13T20:23:48.768Z
+- **o6** · Kullanıcı seçenekleri › Dolu hedefe taşıma: üzerine yaz
+  - Zaman: 2026-10-13T20:23:50.784Z
+- **o7** · Kullanıcı seçenekleri › Örnek anahtar uyarısı
+  - Zaman: 2026-10-13T20:23:55.712Z
+- **o8** · Kullanıcı seçenekleri › Postgres verisini sil (isteğe bağlı, geri alınamaz)
+  - Zaman: 2026-10-13T20:23:57.200Z
+
