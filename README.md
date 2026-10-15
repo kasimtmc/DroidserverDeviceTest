@@ -41,4 +41,6 @@ Asistan önce `sonuclar/SONUCLAR.md`'yi okur. Bu dosyada sorunlar en üstte, not
 
 İlk sonuçlar, 14 Ekim 2026'ya kadar claude.ai'deki test sayfasında işaretlenen 77 adımdır. O sayfa bundan sonra bu klasörle eşitlenmez; yeni sonuçları buraya girin.
 
+15 Ekim 2026 güncellemesi: **Yeni arayüz** (ui1-ui5) ve **Faz 16** (otomasyon, formlar, GraphQL, yapay zekâ ve anlamsal arama; f16o1-f16y6) bölümleri eklendi. Ekran adları değiştiği için f13g2 (güvenlik duvarı izin listesi) ve f13r1 (canlı kopya kurulumu) adımlarının metni güncellendi. Var olan sonuçlar korunur.
+
 Klasör bir git deposudur. Sonuçların sürümlerini saklamak isterseniz zaman zaman `git add -A && git commit -m "sonuçlar"` çalıştırabilirsiniz. `.anahtar` dosyası git'e girmez.

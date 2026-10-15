@@ -3,7 +3,7 @@
 > Bu dosya `sonuclar/sonuclar.json`'dan otomatik üretilir; elle düzenlemeyin.
 
 - Son güncelleme: 2026-10-14T14:00:45.505Z
-- 120 adım: Tamam 77, Sorun 0, Atlandı 0, Bekliyor 43
+- 137 adım: Tamam 77, Sorun 0, Atlandı 0, Bekliyor 60
 
 ## Sorunlar (0)
 
@@ -13,7 +13,7 @@ Yok.
 
 Yok.
 
-## Bekleyenler (43)
+## Bekleyenler (60)
 
 - **fk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Seçim alanı ve kurallar
 - **fk2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Hesaplanan alan
@@ -58,6 +58,23 @@ Yok.
 - **f15g1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Git'ten deploy (isteğe bağlı)
 - **f15r1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Redis
 - **f15p1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Python ve Java (isteğe bağlı)
+- **ui1** · Yeni arayüz › Tema
+- **ui2** · Yeni arayüz › Sunucu ekranı ve arama
+- **ui3** · Yeni arayüz › Durum panosu
+- **ui4** · Yeni arayüz › Boş durumlar ve ipuçları
+- **ui5** · Yeni arayüz › Web paneli
+- **f16o1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Otomasyon: kayıt eklenince
+- **f16o2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Otomasyon: zamanlanmış ve Şimdi dene
+- **f16f1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Form: oluştur ve gönder
+- **f16f2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Form: spam koruması
+- **f16g1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › GraphQL: sorgu ve ekleme
+- **f16g2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › GraphQL: şema, hata ve yetki
+- **f16y1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: sağlayıcı ve anahtar
+- **f16y2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: sohbet
+- **f16y3** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: erişim ve günlük sınır
+- **f16y4** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: kayıtlara soru
+- **f16y5** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Anlamsal arama
+- **f16y6** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Başka sağlayıcı veya yerel model (isteğe bağlı)
 
 ## Tamamlananlar (77)
 

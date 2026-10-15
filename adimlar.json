@@ -811,7 +811,7 @@
           "id": "f13g2",
           "baslik": "Güvenlik duvarı: izin listesi",
           "yapilacaklar": [
-            "Güvenlik duvarında <b>Yalnızca bu adreslere izin ver</b>: kendi ağınız (örn. <code>192.168.1.0/24</code>). Deploy; mobil veriye geçmiş başka bir telefondan (tünel/doğrudan erişimle) istek atın. Sonra listeyi boşaltın."
+            "Sihirbaz &gt; Güvenlik &gt; Güvenlik duvarı &gt; <b>Yalnızca izin verilenler</b>: kendi ağınızı yazın (örn. <code>192.168.1.0/24</code>). Deploy; mobil veriye geçmiş başka bir telefondan (tünel/doğrudan erişimle) istek atın. Sonra listeyi boşaltın."
           ],
           "beklenen": "Ağ dışından gelen istek 403; yerel ağdan çalışır."
         },
@@ -870,8 +870,8 @@
           "id": "f13r1",
           "baslik": "Canlı kopya: kurulum",
           "yapilacaklar": [
-            "Ana telefonda Sihirbaz &gt; Veritabanı &gt; <b>Canlı kopya</b> &gt; <b>Bu sunucu kopyalanabilir</b>. Deploy.",
-            "İkinci telefonda DroidServer'ı kurun, sihirbazda Veritabanı &gt; Canlı kopya &gt; <b>Bu sunucu bir kopya</b>: ana sunucunun API adresi (örn. <code>http://192.168.1.20:8080/api</code>) ve yönetici anahtarı. Deploy."
+            "Ana telefonda Sihirbaz &gt; Veritabanı &gt; Canlı kopya &gt; <b>Bu sunucu kopyalanabilir</b>. Deploy.",
+            "İkinci telefonda DroidServer'ı kurun; sihirbazda Veritabanı &gt; Canlı kopya &gt; <b>Bu telefonu başka bir sunucunun kopyası yap…</b>: <b>Yerel ağda ara</b> veya ana sunucunun API adresini (örn. <code>http://192.168.1.20:8080/api</code>) ve yönetici anahtarını yazın &gt; <b>Bağlan ve kopya olarak ayarla</b>. Deploy."
           ],
           "beklenen": "Kopyanın Durum ekranında \"Canlı kopya\" kartı: son eşitleme birkaç saniye önce. Ana telefonda kayıt ekleyince birkaç saniyede kopyada görünür; dosyalar da gelir. Kopyaya yazma isteği 503 \"salt okunur kopya\"."
         },
@@ -1054,6 +1054,178 @@
             "<b>python</b>'u kurup bir uygulama ekleyin: ortam python, komut <code>python3 -m http.server 3001 --bind 127.0.0.1</code>, port 3001, sağlık yolu <code>/</code>; boş bir zip yükleyin. Java için <b>openjdk</b> ve bir <code>app.jar</code> ile <code>java -Xmx256m -jar app.jar</code>."
           ],
           "beklenen": "<code>/apps/&lt;ad&gt;/</code> dizin listesini (Python) veya uygulamanızı (Java) döndürür. Kurulum veya başlatma hatası olursa Loglar görüntüsü alın."
+        }
+      ]
+    },
+    {
+      "id": "arayuz",
+      "baslik": "Yeni arayüz",
+      "not": "Tema, sunucu ekranı, durum panosu ve web paneli yenilendi. Bu bölüm görünüş ve gezinme içindir; bir şey yanlış yerdeyse veya okunmuyorsa ekran görüntüsüyle not düşün.",
+      "adimlar": [
+        {
+          "id": "ui1",
+          "baslik": "Tema",
+          "yapilacaklar": [
+            "Durum &gt; ⚙ <b>Ayarlar</b> &gt; <b>Tema</b>: <b>Koyu</b>, sonra <b>Açık</b>, sonra <b>Telefon</b>. Android 12 ve üstündeyseniz <b>Duvar kâğıdı renkleri</b>'ni açıp kapatın.",
+            "Uygulamayı kapatıp açın."
+          ],
+          "beklenen": "Tüm ekranlar seçilen temaya geçer, yazılar her iki temada okunur. Duvar kâğıdı renkleri açıkken renkler telefonun temasından gelir. Seçim yeniden açılışta korunur."
+        },
+        {
+          "id": "ui2",
+          "baslik": "Sunucu ekranı ve arama",
+          "yapilacaklar": [
+            "Alttaki <b>Sunucu</b> sekmesi: araçlar <b>Tasarım</b>, <b>Veri</b>, <b>Geliştirici</b>, <b>Güvenlik ve işletim</b> gruplarında.",
+            "Üstteki arama kutusuna <code>yedek</code>, sonra <code>webhook</code> yazın."
+          ],
+          "beklenen": "Yalnızca eşleşen araçlar kalır (örn. <b>Yedekler</b>); arama silinince tüm gruplar geri gelir. Kartlara dokununca ilgili ekran açılır."
+        },
+        {
+          "id": "ui3",
+          "baslik": "Durum panosu",
+          "yapilacaklar": [
+            "Sunucu çalışırken Durum ekranına bakın. Bilgisayardan birkaç istek atın, ekrana dönün."
+          ],
+          "komut": "curl -H \"Authorization: Bearer {KEY}\" http://{IP}:8080/api/collections/todos/records",
+          "beklenen": "<b>Son 1 saat</b> (istek ve hata sayısı), <b>Pil</b>, <b>Süreçler</b>, <b>Uyarılar</b> kartları ve <b>Araçlar</b> (Sorun giderici, Bağlan (QR), İstemci erişimi / token) görünür. İstek sayısı artar; sorun yoksa \"her şey yolunda\"."
+        },
+        {
+          "id": "ui4",
+          "baslik": "Boş durumlar ve ipuçları",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>Formlar</b>'ı form yokken açın. Bir ekrandaki ipucu kartını ✕ ile kapatın, ekrandan çıkıp geri girin."
+          ],
+          "beklenen": "Boş ekranda açıklama ve <b>Form ekle</b> düğmesi görünür. Kapatılan ipucu bir daha çıkmaz."
+        },
+        {
+          "id": "ui5",
+          "baslik": "Web paneli",
+          "yapilacaklar": [
+            "Bilgisayarda ve telefonun tarayıcısında aşağıdaki adresi açıp eşleştirme koduyla girin; birkaç sayfayı gezin."
+          ],
+          "komut": "http://{IP}:8080/_admin",
+          "beklenen": "Panel yeni renklerle açılır; telefon genişliğinde menü ve tablolar taşmadan kullanılır."
+        }
+      ]
+    },
+    {
+      "id": "faz16",
+      "baslik": "Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16)",
+      "not": "Faz 16 konfigürasyonu v16'ya yükseltir; \"Konfigürasyon sürümü yükseltilsin mi?\" kartını onaylayın. Yapay zekâ adımları seçtiğiniz sağlayıcıda (Claude, OpenAI veya Gemini) çok küçük bir ücret doğurur; ücretsiz denemek isterseniz bilgisayardaki Ollama ile OpenAI uyumlu seçenek kullanılabilir (f16y6). Anahtarları buraya veya notlara yazmayın.",
+      "adimlar": [
+        {
+          "id": "f16o1",
+          "baslik": "Otomasyon: kayıt eklenince",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>Otomasyonlar</b> &gt; <b>Kural ekle</b>: ad <code>yeni-gorev</code>; <b>Ne zaman?</b> <b>Kayıt olayında</b>, koleksiyon <code>todos</code>, <b>eklenince</b>; <b>Koşul (isteğe bağlı)</b>: <code>done=false</code>.",
+            "<b>Ne yapılsın?</b> &gt; <b>Eylem ekle</b> &gt; <b>Loga yaz</b>: metin <code>Yeni görev: {title}</code>. E-posta ayarlıysa ikinci eylem <b>E-posta gönder</b> (alıcı kendi adresiniz, konu <code>{title}</code>). <b>Kaydet ve deploy et</b>.",
+            "Komutu çalıştırın; sonra <code>\"done\": true</code> ile bir kayıt daha ekleyin."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/collections/todos/records -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"ekmek al\", \"done\": false}'",
+          "beklenen": "İlk kayıttan sonra Loglar'da <code>Otomasyon 'yeni-gorev': Yeni görev: ekmek al</code> (e-posta açıksa posta da gelir); Otomasyonlar &gt; <b>Son çalışmalar</b>'da başarılı satır. <code>done: true</code> olan kayıt kuralı tetiklemez."
+        },
+        {
+          "id": "f16o2",
+          "baslik": "Otomasyon: zamanlanmış ve Şimdi dene",
+          "yapilacaklar": [
+            "<b>Kural ekle</b>: ad <code>toplu-bitir</code>; <b>Belirli zamanlarda</b> &gt; <b>Her gece 03:00</b>; koleksiyon <code>todos</code>, koşul <code>done=false</code>; eylem <b>Kaydı güncelle</b>: alan <code>done</code> = <code>true</code>. Kaydedin.",
+            "Kuralın kartında <b>Şimdi dene</b>'ye basın. Sonra kuralı <b>Kuralı sil</b> ile kaldırın (her gece çalışmasın)."
+          ],
+          "beklenen": "Bitmemiş todos kayıtlarının hepsi <code>done: true</code> olur (en çok 1000). Son çalışmalar'da kaç kaydın güncellendiği görünür. Değeri zaten aynı olan kayıt yeniden yazılmaz."
+        },
+        {
+          "id": "f16f1",
+          "baslik": "Form: oluştur ve gönder",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>Formlar</b> &gt; <b>Form ekle</b>: başlık <code>Bize yazın</code>, adres <code>iletisim</code>, <b>Kayıtlar nereye?</b> <code>notes</code>; alanlarda <code>body</code> için <b>Çok satırlı</b>. <b>Kaydet ve deploy et</b>.",
+            "Karttaki <b>Aç</b> ile (veya bilgisayarda aşağıdaki adresi) açın. Önce <code>slug</code>'ı boş bırakıp gönderin; sonra <code>slug</code> = <code>form-1</code>, bir metin yazıp 2-3 saniye sonra gönderin."
+          ],
+          "komut": "http://{IP}:8080/forms/iletisim",
+          "beklenen": "Boş <code>slug</code>'da hata alanın altında görünür, yazdığınız metin kaybolmaz. İkinci gönderimde teşekkür sayfası (\"Teşekkürler, gönderildi.\"); <code>notes</code>'ta <code>form-1</code> kaydı. Sayfa telefon ekranında da düzgün görünür."
+        },
+        {
+          "id": "f16f2",
+          "baslik": "Form: spam koruması",
+          "yapilacaklar": [
+            "Önce komutu çalıştırın (formu açmadan doğrudan gönderim).",
+            "Sonra formu tarayıcıdan art arda gönderin: her seferinde teşekkür sayfasındaki <b>Yeni gönderim</b>'e basın, farklı bir <code>slug</code> yazın (<code>form-2</code>, <code>form-3</code>…), 2-3 saniye bekleyip gönderin. Sınır 10 dakikada 5 gönderimdir (f16f1'deki iki deneme de sayılır)."
+          ],
+          "komut": "curl -i -X POST http://{IP}:8080/forms/iletisim -d \"f.slug=bot&f.body=deneme\"",
+          "beklenen": "Komut kayıt eklemez: HTTP 400 ve \"Form süresi doldu; sayfayı yenileyip yeniden gönderin\" (sayfadaki gizli doğrulama alanı yok). Tarayıcıda sınır dolunca 429 ve \"Çok fazla gönderim; biraz sonra yeniden deneyin.\" Çok hızlı gönderilirse \"Form çok hızlı gönderildi\"."
+        },
+        {
+          "id": "f16g1",
+          "baslik": "GraphQL: sorgu ve ekleme",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Genel &gt; <b>GraphQL</b>'i açın, deploy edin.",
+            "İki komutu sırayla çalıştırın."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/graphql -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"query\": \"{ todos(perPage: 5, sort: \\\"-id\\\") { totalItems items { id title done } } }\"}'\n\ncurl -X POST http://{IP}:8080/api/graphql -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"query\": \"mutation { create_todos(data: {title: \\\"graphql ile\\\"}) { id title } }\"}'",
+          "beklenen": "İlk komut <code>{\"data\":{\"todos\":{\"totalItems\":…,\"items\":[…]}}}</code>; ikincisi yeni kaydın <code>id</code>'sini döndürür ve kayıt REST listesinde de görünür (f16o1 kuralı açıksa Loglar'a da düşer)."
+        },
+        {
+          "id": "f16g2",
+          "baslik": "GraphQL: şema, hata ve yetki",
+          "yapilacaklar": [
+            "Üç komutu çalıştırın: şema, olmayan alan, anahtarsız istek."
+          ],
+          "komut": "curl -H \"Authorization: Bearer {KEY}\" http://{IP}:8080/api/graphql/schema\n\ncurl -X POST http://{IP}:8080/api/graphql -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" -d '{\"query\": \"{ todos { items { yok } } }\"}'\n\ncurl -X POST http://{IP}:8080/api/graphql -H \"Content-Type: application/json\" -d '{\"query\": \"{ todos { totalItems } }\"}'",
+          "beklenen": "Şema metninde <code>type Query {</code> ve <code>create_todos(data: JSON!)</code>. Olmayan alanda HTTP 200 ve <code>errors</code> içinde <code>'yok'</code> geçen ileti. Anahtarsız istekte <code>todos</code> <code>null</code>, <code>errors[0].extensions.code</code> 401 veya 403."
+        },
+        {
+          "id": "f16y1",
+          "baslik": "Yapay zekâ: sağlayıcı ve anahtar",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>Yapay zekâ</b>: <b>Yapay zekâ açık</b>; sağlayıcı seçin (<b>Claude (Anthropic)</b>, <b>OpenAI</b> veya <b>Google Gemini</b>). <b>Anahtar al</b> ile sağlayıcının sayfasından anahtar alıp yapıştırın, bir model seçin. <b>Kaydet ve deploy et</b>.",
+            "Sunucu &gt; <b>Gelişmiş (JSON)</b>'da <code>ai</code> bölümüne bakın."
+          ],
+          "beklenen": "Deploy sorunsuz; anahtar alanında \"Kayıtlı anahtar korunuyor\". JSON'da anahtar düz metin değil, <code>\"apiKey\": \"secret:ai_api_key_…\"</code>. Sunucu ekranındaki Yapay zekâ kartında \"… açık\"."
+        },
+        {
+          "id": "f16y2",
+          "baslik": "Yapay zekâ: sohbet",
+          "yapilacaklar": [
+            "Komutu çalıştırın; sonra Yapay zekâ ekranındaki <b>Bugün</b> kartına bakın."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/ai/chat -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"prompt\": \"Merhaba, tek cümleyle kendini tanıt.\"}'",
+          "beklenen": "Birkaç saniyede <code>{\"text\":\"…\",\"model\":\"…\",\"stopReason\":\"end_turn\",\"refused\":false,\"usage\":{…}}</code>. Bugün kartında 1 istek ve token sayıları."
+        },
+        {
+          "id": "f16y3",
+          "baslik": "Yapay zekâ: erişim ve günlük sınır",
+          "yapilacaklar": [
+            "Yapay zekâ ekranında <b>Kişi başı günlük istek</b>: <code>2</code>, kaydedin.",
+            "Anahtarsız komutu çalıştırın. Kullanıcı hesapları açıksa (u1) u2'deki kullanıcının token'ıyla ikinci komutu 3 kez çalıştırın. Sonra sınırı eski değerine (50) getirin."
+          ],
+          "komut": "curl -i -X POST http://{IP}:8080/api/ai/chat -H \"Content-Type: application/json\" -d '{\"prompt\": \"selam\"}'\n\ncurl -i -X POST http://{IP}:8080/api/ai/chat -H \"Authorization: Bearer <kullanıcı token'ı>\" -H \"Content-Type: application/json\" -d '{\"prompt\": \"selam\"}'",
+          "beklenen": "Anahtarsız istek 401. Kullanıcıyla ilk iki istek yanıt verir (<code>remaining</code> 1, 0); üçüncüsü 429 \"Günlük YZ sınırı doldu\". Yönetici anahtarı sınırlanmaz."
+        },
+        {
+          "id": "f16y4",
+          "baslik": "Yapay zekâ: kayıtlara soru",
+          "yapilacaklar": [
+            "todos'ta birkaç kayıt olsun (bazıları <code>done: false</code>). Komutu çalıştırın."
+          ],
+          "komut": "curl -X POST \"http://{IP}:8080/api/ai/ask/todos?done=false\" -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"question\": \"Bitmemiş görevlerim neler?\"}'",
+          "beklenen": "Yanıtın <code>text</code>'i yalnızca kayıtlara dayanır ve <code>[#id]</code> kaynakları içerir; <code>sources</code> kullanılan kayıt kimliklerini listeler. Kayıtlarda olmayan bir şey sorulursa \"kayıtlarda yok\" türünde yanıt verir."
+        },
+        {
+          "id": "f16y5",
+          "baslik": "Anlamsal arama",
+          "yapilacaklar": [
+            "Yapay zekâ &gt; <b>Anlamsal arama</b>: <b>Voyage AI</b> (anahtar: dash.voyageai.com) veya <b>OpenAI uyumlu (Ollama, LM Studio…)</b> seçin. Ollama için bilgisayarda <code>ollama pull nomic-embed-text</code>, Ollama'yı ağa açın (<code>OLLAMA_HOST=0.0.0.0 ollama serve</code>), adres <code>http://&lt;bilgisayarın IP'si&gt;:11434/v1</code>, anahtar boş.",
+            "<b>Dizinlenecek alanlar</b>: todos &gt; <code>title</code>. Kaydet ve deploy et. todos'a <code>Otomobilin lastiğini değiştir</code> ve <code>Elma ile armut al</code> başlıklı iki kayıt ekleyin; komutu çalıştırın."
+          ],
+          "komut": "curl -H \"Authorization: Bearer {KEY}\" \"http://{IP}:8080/api/ai/search/todos?q=araba\"",
+          "beklenen": "Yapay zekâ ekranında \"todos: N kayıt dizinde\" (bekleyen yoksa). Aramada kelime geçmese de otomobil kaydı ilk sırada, <code>_score</code> değeriyle. Gömme servisine ulaşılamazsa ekranda hata görünür ve bir dakika sonra yeniden denenir."
+        },
+        {
+          "id": "f16y6",
+          "baslik": "Başka sağlayıcı veya yerel model (isteğe bağlı)",
+          "yapilacaklar": [
+            "Yapay zekâ ekranında başka bir sağlayıcıya geçip anahtarını girin; ya da <b>OpenAI</b>'yi seçip <b>Uç adresi</b>ne <code>http://&lt;bilgisayarın IP'si&gt;:11434/v1</code> yazın, model kimliği <code>llama3.2</code> (bilgisayarda <code>ollama pull llama3.2</code>), anahtarı boş bırakın. Kaydet ve deploy et; f16y2'deki komutu tekrar çalıştırın."
+          ],
+          "beklenen": "Yanıt yeni sağlayıcıdan/modelden gelir (<code>model</code> alanında görünür). Sağlayıcı değişince eski anahtar taşınmaz; yanlış anahtarda 502 ve sağlayıcının hata iletisi (anahtarın kendisi iletide geçmez)."
         }
       ]
     },

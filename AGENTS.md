@@ -16,7 +16,7 @@ Bu klasör, DroidServer Android uygulamasının (kaynak: github.com/kasimtmc/dro
     "adimlar": [ { "id": "f15a1", "baslik": "...", "yapilacaklar": ["HTML"], "komut": "curl ... {IP} {KEY}", "beklenen": "HTML" } ] } ] }
 ```
 - Komutlardaki `{IP}` telefonun adresi, `{KEY}` ise API anahtarıdır. Sayfa bunları kullanıcının girdiği değerlerle doldurur.
-- Bölümler uygulamanın geliştirme fazlarına karşılık gelir (Faz 5 kullanıcılar, Faz 15 ortam/uygulamalar/katalog...).
+- Bölümler uygulamanın geliştirme fazlarına karşılık gelir (Faz 5 kullanıcılar, Faz 15 ortam/uygulamalar/katalog, Faz 16 otomasyon/formlar/GraphQL/yapay zekâ...).
 
 `sonuclar/sonuclar.json`:
 ```json
