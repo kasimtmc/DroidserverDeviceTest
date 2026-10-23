@@ -43,4 +43,8 @@ Asistan önce `sonuclar/SONUCLAR.md`'yi okur. Bu dosyada sorunlar en üstte, not
 
 15 Ekim 2026 güncellemesi: **Yeni arayüz** (ui1-ui5) ve **Faz 16** (otomasyon, formlar, GraphQL, yapay zekâ ve anlamsal arama; f16o1-f16y6) bölümleri eklendi. Ekran adları değiştiği için f13g2 (güvenlik duvarı izin listesi) ve f13r1 (canlı kopya kurulumu) adımlarının metni güncellendi. Var olan sonuçlar korunur.
 
+23 Ekim 2026 güncellemesi: **Faz 16 devamı** bölümü eklendi (hızlı ayar ve widget, SMS ile giriş, Tasker, ağ sürücüsü, otomatik devralma, takımlar, komut satırı aracı, MQTT; f16h1-f16m2) ve **Faz 17** bölümü başladı (sağlamlaştırma, ilk imzalı sürüm, web paneli eşitleme, güvenli bağlantılar ve ev otomasyonu: f17b1-f17h4). Var olan sonuçlar korunur.
+
+24 Ekim 2026 güncellemesi: **Faz 18** bölümleri eklendi: çevrimdışı eşitleme ve kopyalarla ölçek (f18s1-f18r3), konum, takvim ve medya (f18g1-f18m4), sayfalar, panolar, yerel YZ ve paketler (f18p1-f18y4), ödemeler (f18o1-f18o10; Stripe test modu, iyzico ve Paddle sandbox hesapları gerekir) ve **MQTT TLS** (mt1-mt4). Var olan sonuçlar korunur.
+
 Klasör bir git deposudur. Sonuçların sürümlerini saklamak isterseniz zaman zaman `git add -A && git commit -m "sonuçlar"` çalıştırabilirsiniz. `.anahtar` dosyası git'e girmez.

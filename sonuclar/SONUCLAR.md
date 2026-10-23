@@ -3,7 +3,7 @@
 > Bu dosya `sonuclar/sonuclar.json`'dan otomatik üretilir; elle düzenlemeyin.
 
 - Son güncelleme: 2026-10-14T14:00:45.505Z
-- 137 adım: Tamam 77, Sorun 0, Atlandı 0, Bekliyor 60
+- 176 adım: Tamam 77, Sorun 0, Atlandı 0, Bekliyor 99
 
 ## Sorunlar (0)
 
@@ -13,7 +13,7 @@ Yok.
 
 Yok.
 
-## Bekleyenler (60)
+## Bekleyenler (99)
 
 - **fk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Seçim alanı ve kurallar
 - **fk2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Hesaplanan alan
@@ -75,6 +75,45 @@ Yok.
 - **f16y4** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: kayıtlara soru
 - **f16y5** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Anlamsal arama
 - **f16y6** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Başka sağlayıcı veya yerel model (isteğe bağlı)
+- **f16h1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Hızlı ayar kutucuğu
+- **f16h2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ana ekran widget'ı
+- **f16s1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › SMS ile giriş: kod iste ve gir
+- **f16s2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › SMS ile giriş: sınırlar ve kayıtsız numara
+- **f16t1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Tasker: komutla durdur ve başlat
+- **f16t2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Tasker: sunucu olayları (isteğe bağlı, Tasker veya MacroDroid gerekir)
+- **f16d1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ağ sürücüsü: bağlan ve dosya kopyala
+- **f16d2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ağ sürücüsü: salt okunur paylaşımlar
+- **f16v1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Otomatik devralma (ikinci telefon gerekir)
+- **f16v2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ana rolünü geri alma (isteğe bağlı)
+- **f16k1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Takımlar: kur ve üye ekle
+- **f16k2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Takımlar: üyeyi çıkar
+- **f16c1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Komut satırı aracı (CLI)
+- **f16m1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › MQTT: mesaj kayda dönüşür
+- **f16m2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › MQTT: kayıt olayları ve komut
+- **f17b1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sorun giderici: Kısıtlı pil ayarı
+- **f17b2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sistem sunucuyu öldürünce
+- **f17b3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › 24 saat kesintisiz çalışma
+- **f17r1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › İlk imzalı sürüm (0.9.0)
+- **f17r2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Uygulama içi güncelleme (0.9.0 → 0.9.1)
+- **f17p1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: Otomasyon ve Formlar
+- **f17p2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: Servisler
+- **f17p3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: Takımlar ve devralma (isteğe bağlı)
+- **f17m1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › MQTT yalnızca yerel ağ
+- **f17m2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › MQTT tutulan mesaj
+- **f17m3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › MQTT cihaz kimliği
+- **f17k1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Passkey ile panel girişi
+- **f17s1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Açık oturumlar
+- **f17h1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Otomasyonda MQTT
+- **f17h2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sahneler ve widget
+- **f17h3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sensör panosu ve eşik uyarısı
+- **f17h4** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Home Assistant keşfi (isteğe bağlı)
+- **f17g1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › GraphQL aboneliği (WebSocket)
+- **f17d1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: salt okunur SQL konsolu
+- **f17d2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: örnek veri
+- **f17d3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Zip ile dosyalı dışa / içe aktarma
+- **f17d4** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › CSV şablonu
+- **f17d5** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: toplu düzenleme ve silme
+- **f17d6** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Geçmişte tek alanı geri alma
 
 ## Tamamlananlar (77)
 

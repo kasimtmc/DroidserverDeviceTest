@@ -1230,6 +1230,737 @@
       ]
     },
     {
+      "id": "faz16b",
+      "baslik": "Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı)",
+      "not": "Konfigürasyon sürümü değişmez (v16). Ağ sürücüsü, CLI ve MQTT adımları bilgisayardan yapılır (CLI için Node.js 18+, MQTT için <code>mosquitto-clients</code>). SMS adımları bu telefonun SIM'inden gerçek SMS gönderir (operatör ücreti); Telefon özellikleri &gt; SMS gönderme açık olmalı (f14s1). Devralma adımları için canlı kopya kurulmuş olmalı (f13r1). Parola, anahtar ve telefon numarasını notlara yazmayın.",
+      "adimlar": [
+        {
+          "id": "f16h1",
+          "baslik": "Hızlı ayar kutucuğu",
+          "yapilacaklar": [
+            "Bildirim panelini iki kez aşağı çekin, düzenle (kalem) &gt; <b>DroidServer</b> kutucuğunu ekleyin.",
+            "Sunucu çalışırken kutucuğa dokunun, sonra tekrar dokunun. Ekran kilitliyken bir kez daha deneyin."
+          ],
+          "beklenen": "Açıkken kutucuk etkin görünür ve altında adres yazar (Android 10+); dokununca sunucu kapanır/açılır, Durum ekranı da aynısını gösterir. Kilitliyken önce ekran kilidinin açılması istenir."
+        },
+        {
+          "id": "f16h2",
+          "baslik": "Ana ekran widget'ı",
+          "yapilacaklar": [
+            "Ana ekranda boş yere uzun basın &gt; Widget'lar &gt; <b>DroidServer</b>'ı ekleyin.",
+            "Birkaç istek atın (a1 komutu), yarım dakika bekleyin. Widget'taki <b>Durdur</b>, sonra <b>Başlat</b>; karta dokunun."
+          ],
+          "beklenen": "Durum, yerel ağ adresi, son bir saatteki istek sayısı ve pil görünür; istek sayısı yarım dakika içinde artar. Başlat/Durdur durumu hemen değiştirir; karta dokununca uygulama açılır. Birden çok profil varsa başlıkta etkin profilin adı."
+        },
+        {
+          "id": "f16s1",
+          "baslik": "SMS ile giriş: kod iste ve gir",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Kullanıcılar &gt; <b>SMS ile giriş</b>'i açın, İzinli ülke kodlarında <code>+90</code> olsun. Deploy.",
+            "Sunucu &gt; Kullanıcılar'da bir test kullanıcısının <code>phone</code> alanına <b>başka bir telefonun</b> numarasını <code>+90…</code> biçiminde yazın.",
+            "Birinci komutu o numarayla çalıştırın; gelen 6 haneli kodu ikinci komutta kullanın."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/auth/request-sms-code -H \"Content-Type: application/json\" -d '{\"phone\": \"+90<numara>\"}'\ncurl -X POST http://{IP}:8080/api/auth/sms-code -H \"Content-Type: application/json\" -d '{\"phone\": \"+90<numara>\", \"code\": \"<kod>\"}'",
+          "beklenen": "Birinci komut <b>202</b>; diğer telefona SMS gelir. İkinci komut <code>token</code> ve <code>refreshToken</code> döner. Aynı kod ikinci kez kullanılınca reddedilir."
+        },
+        {
+          "id": "f16s2",
+          "baslik": "SMS ile giriş: sınırlar ve kayıtsız numara",
+          "yapilacaklar": [
+            "f16s1'in birinci komutunu bir dakika dolmadan tekrar çalıştırın.",
+            "Kayıtlı olmayan bir numarayla (ör. kendi ikinci hattınız) birinci komutu çalıştırın."
+          ],
+          "beklenen": "Tekrar istekte <b>429</b> ve \"Bu numaraya az önce kod gönderildi; … saniye sonra tekrar deneyin\"; SMS gitmez. Kayıtsız numarada yanıt yine <b>202</b> (numaranın kayıtlı olmadığı belli olmaz) ama SMS gitmez."
+        },
+        {
+          "id": "f16t1",
+          "baslik": "Tasker: komutla durdur ve başlat",
+          "yapilacaklar": [
+            "Durum &gt; ⚙ Ayarlar &gt; <b>Tasker ve otomasyon</b>'u açın; <b>Komut anahtarı</b>nı <b>Anahtarı kopyala</b> ile alın.",
+            "Bilgisayardan (adb ile) komutu anahtarla, sonra <code>STOP</code> yerine <code>START</code> ile çalıştırın. Bir de yanlış anahtarla deneyin. Tasker kuruluysa aynısını Görev &gt; Sistem &gt; Send Intent ile yapın (ekrandaki <b>Tasker'da kurulum</b> alanları)."
+          ],
+          "komut": "adb shell am broadcast -a dev.droidserver.action.STOP -n dev.droidserver.app/.service.TaskerReceiver --es token <anahtar>",
+          "beklenen": "Doğru anahtarla sunucu durur, START ile başlar. Yanlış anahtarla bir şey olmaz; Loglar'da \"reddedildi\"."
+        },
+        {
+          "id": "f16t2",
+          "baslik": "Tasker: sunucu olayları (isteğe bağlı, Tasker veya MacroDroid gerekir)",
+          "yapilacaklar": [
+            "<b>Olayların gideceği uygulamalar</b>'da Tasker'ı (veya MacroDroid'i) seçin.",
+            "Tasker'da Profil &gt; Olay &gt; Sistem &gt; <b>Intent Received</b>, Action <code>dev.droidserver.event.STARTED</code>; görev olarak <code>%url</code> ile bir bildirim (Alert &gt; Notify). Sunucuyu durdurup başlatın."
+          ],
+          "beklenen": "Sunucu başlayınca Tasker bildirimi yerel ağ adresiyle çıkar. Uygulama listeden kaldırılınca olay gelmez; komutlar yine çalışır."
+        },
+        {
+          "id": "f16d1",
+          "baslik": "Ağ sürücüsü: bağlan ve dosya kopyala",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>Ağ sürücüsü</b>'nü açın, parolayı boş bırakın (üretilir), <b>Kaydet ve deploy et</b>. Adres, kullanıcı adı ve parola ekranda.",
+            "Bilgisayarda ekrandaki <b>Bilgisayardan bağlanma</b> talimatına göre bağlanın. Windows: Bu bilgisayar &gt; Ağ konumu ekle (olmazsa <code>\\\\{IP}@8080\\dav</code>). KDE/Dolphin: <code>webdav://{IP}:8080/dav</code>. GNOME: <code>dav://{IP}:8080/dav</code>. macOS: Sunucuya Bağlan.",
+            "<code>drive</code> klasörüne bir dosya kopyalayın, açıp değiştirip kaydedin, sonra silin. Bir kez de yanlış parolayla bağlanmayı deneyin."
+          ],
+          "komut": "curl --digest -u droid:<parola> -X PROPFIND -H \"Depth: 1\" http://{IP}:8080/dav/",
+          "beklenen": "Paylaşımlar (<code>drive</code>, açtıklarınız) klasör olarak görünür; kopyalama, düzenleme ve silme çalışır. Windows'ta 50 MB'den büyük dosya Windows'un kendi sınırına takılır (beklenen). Yanlış parola reddedilir ve güvenlik duvarının hatalı deneme sayacına girer. Bağlanamazsanız işletim sistemini ve hata iletisini not edin."
+        },
+        {
+          "id": "f16d2",
+          "baslik": "Ağ sürücüsü: salt okunur paylaşımlar",
+          "yapilacaklar": [
+            "Ağ sürücüsü ekranında <b>uploads</b> ve <b>site</b>'ı açın, <b>Sürücü yalnızca okunur</b>'u açın. Kaydet ve deploy et.",
+            "Bilgisayarda <code>uploads</code>'a ve <code>drive</code>'a dosya kopyalamayı deneyin; <code>site</code>'taki <code>index.html</code>'yi değiştirip tarayıcıda siteyi yenileyin (f6)."
+          ],
+          "beklenen": "<code>uploads</code> ve <code>drive</code> yazmayı reddeder (dosyalar okunabilir). <code>site</code>'taki değişiklik hemen yayında görünür."
+        },
+        {
+          "id": "f16v1",
+          "baslik": "Otomatik devralma (ikinci telefon gerekir)",
+          "yapilacaklar": [
+            "Kopya telefonda Sihirbaz &gt; Veritabanı &gt; <b>Otomatik devral</b>'ı açın; <b>Tanık adresi (isteğe bağlı)</b>: modemin adresi (ör. <code>http://192.168.1.1</code>). Deploy. Durum'daki Canlı kopya kartında \"Otomatik devralma açık\" yazmalı.",
+            "Ana telefonun Wi-Fi'ını kapatın ve 2-3 dakika bekleyin. Kopyaya bir kayıt ekleyin (a2 komutu, kopyanın IP'siyle).",
+            "Ana telefonun Wi-Fi'ını yeniden açın, bir dakika bekleyin."
+          ],
+          "beklenen": "Yaklaşık 2 dakika sonra kopya devralır: kritik sağlık uyarısı, Loglar'da devralma satırı, kayıt eklenebilir (503 değil). Ana telefon geri gelince yazmayı keser, <code>devir-oncesi</code> yedeğini alır ve yeni ana sunucunun kopyası olur; kopyaya eklenen kayıt onda da görünür. İki telefon hiçbir an birlikte yazılabilir olmaz."
+        },
+        {
+          "id": "f16v2",
+          "baslik": "Ana rolünü geri alma (isteğe bağlı)",
+          "yapilacaklar": [
+            "f16v1'den önce eski ana telefonda Sihirbaz &gt; Veritabanı &gt; <b>Dönünce ana rolünü geri al</b> açıksa (değilse açıp f16v1'i yineleyin): eski ana telefon kopyaya döndükten sonra 1-2 dakika bekleyin.",
+            "Bu sırada diğer telefona bir kayıt ekleyin."
+          ],
+          "beklenen": "Eski ana telefon güncel kalınca ana rolünü geri alır, öbürü yeniden kopya olur. Son eklenen kayıt kaybolmaz (ana telefonda görünür)."
+        },
+        {
+          "id": "f16k1",
+          "baslik": "Takımlar: kur ve üye ekle",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Kullanıcılar &gt; <b>Takımlar</b>'ı açın. Bir koleksiyonda (ör. yeni <code>tasks</code>, alan <code>title</code>) hazır kural olarak <b>Takım üyeleri görür ve düzenler</b>'i seçin. Deploy.",
+            "İki kullanıcıyla giriş yapın (u2-u3 gibi; token'lar A ve B). A takım kursun, B'yi e-postasıyla eklesin; A bir kayıt eklesin. Üçüncü bir kullanıcı (C) listelesin."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/teams -H \"Authorization: Bearer <A>\" -H \"Content-Type: application/json\" -d '{\"name\": \"Ev\"}'\ncurl -X POST http://{IP}:8080/api/teams/<id>/members -H \"Authorization: Bearer <A>\" -H \"Content-Type: application/json\" -d '{\"email\": \"<B e-postası>\"}'\ncurl -X POST http://{IP}:8080/api/collections/tasks/records -H \"Authorization: Bearer <A>\" -H \"Content-Type: application/json\" -d '{\"title\": \"süt al\"}'\ncurl http://{IP}:8080/api/collections/tasks/records -H \"Authorization: Bearer <B veya C>\"",
+          "beklenen": "A tek takımda olduğundan <code>team</code> alanı kendiliğinden dolar. B kaydı görür ve değiştirebilir; C'nin listesi boştur, kaydı doğrudan istediğinde 404. Sunucu &gt; <b>Takımlar</b>'da takım ve iki üye (sahip, üye) görünür."
+        },
+        {
+          "id": "f16k2",
+          "baslik": "Takımlar: üyeyi çıkar",
+          "yapilacaklar": [
+            "Sunucu &gt; Takımlar'da B'nin satırında <b>Çıkar</b>. B f16k1'deki son komutu tekrar çalıştırsın."
+          ],
+          "beklenen": "B kaydı hemen göremez (liste boş)."
+        },
+        {
+          "id": "f16c1",
+          "baslik": "Komut satırı aracı (CLI)",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>Komut satırı (CLI)</b> ekranındaki komutları bilgisayarda sırayla çalıştırın (yönetici anahtarı sorulur, ekranda görünmez).",
+            "Web paneli açıkken (Sihirbaz &gt; Güvenlik) <code>logs -f</code>'yi çalıştırıp başka bir pencereden bir kayıt ekleyin; Ctrl+C ile çıkın."
+          ],
+          "komut": "curl -o droidserver.mjs http://{IP}:8080/api/_cli\nnode droidserver.mjs login http://{IP}:8080/api\nnode droidserver.mjs status\nnode droidserver.mjs list todos --sort -id\nnode droidserver.mjs export todos --format json -o todos.json\nnode droidserver.mjs logs -f",
+          "beklenen": "<code>status</code> durum, istek sayısı, pil ve boş alanı gösterir; <code>list</code> kayıtları tablo olarak, <code>export</code> dosyayı yazar. <code>logs -f</code> yeni log satırlarını canlı akıtır. Panel kapalıyken <code>logs</code> \"Sihirbaz → Güvenlik → Web paneli'ni açın\" iletisiyle durur."
+        },
+        {
+          "id": "f16m1",
+          "baslik": "MQTT: mesaj kayda dönüşür",
+          "yapilacaklar": [
+            "<code>readings</code> koleksiyonu oluşturun: <code>temp</code> (sayı), <code>device</code> (metin).",
+            "Sunucu &gt; <b>MQTT (IoT)</b>: <b>MQTT açık</b>, parolayı boş bırakın (üretilir). <b>Mesajları kaydet</b> &gt; <b>Yönlendirme ekle</b>: konu <code>sensors/+/temp</code>, koleksiyon <code>readings</code>, değer alanı <code>temp</code>, konu alanı <code>device</code>. <b>Kaydet ve deploy et</b>.",
+            "Bilgisayardan komutu çalıştırın (parola: <b>Parolayı kopyala</b>). Bir de yanlış parolayla deneyin."
+          ],
+          "komut": "mosquitto_pub -h {IP} -u device -P <parola> -t sensors/salon/temp -m 23.5",
+          "beklenen": "<code>readings</code>'te <code>temp: 23.5</code>, <code>device: salon</code> kaydı. MQTT ekranında Durum sayaçları artar, Son mesajlar'da mesaj ve sonucu. Yanlış parolada bağlantı reddedilir."
+        },
+        {
+          "id": "f16m2",
+          "baslik": "MQTT: kayıt olayları ve komut",
+          "yapilacaklar": [
+            "MQTT ekranında <b>Kayıt olaylarını yayınla</b>'da <code>readings</code>'i seçin, deploy. Bilgisayarda birinci komutu açık bırakıp f16m1'deki mesajı yeniden gönderin.",
+            "İkinci bir terminalde <code>mosquitto_sub -h {IP} -u device -P &lt;parola&gt; -t 'ev/#'</code> açın; uygulamada <b>Cihazlara mesaj gönder</b>: konu <code>ev/salon/lamba</code>, içerik <code>on</code> &gt; <b>Gönder</b>. Sonra ikinci komutla API'den aynısını gönderin."
+          ],
+          "komut": "mosquitto_sub -h {IP} -u device -P <parola> -t 'droidserver/readings/#' -v\ncurl -X POST http://{IP}:8080/api/_mqtt/publish -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" -d '{\"topic\": \"ev/salon/lamba\", \"payload\": \"on\"}'",
+          "beklenen": "Yeni kayıt <code>droidserver/readings/create</code> konusunda JSON olarak gelir. Uygulamadan ve API'den gönderilen <code>on</code> abonede görünür; Bağlı cihazlar listesinde iki istemci."
+        }
+      ]
+    },
+    {
+      "id": "faz17",
+      "baslik": "Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17)",
+      "not": "Konfigürasyon sürümü değişmez (v16). Bu bölümdeki adımlar için bilgisayarda <code>adb</code> gerekir (USB hata ayıklama açık). f17b3 24 saat sürer; başka adımlarla birlikte yürütülebilir. Grup 2 adımları konfigürasyonu v17'ye yükseltir (\"Konfigürasyon sürümü yükseltilsin mi?\" kartını onaylayın). Passkey için HTTPS ve alan adı (DuckDNS + Let's Encrypt veya adlandırılmış tünel) gerekir.",
+      "adimlar": [
+        {
+          "id": "f17b1",
+          "baslik": "Sorun giderici: Kısıtlı pil ayarı",
+          "yapilacaklar": [
+            "Android ayarları &gt; Uygulamalar &gt; DroidServer &gt; Pil &gt; <b>Kısıtlı</b> seçin (adı üreticiye göre değişebilir).",
+            "DroidServer'da Durum &gt; <b>Sorun giderici</b>'yi açın; \"Arka plan kullanımı kısıtlı\" bulgusundaki <b>Uygulama bilgisini aç</b>'a basıp ayarı <b>Kısıtlanmamış</b> yapın, geri dönüp yenileyin."
+          ],
+          "beklenen": "Kısıtlıyken en üstte kırmızı \"Arka plan kullanımı kısıtlı\" bulgusu; düğme uygulama bilgisi ekranını açar. Ayar düzelince bulgu kaybolur."
+        },
+        {
+          "id": "f17b2",
+          "baslik": "Sistem sunucuyu öldürünce",
+          "yapilacaklar": [
+            "Sunucu çalışırken bilgisayarda birinci komutla süreç numarasını alın, ikinci komutla süreci öldürün (yalnızca Android Studio'dan kurulan debug sürümde çalışır).",
+            "10-30 saniye bekleyin. Bildirimlere, Loglar'a ve Durum &gt; Sorun giderici'ye bakın."
+          ],
+          "komut": "adb shell pidof dev.droidserver.app\nadb shell run-as dev.droidserver.app kill -9 <pid>",
+          "beklenen": "Sunucu kendiliğinden yeniden başlar. Loglar'da \"… sistem sunucu servisini durdurup yeniden başlattı.\" ve Android 11+'da \"Önceki süreç … bitti: sistem sonlandırdı (sinyal 9).\" Sağlık uyarıları açıksa \"Sistem sunucuyu yeniden başlattı\" bildirimi (sessiz saatte gelmez). Sorun gidericide aynı açıklamayla sarı bulgu. Uygulamayı kendiniz Durdur'la kapatınca bu uyarı çıkmaz."
+        },
+        {
+          "id": "f17b3",
+          "baslik": "24 saat kesintisiz çalışma",
+          "yapilacaklar": [
+            "Sorun gidericide kırmızı/sarı pil bulgusu olmasın (pil optimizasyonundan muaf, Kısıtlanmamış). Telefonu şarj cihazından ayırın, ekranı kapatıp 24 saat normal kullanımda bırakın; sunucuya ara sıra istek gelsin (ör. başka bir cihazdan saatte bir a4 komutu ya da bir izleme servisi).",
+            "Başta ve sonda: Durum'daki pil yüzdesini ve birinci komutun <code>TOTAL PSS</code> satırını not edin; sonunda ikinci komutla son yeniden başlatmaları da alın."
+          ],
+          "komut": "adb shell dumpsys meminfo dev.droidserver.app | grep -i \"TOTAL\"\nadb shell dumpsys activity exit-info dev.droidserver.app | head -40",
+          "beklenen": "24 saatte sunucu hiç durmaz: Sorun gidericide \"Sistem sunucuyu yeniden başlattı\" bulgusu yok, istekler hep yanıtlanır. Notlara pil düşüşünü (% / 24 sa), bellekteki değişimi ve telefon modelini yazın. Yeniden başlatma olduysa nedenini (bulgudaki metin) not edin."
+        },
+        {
+          "id": "f17r1",
+          "baslik": "İlk imzalı sürüm (0.9.0)",
+          "yapilacaklar": [
+            "Droidserver README &gt; <b>Sürüm yayınlama</b>: imza anahtarını oluşturun, dört secret'ı ekleyin, <code>v0.9.0</code> etiketini gönderin. GitHub &gt; Actions'ta <b>Uygulama sürümü</b> iş akışının bitmesini bekleyin.",
+            "Telefonda önce yedek alın (y1). Kaldırınca şifreli depo da silinir ve yedekte sırlar yoktur: şifreli alan kullanıyorsanız Sihirbaz &gt; Veritabanı &gt; Alan şifreleme &gt; <b>Anahtarı kopyala</b>, Ortam ve sırlar &gt; <b>Dışa aktar</b> ile sırları alın. Sonra debug sürümünü kaldırıp Releases'taki <code>droidserver-0.9.0.apk</code>'yı kurun, yedeği geri yükleyin (y2)."
+          ],
+          "beklenen": "Sürüm sayfasında APK, <code>.sha256</code> ve notun başında <code>.github/release-notes/0.9.0.md</code> metni (altında commit notları). Uygulama kurulur; Ayarlar &gt; Güncelleme'de 0.9.0 yazar; geri yüklenen veriler yerinde (alan anahtarını <b>Var olan anahtarı gir</b> ile, sırları İçe aktar ile geri verdikten sonra). İş akışı hata verirse adım adını ve hata satırını not edin (secret değerlerini değil)."
+        },
+        {
+          "id": "f17r2",
+          "baslik": "Uygulama içi güncelleme (0.9.0 → 0.9.1)",
+          "yapilacaklar": [
+            "Küçük bir değişiklikle (ya da yalnızca <code>.github/release-notes/0.9.1.md</code> ekleyerek) <code>v0.9.1</code> etiketini gönderin.",
+            "Sunucu çalışırken Durum &gt; ⚙ Ayarlar &gt; Güncelleme &gt; <b>Şimdi denetle</b> &gt; <b>İndir ve kur</b>."
+          ],
+          "beklenen": "0.9.1 ve sürüm notu görünür; indirme ilerler, Android onay penceresi açılır, kurulunca sunucu kendiliğinden yeniden başlar. Loglar'da imza ve sha256 denetimi geçer."
+        },
+        {
+          "id": "f17p1",
+          "baslik": "Panel: Otomasyon ve Formlar",
+          "yapilacaklar": [
+            "Bilgisayarda web paneline girin (w1) &gt; <b>Otomasyon</b>. f16o1'deki kuralın kartında <b>değişince</b>'yi işaretleyin, <b>Kaydet ve deploy et</b>; plan ve onay penceresinden sonra telefonda Otomasyonlar ekranına bakın.",
+            "Kartta <b>Şimdi dene</b>. <b>Formlar</b>'da f16f1'deki formun başlığını değiştirip kaydedin, <b>Aç</b> ile formu açın.",
+            "Bir kuralın koşuluna bozuk bir değer yazın (ör. <code>qty[xx]=1</code>) ve kaydetmeyi deneyin."
+          ],
+          "beklenen": "Telefondaki kural da güncellenir; Denetim sekmesinde \"Panelden konfigürasyon kaydedildi\". Şimdi dene sonucu kartın altında. Form yeni başlıkla açılır. Bozuk koşulda kaydedilmez, uygulamadaki ile aynı hata iletisi kırmızı görünür."
+        },
+        {
+          "id": "f17p2",
+          "baslik": "Panel: Servisler",
+          "yapilacaklar": [
+            "Panel &gt; <b>Servisler</b>. MQTT kartında durum ve bağlı cihazlar (f16m1-f16m2 açıkken); <b>Cihazlara mesaj gönder</b> ile <code>ev/salon/lamba</code> = <code>on</code>.",
+            "Ağ sürücüsü kartında <b>uploads</b>'u açıp kaydedin; telefondaki Ağ sürücüsü ekranına bakın. <b>Parola üret</b>'le yeni parola verip kaydedin, bilgisayarı yeni parolayla yeniden bağlayın.",
+            "Yapay zekâ, Kendi uygulamalarınız ve Komut satırı kartlarına bakın (açıksa <b>Dizini yeniden kur</b>, <b>Yeniden deploy et</b>); CLI kartındaki komutları bilgisayarda deneyin."
+          ],
+          "beklenen": "Abone mesajı alır. Telefonda uploads açık görünür; yeni parola çalışır, eskisi reddedilir (parola server.json'da <code>secret:</code> referansı olarak kalır). Kapalı özellikler kartta \"Kapalı\" yazar; CLI komutları doğrudan çalışır."
+        },
+        {
+          "id": "f17p3",
+          "baslik": "Panel: Takımlar ve devralma (isteğe bağlı)",
+          "yapilacaklar": [
+            "Takımlar açıkken Panel &gt; Kullanıcılar'ın altında <b>Takımlar</b>: bir takım kurun, <b>Üyeler</b>'den bir kullanıcıyı e-postasıyla ekleyin, sahip yapın, sonra çıkarmayı deneyin.",
+            "Canlı kopya kuruluysa kopyanın panelinde Servisler &gt; <b>Canlı kopya ve devralma</b>: eşitleme durumu; <b>Devral</b> (f16v1'deki gibi ana telefonu sonra kopyaya döndürmeyi unutmayın)."
+          ],
+          "beklenen": "Takım ve üyeler telefondaki Takımlar ekranında da görünür; takımın tek sahibi çıkarılamaz (hata iletisi). Devral'dan sonra kopya yazılabilir olur; Denetim'de \"Kopya devraldı\" ve kişi olarak panel."
+        },
+        {
+          "id": "f17m1",
+          "baslik": "MQTT yalnızca yerel ağ",
+          "yapilacaklar": [
+            "MQTT açıkken telefonun Wi-Fi'ı kapalı, mobil veride genel IPv6 adresi varken (Durum → İnternetten erişim kartı) başka bir ağdan bağlanmayı deneyin; aynı komutu ev ağından da çalıştırın."
+          ],
+          "komut": "mosquitto_sub -h <telefonun-genel-ipv6> -p 1883 -u device -P <parola> -t 'ev/#' -d",
+          "beklenen": "Dışarıdan bağlantı hemen kapanır (CONNACK gelmez); Loglar'da \"MQTT: internetten gelen bağlantı reddedildi\" (dakikada en çok bir). Ev ağından ve Tailscale'den bağlantı çalışır."
+        },
+        {
+          "id": "f17m2",
+          "baslik": "MQTT tutulan mesaj",
+          "yapilacaklar": [
+            "Birinci komutla tutulan mesaj gönderin; sonra ikinci komutla abone olun. Sunucuyu durdurup başlatın, ikinci komutu yineleyin. En sonda üçüncü komutla silin."
+          ],
+          "komut": "mosquitto_pub -h {IP} -u device -P <parola> -t ev/salon/perde -m kapali -r\nmosquitto_sub -h {IP} -u device -P <parola> -t 'ev/#' -v -C 1\nmosquitto_pub -h {IP} -u device -P <parola> -t ev/salon/perde -n -r",
+          "beklenen": "Abone olur olmaz <code>ev/salon/perde kapali</code> gelir; yeniden başlatmadan sonra da gelir. Boş içerikle silinince yeni abone hiçbir şey almaz. MQTT durumunda \"tutulan mesaj\" sayısı değişir."
+        },
+        {
+          "id": "f17m3",
+          "baslik": "MQTT cihaz kimliği",
+          "yapilacaklar": [
+            "MQTT → <b>Cihazlar</b>: <code>esp-salon</code> ekleyin, <b>Ortak kullanıcı adı ve parolayla girişe de izin ver</b>'i kapatın, kaydedin. <b>Parolayı kopyala</b> ile cihaz parolasını alın.",
+            "Birinci komutu cihaz kimliğiyle, sonra ortak kimlikle çalıştırın. Cihazı silip kaydedin, cihaz kimliğiyle yeniden deneyin."
+          ],
+          "komut": "mosquitto_sub -h {IP} -u esp-salon -P <cihaz-parolası> -t 'ev/#' -d",
+          "beklenen": "Cihaz kimliği bağlanır; Durum → Bağlı cihazlar'da <code>esp-salon</code> görünür. Ortak kimlik reddedilir. Silinen cihaz bağlanamaz (diğer cihazlar etkilenmez)."
+        },
+        {
+          "id": "f17k1",
+          "baslik": "Passkey ile panel girişi",
+          "yapilacaklar": [
+            "Sihirbaz → Güvenlik → <b>Passkey ile giriş</b>: açın, alan adı önerilen DuckDNS adı (örn. <code>ev.duckdns.org</code>). Kaydedin.",
+            "Bilgisayarda paneli <b>https://&lt;ad&gt;.duckdns.org:8443/_admin/</b> ile açın, eşleştirme koduyla girin. Konfigürasyon sekmesi → <b>Panel passkey'leri</b> → <b>Passkey ekle</b> (Windows Hello, Touch ID veya telefon).",
+            "Çıkış yapıp giriş ekranında <b>Passkey ile giriş</b>."
+          ],
+          "beklenen": "Kod sorulmadan panele girilir; Denetim'de \"Panel girişi\" (passkey). Panel yerel IP ile açılınca passkey düğmesi çalışmaz (alan adı uyuşmaz; beklenen). Sihirbaz alan adı yokken uyarı gösterir."
+        },
+        {
+          "id": "f17s1",
+          "baslik": "Açık oturumlar",
+          "yapilacaklar": [
+            "Aynı kullanıcıyla iki farklı cihazdan/tarayıcıdan giriş yapın (u2-u3).",
+            "Uygulamada Sunucu → Kullanıcılar → kullanıcının <b>Oturumlar</b>'ı; ikinci komutla bir oturumu kapatın (oturum kimliği birinci komutun çıktısında)."
+          ],
+          "komut": "curl -H \"Authorization: Bearer <TOKEN>\" http://{IP}:8080/api/auth/sessions\ncurl -X DELETE -H \"Authorization: Bearer <TOKEN>\" http://{IP}:8080/api/auth/sessions/<id>",
+          "beklenen": "Listede iki oturum, cihaz (User-Agent), adres ve son kullanım; <code>current</code> isteği yapan. Kapatılan oturumun token'ı hemen 401 alır (15 dakika beklemeden). <b>Hepsini kapat</b> tüm cihazlarda yeniden giriş ister."
+        },
+        {
+          "id": "f17h1",
+          "baslik": "Otomasyonda MQTT",
+          "yapilacaklar": [
+            "Otomasyonlar → <b>Kural ekle</b>: <b>MQTT mesajında</b>, konu <code>ev/+/hareket</code>; eylem <b>MQTT mesajı gönder</b>: konu <code>ev/salon/lamba</code>, içerik <code>on</code>. Kaydedin.",
+            "Bir terminalde <code>ev/salon/lamba</code>'ya abone olun; diğerinde komutu çalıştırın."
+          ],
+          "komut": "mosquitto_pub -h {IP} -u device -P <parola> -t ev/koridor/hareket -m '{\"kim\":\"kedi\"}'",
+          "beklenen": "Abone <code>on</code> alır; Otomasyonlar → Son çalışmalar'da <code>mqtt:ev/koridor/hareket</code> satırı. Mesaj hiçbir koleksiyona yazılmaz (yönlendirme yoksa)."
+        },
+        {
+          "id": "f17h2",
+          "baslik": "Sahneler ve widget",
+          "yapilacaklar": [
+            "MQTT → <b>Sahneler</b> → <b>Sahne ekle</b>: ad <code>Akşam</code>, mesajlar <code>ev/salon/lamba = on</code> ve <code>ev/salon/perde = kapali</code>. Kaydedin.",
+            "<b>Çalıştır</b>'a basın. Sonra ana ekrana <b>DroidServer sahneler</b> widget'ını ekleyip düğmeye dokunun. Son olarak API'den deneyin."
+          ],
+          "komut": "curl -X POST -H \"Authorization: Bearer {KEY}\" http://{IP}:8080/api/_mqtt/scenes/Ak%C5%9Fam",
+          "beklenen": "Her seferinde abone iki mesajı sırayla alır; widget kısa bir bildirimle \"Akşam: N cihaza gitti\" der; Son mesajlar'da \"sahne: Akşam\". Sunucu kapalıyken widget \"MQTT çalışmıyor\" der."
+        },
+        {
+          "id": "f17h3",
+          "baslik": "Sensör panosu ve eşik uyarısı",
+          "yapilacaklar": [
+            "Sunucu → <b>Sensör panosu</b>: <code>readings.temp</code> ekleyin, ad <code>Salon</code>, birim <code>°C</code>, alt eşik 15, üst eşik 28. Kaydedin.",
+            "f16m1'deki komutla birkaç değer gönderin (20, 22, 35)."
+          ],
+          "beklenen": "Grafikte değerler ve kesikli eşik çizgileri; 35 için sağlık uyarısı (\"Sensör eşik dışında: Salon: 35°C, üst eşiğin (28°C) üstünde\"). Panelde Servisler → Sensör panosu'nda aynı grafik."
+        },
+        {
+          "id": "f17h4",
+          "baslik": "Home Assistant keşfi (isteğe bağlı)",
+          "yapilacaklar": [
+            "Sensör panosu → <b>Sensörleri Home Assistant'ta göster</b>'i açıp kaydedin.",
+            "Home Assistant → Ayarlar → Cihazlar ve hizmetler → MQTT: aracı olarak telefonun adresi, 1883, MQTT kullanıcı adı ve parolası. f17h3'teki gibi değer gönderin."
+          ],
+          "beklenen": "Home Assistant'ta sunucu adıyla bir cihaz ve <b>Salon</b> sensörü (°C, sıcaklık) görünür, yeni değerle güncellenir. Sensör listeden çıkarılınca Home Assistant'tan da kalkar."
+        },
+        {
+          "id": "f17g1",
+          "baslik": "GraphQL aboneliği (WebSocket)",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Genel'de <b>GraphQL</b> ve <b>canlı abonelik</b> açık olsun, deploy edin.",
+            "Bilgisayarda komutu çalıştırın (Node 22+), açık bırakın. Telefondan veya panelden <code>todos</code>'a bir kayıt ekleyin, düzenleyin, silin."
+          ],
+          "komut": "node -e 'const w=new WebSocket(\"ws://{IP}:8080/api/graphql/ws\",\"graphql-transport-ws\");w.onopen=()=>w.send(JSON.stringify({type:\"connection_init\",payload:{token:\"{KEY}\"}}));w.onmessage=e=>{console.log(e.data);if(JSON.parse(e.data).type===\"connection_ack\")w.send(JSON.stringify({id:\"1\",type:\"subscribe\",payload:{query:\"subscription { todos { action record { id title } } }\"}}))}'",
+          "beklenen": "Önce <code>connection_ack</code>; her değişiklikte <code>{\"id\":\"1\",\"type\":\"next\",\"payload\":{\"data\":{\"todos\":{\"action\":\"create\",…}}}}</code> (sonra <code>update</code>, <code>delete</code>; silmede kayıtta yalnızca id). Anahtarı yanlış yazınca bağlantı 4403 ile kapanır."
+        },
+        {
+          "id": "f17d1",
+          "baslik": "Panel: salt okunur SQL konsolu",
+          "yapilacaklar": [
+            "Panelde <b>SQL</b> sekmesinde sırayla çalıştırın (Ctrl+Enter): <code>SELECT * FROM todos</code>, <code>DELETE FROM todos</code>, <code>SELECT * FROM _ds_meta</code>.",
+            "Zaman aşımı: <code>WITH RECURSIVE x(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM x) SELECT count(*) FROM x</code>.",
+            "Denetim sekmesine bakın."
+          ],
+          "beklenen": "İlki tablo olarak gelir (süre ms ile). DELETE \"Yalnızca SELECT…\" hatası, <code>_ds_meta</code> \"konsoldan sorgulanamaz\" hatası verir; kayıtlar silinmez. Sonsuz sorgu yaklaşık 5 saniyede \"Sorgu 5 saniyede bitmedi\" ile durur, sunucu yanıt vermeye devam eder. Denetimde her sorgu \"SQL sorgusu\" olarak görünür."
+        },
+        {
+          "id": "f17d2",
+          "baslik": "Panel: örnek veri",
+          "yapilacaklar": [
+            "Panelde Kayıtlar &gt; <code>todos</code> &gt; <b>Örnek veri</b> &gt; 20.",
+            "İlişki alanı olan bir koleksiyonda, hedef koleksiyon boşken de deneyin."
+          ],
+          "beklenen": "20 kayıt eklenir; değerler alan tiplerine uyar (metinler Türkçe sözcükler, seçimler seçeneklerden). Boş hedefli zorunlu ilişkide \"önce '…' koleksiyonuna kayıt ekleyin\" hatası, hiç kayıt eklenmez."
+        },
+        {
+          "id": "f17d3",
+          "baslik": "Zip ile dosyalı dışa / içe aktarma",
+          "yapilacaklar": [
+            "Dosya alanı olan bir koleksiyonda (örn. fotoğraflı notlar) 2-3 kayda fotoğraf yükleyin.",
+            "Panelde Kayıtlar'da biçim <b>Zip (dosyalarla)</b> &gt; Dışa aktar. Zip'i açıp içine bakın.",
+            "<b>İçe aktar…</b> ile aynı zip'i seçin; önizlemeye bakın, <b>İçe aktar</b>'a basın.",
+            "Zip'te bir fotoğrafın yerine metin dosyasını aynı adla koyup yeniden içe aktarmayı deneyin."
+          ],
+          "beklenen": "Zip'te <code>data.json</code> ve <code>files/&lt;id&gt;/&lt;ad&gt;</code> fotoğrafları var. İçe aktarma kayıtların kopyalarını fotoğraflarıyla ekler (yeni kayıtların fotoğrafları açılır). Bozuk dosyalı zip satır hatası verir, hiçbir kayıt ve dosya eklenmez (Depolama kullanımı değişmez)."
+        },
+        {
+          "id": "f17d4",
+          "baslik": "CSV şablonu",
+          "yapilacaklar": [
+            "Panelde biçim <b>CSV (Excel, ;)</b> seçiliyken <b>Şablon</b>'a basın; dosyayı Excel/LibreOffice'te açın.",
+            "Örnek satırın altına iki satır daha doldurup kaydedin (CSV olarak) ve <b>İçe aktar…</b> ile yükleyin."
+          ],
+          "beklenen": "Başlıklarda parantez içinde ipuçları (zorunlu, seçenekler, biçim), altında kurallara uyan bir örnek satır; Türkçe karakterler bozulmaz. İçe aktarmada sütunlar alanlara kendiliğinden eşlenir; 3 kayıt eklenir."
+        },
+        {
+          "id": "f17d5",
+          "baslik": "Panel: toplu düzenleme ve silme",
+          "yapilacaklar": [
+            "Kayıtlar tablosunda 3 satırı işaretleyin &gt; <b>Alan değiştir…</b> &gt; <code>done</code> = <code>true</code> &gt; Uygula.",
+            "Başlıktaki kutuyla sayfanın hepsini seçip <b>Seçilenleri sil</b>."
+          ],
+          "beklenen": "Seçili kayıtlarda alan değişir (diğerleri aynı). Silme onayından sonra sayfadaki kayıtlar silinir; canlı abonelik açıksa telefondaki listeler de yenilenir."
+        },
+        {
+          "id": "f17d6",
+          "baslik": "Geçmişte tek alanı geri alma",
+          "yapilacaklar": [
+            "Geçmişi açık bir koleksiyonda bir kaydın iki alanını ayrı ayrı değiştirin.",
+            "Panelde satırdaki <b>Geçmiş</b> &gt; eski sürümün satırında <b>Tek alan…</b> &gt; bir alan seçip onaylayın."
+          ],
+          "beklenen": "Yalnızca seçilen alan o sürümdeki değerine döner, diğer alan son halinde kalır; geçmişe \"sürüme dönüldü\" satırı eklenir."
+        },
+        {
+          "id": "f17t1",
+          "baslik": "Telegram: yönetici sohbeti ve /durum",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Genel &gt; Sağlık uyarıları &gt; Telegram açık ve çalışır olsun. Telegram'da botunuza kendi hesabınızdan /start yazın, sihirbazda <b>Yönetici sohbetini bul</b>'a basın, deploy edin.",
+            "Bota <code>/durum</code>, <code>/loglar 5</code>, <code>/yedek</code> yazın.",
+            "Başka bir Telegram hesabından (veya gruptan) bota <code>/durum</code> yazın."
+          ],
+          "beklenen": "Birkaç saniye içinde durum (adres, pil, boş alan, son bir saatin istekleri), son 5 log satırı ve \"Yedek alındı: …\" gelir; Yedekler ekranında yeni yedek görünür. Başka hesaptan gelen komuta yanıt yok; Loglar'da bir kez \"yönetici sohbeti olmayan … sohbetinden gelen mesaj yok sayıldı\"."
+        },
+        {
+          "id": "f17t2",
+          "baslik": "Telegram: /durdur ve /baslat",
+          "yapilacaklar": [
+            "Bota <code>/durdur</code> yazın, gelen mesajdaki <b>Evet, durdur</b>'a basın.",
+            "Telefonun bildirimine bakın; bilgisayardan sunucuya istek atın.",
+            "Ekranı kapatıp 5 dakika bekleyin, sonra bota <code>/baslat</code> yazın; 10 saniye sonra <code>/durum</code>."
+          ],
+          "komut": "curl -m 5 http://{IP}:8080/api/health",
+          "beklenen": "Onay düğmesi \"Sunucu durduruldu…\" yazısına dönüşür; bildirim \"Durduruldu; Telegram'dan /baslat ile başlatılabilir\"; istek bağlanamaz. Ekran kapalıyken de /baslat birkaç saniye içinde çalışır (gecikme olursa not edin), /durum \"Çalışıyor\" der. Bildirimden <b>Durdur</b>'a basınca uygulama tamamen kapanır."
+        },
+        {
+          "id": "f17e1",
+          "baslik": "E-posta şablonu",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Kullanıcılar &gt; E-posta &gt; Hesap e-postası şablonları &gt; Ekle: <b>Parola sıfırlama</b>; konuyu değiştirip <b>Önizle</b>'ye basın, deploy edin.",
+            "Bilgisayardan parola sıfırlama isteyin; sonra aynısını <code>Accept-Language: en</code> ile isteyin (en dilinde şablon yoksa dilsiz şablon gelir)."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/auth/request-reset -H 'Content-Type: application/json' -d '{\"email\":\"<kayıtlı adres>\"}'",
+          "beklenen": "Önizlemede örnek değerlerle konu ve metin görünür. Gelen e-postanın konusu ve metni şablondaki gibidir; bağlantı çalışır."
+        },
+        {
+          "id": "f17e2",
+          "baslik": "Toplu e-posta ve abonelikten çıkma",
+          "yapilacaklar": [
+            "E-posta ayarlarında \"Bağlantılardaki adres\" dolu olsun. Panelde Kullanıcılar &gt; <b>Toplu bildirim…</b>: konu ve metin yazın, <b>Alıcıları say</b>, sonra <b>Gönder</b> (dakikada 30).",
+            "İşler sekmesinde işi izleyin. Gelen e-postadaki <b>abonelikten çık</b> bağlantısını açıp onaylayın; yeniden Alıcıları say.",
+            "Dakikada 1 ile yeni gönderim başlatıp İşler'den iptal edin."
+          ],
+          "beklenen": "Alıcı sayısı doğrulanmış kullanıcı sayısıdır. Her alıcıya bir e-posta gelir; İşler'de sonuçta gönderilen sayısı artar ve iş biter. Bağlantı önce onay sayfası açar; onaydan sonra alıcı sayısı bir azalır. İptal edilen iş ilk e-postadan sonra durur."
+        },
+        {
+          "id": "f17y1",
+          "baslik": "İlk açılış rehberi ve örnek proje",
+          "yapilacaklar": [
+            "Uygulamanın verilerini silin (Ayarlar &gt; Uygulamalar &gt; DroidServer &gt; Depolama &gt; Verileri temizle; önce yedek alın) veya yeni bir test telefonunda açın.",
+            "Rehberi İleri ile geçin, son sayfada <b>Görev takibi</b>'ni seçin, sihirbazı bitirip deploy edin."
+          ],
+          "beklenen": "Üç tanıtım sayfası ve başlangıç sayfası görünür; seçimden sonra sihirbaz projeler ve görevler koleksiyonlarıyla açılır. Deploy'dan sonra örnek kayıtlar vardır. Uygulama yeniden açıldığında rehber bir daha çıkmaz."
+        },
+        {
+          "id": "f17y2",
+          "baslik": "Yardım",
+          "yapilacaklar": [
+            "Uçak modunu açın. Durum ekranındaki <b>?</b> simgesine basın, \"MQTT\" arayıp bölümü açın; kod bloğunu ve tabloyu yana kaydırın.",
+            "Ayarlar'dan dili English yapıp aynı ekrana bakın."
+          ],
+          "beklenen": "Yardım internet olmadan açılır; bölümler listelenir, arama süzer, metin, listeler ve kod blokları okunur. İngilizcede bölümler İngilizce README'den gelir."
+        }
+      ]
+    },
+    {
+      "id": "faz18",
+      "baslik": "Çevrimdışı eşitleme ve kopyalarla ölçek (Faz 18 Grup 1)",
+      "adimlar": [
+        {
+          "id": "f18s1",
+          "baslik": "Eşitleme ucu",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Koleksiyonlar &gt; todos &gt; Geçmiş, çöp kutusu, saklama ve eşitleme &gt; <b>Çevrimdışı eşitleme</b>'yi açın, deploy edin.",
+            "Birinci komutla değişiklikleri çekin; bir kayıt ekleyip yanıttaki <code>next</code> değeriyle ikinci komutu çalıştırın."
+          ],
+          "komut": "curl http://{IP}:8080/api/sync/todos -H \"Authorization: Bearer {KEY}\"\ncurl \"http://{IP}:8080/api/sync/todos?since=<next>\" -H \"Authorization: Bearer {KEY}\"",
+          "beklenen": "İlk yanıtta mevcut kayıtlar <code>upsert</code> ve sürüm 1 ile, <code>epoch</code> ve <code>next</code> dolu. İkinci yanıtta yalnızca yeni kayıt var."
+        },
+        {
+          "id": "f18s2",
+          "baslik": "Çakışma: son yazan kazanır",
+          "yapilacaklar": [
+            "Bir kaydın sürümünü f18s1'deki yanıttan not edin (<code>version</code>). Uygulamadan veya panelden kaydın başlığını değiştirin.",
+            "Komutla eski sürümü taban alıp başlığı ve <code>done</code>'u 1 dakika önceki bir zamanla gönderin (<code>&lt;id&gt;</code>, <code>&lt;sürüm&gt;</code> ve <code>&lt;zaman&gt;</code> = şimdiki ms − 60000)."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/sync/todos -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"changes\":[{\"op\":\"update\",\"id\":<id>,\"base\":<sürüm>,\"fields\":{\"title\":\"eski\",\"done\":true},\"times\":{\"title\":<zaman>,\"done\":<zaman>}}]}'",
+          "beklenen": "Sonuç <code>merged</code>: başlık sunucudaki (sizin değiştirdiğiniz) değerde kalır, <code>done</code> true olur; <code>conflicts</code>'te istemcinin başlığı."
+        },
+        {
+          "id": "f18r1",
+          "baslik": "Kopyaya yazma ana sunucuya iletilir (iki telefon)",
+          "yapilacaklar": [
+            "Faz 13'teki gibi ikinci telefonu kopya yapın ve eşitlenmesini bekleyin.",
+            "Bilgisayardan <b>kopyanın</b> adresine kayıt ekleyin; sonra ana sunucuda listeleyin."
+          ],
+          "komut": "curl -X POST http://<kopya-IP>:8080/api/collections/todos/records -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" -d '{\"title\":\"kopyadan\"}'",
+          "beklenen": "Yanıt 201 ve kayıt; kayıt ana sunucuda var, birkaç saniye sonra kopyada da. Ana sunucunun Denetim/Loglar'ında istek bilgisayarın adresiyle görünür."
+        },
+        {
+          "id": "f18r2",
+          "baslik": "Kopya tablosu",
+          "yapilacaklar": [
+            "Ana telefonda Durum ekranına, panelde Servisler &gt; Canlı kopya kartına bakın."
+          ],
+          "beklenen": "<b>Kopyalar</b> kartında kopyanın adresi, \"bağlı\", \"güncel\" (veya geride kalan değişiklik) ve v18 görünür; panelde aynısı tablo olarak."
+        },
+        {
+          "id": "f18r3",
+          "baslik": "Ana sunucu kapalıyken kopyaya yazma",
+          "yapilacaklar": [
+            "Ana telefonda sunucuyu durdurun.",
+            "f18r1'deki komutu yeniden çalıştırın; sonra kopyadan okuyun."
+          ],
+          "komut": "curl -i http://<kopya-IP>:8080/api/collections/todos/records -H \"Authorization: Bearer {KEY}\"",
+          "beklenen": "Yazma <code>502</code> ve \"yazma ana sunucuya iletilemedi\" mesajı (otomatik devralma kapalıysa); okuma kopyadan çalışır. Ana sunucuyu yeniden başlatın."
+        }
+      ]
+    },
+    {
+      "id": "faz18b",
+      "baslik": "Konum, takvim ve medya (Faz 18 Grup 2)",
+      "adimlar": [
+        {
+          "id": "f18g1",
+          "baslik": "Konum alanı ve yakındakiler",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Koleksiyonlar: <code>places</code> koleksiyonu, alanlar <code>name</code> (Metin) ve <code>loc</code> (<b>Konum</b>); kurallar herkese açık değilse API anahtarıyla deneyin. Kaydet ve deploy et.",
+            "İki kayıt ekleyin (ikincisinde <code>Kadıköy</code>, <code>40.99</code>, <code>29.028</code>):"
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/collections/places/records \\\n  -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"name\": \"Sultanahmet\", \"loc\": {\"lat\": 41.0054, \"lng\": 28.9768}}'",
+          "beklenen": "İkisi de <code>201</code>; yanıtta <code>loc</code> nesne olarak döner. Sonra <code>curl \"http://{IP}:8080/api/collections/places/records?loc[near]=40.99,29.028,10\" -H \"Authorization: Bearer {KEY}\"</code>: önce Kadıköy, sonra Sultanahmet; <code>loc[near]=40.99,29.028,1</code> yalnızca Kadıköy."
+        },
+        {
+          "id": "f18g2",
+          "baslik": "Hatalı konum",
+          "yapilacaklar": [
+            "Enlemi 91 olan bir kayıt göndermeyi deneyin."
+          ],
+          "komut": "curl -i -X POST http://{IP}:8080/api/collections/places/records \\\n  -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"name\": \"x\", \"loc\": {\"lat\": 91, \"lng\": 0}}'",
+          "beklenen": "<code>400</code>, <code>details.loc</code>: \"enlem -90 ile 90 arasında olmalı\"."
+        },
+        {
+          "id": "f18g3",
+          "baslik": "Panelde harita ve konum seçme",
+          "yapilacaklar": [
+            "Bilgisayarda paneli açın, Kayıtlar &gt; <code>places</code> &gt; <b>Harita</b>.",
+            "Haritayı sürükleyin, tekerlekle ve +/− ile yakınlaştırın; bir işarete tıklayın.",
+            "Bir kaydı düzenleyin: <b>loc: haritadan seç</b>, haritaya tıklayın, <b>Seç</b>, Kaydet. Telefon özelliklerinde konum açıksa <b>Telefonun konumu</b>'nu da deneyin."
+          ],
+          "beklenen": "OpenStreetMap karoları yüklenir, iki işaret görünür; işarete tıklayınca kayıt düzenleme açılır. Seçilen nokta JSON'a yazılır ve kaydedilince haritada yeni yerinde görünür. Telefonun konumu düğmesi telefonun son konumunu getirir."
+        },
+        {
+          "id": "f18g4",
+          "baslik": "Uygulamada harita",
+          "yapilacaklar": [
+            "Telefonda Sunucu &gt; <b>Harita</b>.",
+            "Sürükleyin, iki parmakla ve düğmelerle yakınlaştırın, bir işarete dokunun."
+          ],
+          "beklenen": "Karolar yüklenir (internet gerekir), işaretler görünür; dokunulan kaydın adı ve koordinatı alttaki kartta çıkar. Uygulamayı kapatıp açınca karolar önbellekten hızlı gelir."
+        },
+        {
+          "id": "f18t1",
+          "baslik": "Çakışma kuralı",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Koleksiyonlar: <code>bookings</code> koleksiyonu; alanlar <code>title</code> (Metin), <code>starts</code> ve <code>ends</code> (Tarih-saat), <code>room</code> (Metin).",
+            "Aynı koleksiyonda <b>Takvim ve kişiler</b> &gt; <b>Takvim</b>'i açın; başlık title, başlangıç starts, bitiş ends. <b>Çakışma olmasın</b>'ı açın, kaynak <code>room</code>. Kaydet ve deploy et.",
+            "Aynı odaya 10:00-11:00 bir kayıt ekleyin, sonra 10:30-11:30 ikinciyi deneyin:"
+          ],
+          "komut": "curl -i -X POST http://{IP}:8080/api/collections/bookings/records \\\n  -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"Toplantı\", \"starts\": \"2026-11-02T10:00:00Z\", \"ends\": \"2026-11-02T11:00:00Z\", \"room\": \"A\"}'",
+          "beklenen": "İlki <code>201</code>; ikincisi (saatleri 10:30/11:30 yaparak) <code>409</code> ve \"#1 kaydıyla çakışıyor\". <code>room</code> B ile ya da 11:00-12:00 ile <code>201</code>."
+        },
+        {
+          "id": "f18t2",
+          "baslik": "Takvim aboneliği",
+          "yapilacaklar": [
+            "Takvim ayarında <b>Takvim aboneliği (.ics)</b>'yi açın, gizli adres için <b>Oluştur</b>; deploy edin.",
+            "Bilgisayarda tarayıcıyla adresi açın, sonra Google Takvim (Diğer takvimler &gt; URL ile) veya telefonun takvim uygulamasında abone olun (internetten erişim gerekir)."
+          ],
+          "komut": "curl \"http://{IP}:8080/api/calendar/bookings.ics?token=<anahtar>\"",
+          "beklenen": "<code>BEGIN:VCALENDAR</code> ve her rezervasyon için <code>BEGIN:VEVENT</code>; abone olunan takvimde etkinlikler doğru saatte görünür. Yanlış anahtarla 403."
+        },
+        {
+          "id": "f18t3",
+          "baslik": "Telefon takvimiyle iki yönlü eşitleme (CalDAV)",
+          "yapilacaklar": [
+            "Sunucu &gt; Ağ sürücüsü'nü açın (parola verin). Takvim ayarında <b>Telefon takvimiyle eşitle (CalDAV)</b>'yi açın, deploy edin.",
+            "Başka bir telefona (veya aynı telefona) DAVx⁵ kurun (F-Droid). Hesap ekle &gt; URL ve kullanıcı adıyla giriş: <code>http://{IP}:8080/dav/</code>, kullanıcı ve parola ağ sürücüsününki.",
+            "DAVx⁵'te <code>bookings</code> takvimini seçip eşitleyin; telefonun Takvim uygulamasında yeni bir etkinlik ekleyin, sonra birini taşıyın ve birini silin; DAVx⁵'te Şimdi eşitle."
+          ],
+          "beklenen": "Sunucudaki rezervasyonlar telefon takviminde görünür. Telefonda eklenen etkinlik <code>bookings</code>'te kayıt olur (panelde görün), taşınan güncellenir, silinen silinir. Aynı odaya çakışan etkinlik eklerseniz DAVx⁵ hata bildirir (409)."
+        },
+        {
+          "id": "f18t4",
+          "baslik": "Rehber eşitlemesi (CardDAV)",
+          "yapilacaklar": [
+            "<code>people</code> koleksiyonu: <code>name</code>, <code>email</code>, <code>phone</code> (Metin). <b>Kişiler (CardDAV)</b>'i açın, alanları eşleyin, deploy edin.",
+            "DAVx⁵ hesabında yeniden algıla; <code>people</code> adres defterini seçin. Telefonun Kişiler uygulamasında bu hesaba bir kişi ekleyin."
+          ],
+          "beklenen": "Kişi <code>people</code>'da kayıt olur (ad, e-posta, telefon); panelde eklenen kayıt da rehberde görünür."
+        },
+        {
+          "id": "f18m1",
+          "baslik": "Fotoğraftaki konum silinir",
+          "yapilacaklar": [
+            "<code>photos</code> koleksiyonu: <code>image</code> (Dosya, Görseller). Telefonun kamerasıyla konum açıkken bir fotoğraf çekin ve bilgisayara alın.",
+            "Fotoğrafı yükleyin, indirin ve konum bilgisine bakın (<code>exiftool</code> ya da dosya özellikleri)."
+          ],
+          "komut": "curl -H \"Authorization: Bearer {KEY}\" -F 'image=@foto.jpg' http://{IP}:8080/api/collections/photos/records",
+          "beklenen": "İndirilen dosyada GPS bilgisi yok, yön ve çekim tarihi duruyor; fotoğraf doğru yönde görünür. Alanda <b>Konum bilgisini koru</b> açılınca konum kalır."
+        },
+        {
+          "id": "f18m2",
+          "baslik": "WebP'ye dönüşüm ve küçültme",
+          "yapilacaklar": [
+            "Aynı alanda Dönüştür: <b>WebP</b>, En büyük kenar: <code>1600</code>. Deploy edin, aynı fotoğrafı yeniden yükleyin."
+          ],
+          "beklenen": "Yanıttaki ad <code>.webp</code> ile biter, dosya özgününden çok küçük, uzun kenarı 1600 piksel ve dikey çekilmiş fotoğraf dik durur."
+        },
+        {
+          "id": "f18m3",
+          "baslik": "Video akışı (ileri sarma)",
+          "yapilacaklar": [
+            "<code>video</code> alanı (Dosya, Video, en çok 200 MB) ekleyin; telefondaki bir videoyu yükleyin.",
+            "İndirme adresini tarayıcıda (API anahtarıyla erişilebilecek şekilde; örn. panelde dosya bağlantısı) açın, ortalara atlayın. Ayrıca:"
+          ],
+          "komut": "curl -s -o /dev/null -D - -r 0-99 -H \"Authorization: Bearer {KEY}\" http://{IP}:8080/api/files/photos/<id>/<ad>",
+          "beklenen": "<code>206 Partial Content</code>, <code>Content-Range: bytes 0-99/…</code>, <code>Cache-Control: private, max-age=31536000, immutable</code>; oynatıcı ileri sarar, baştan indirmez."
+        },
+        {
+          "id": "f18m4",
+          "baslik": "YZ ile etiket ve OCR",
+          "yapilacaklar": [
+            "Sunucu &gt; Yapay zekâ'yı görsel destekleyen bir modelle açın.",
+            "<code>photos</code>'a <code>etiketler</code> (Metin) ve <code>metin</code> (Metin) alanları ekleyin; image alanında Etiketler: etiketler, Görseldeki metin: metin. Deploy edin.",
+            "Bir fiş ya da tabela fotoğrafı yükleyin; birkaç saniye sonra kaydı açın."
+          ],
+          "beklenen": "<code>etiketler</code>'de görseli anlatan kelimeler, <code>metin</code>'de görseldeki yazı. Anlamsal arama açıksa metindeki kelimelerle kayıt bulunur."
+        }
+      ]
+    },
+    {
+      "id": "faz18c",
+      "baslik": "Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3)",
+      "adimlar": [
+        {
+          "id": "f18p1",
+          "baslik": "Herkese açık sayfa",
+          "yapilacaklar": [
+            "<code>posts</code> koleksiyonu (title, body, status seçim, image dosya), liste ve görüntüleme kuralı <b>herkes</b>, arama alanı title. Birkaç kayıt ekleyin.",
+            "Sunucu &gt; <b>Sayfalar</b> &gt; +: başlık Blog, adres <code>blog</code>, koleksiyon posts, süzgeç <code>status=yayında</code>. Kaydet ve deploy et.",
+            "Telefonda ve bilgisayarda <code>http://{IP}:8080/pages/blog</code> adresini açın; arayın, sıralamayı değiştirin, bir kayda tıklayın."
+          ],
+          "beklenen": "Kartlarda başlık ve görseller; yalnızca yayındakiler; arama ve sıralama çalışır; detay sayfasında tüm alanlar, görsel büyük. Sayfa kaynağında script yok."
+        },
+        {
+          "id": "f18p2",
+          "baslik": "Giriş gerektiren sayfa",
+          "yapilacaklar": [
+            "Kullanıcı hesapları açıkken <code>notes</code> koleksiyonu (kural: sahip). İki kullanıcıyla birer not ekleyin.",
+            "<code>notlarim</code> sayfası, <b>Giriş gereksin</b> açık. Tarayıcıda açın, birinci kullanıcıyla giriş yapın; sonra Çıkış yap."
+          ],
+          "beklenen": "Önce giriş sayfası; girişten sonra yalnızca kendi notları görünür. Çıkıştan sonra yeniden giriş sayfası."
+        },
+        {
+          "id": "f18p3",
+          "baslik": "Pano (uygulama ve panel)",
+          "yapilacaklar": [
+            "Panelde Görünümler: <code>durum</code> (posts, rapor: gruplama status) ve <code>son</code> (posts, sütunlar title). ",
+            "Sunucu &gt; <b>Panolar</b> &gt; +: bir grafik kutusu (durum) ve bir tablo kutusu (son). Kaydet; panoyu açın.",
+            "Panelde <b>Sayfalar ve panolar</b> sekmesinde kutuları sürükleyip yer değiştirin, kaydedin, <b>Göster</b>."
+          ],
+          "beklenen": "Uygulamada çubuk grafik ve tablo; panelde sürükle-bırak sırası kaydedilir ve pano yeni sırayla görünür."
+        },
+        {
+          "id": "f18p4",
+          "baslik": "Panoyu paylaşma",
+          "yapilacaklar": [
+            "Pano düzenleyicide <b>Salt okunur adresle paylaş</b>'ı açın, kaydedin, adresi kopyalayıp başka bir cihazda açın."
+          ],
+          "beklenen": "Giriş istemeden pano görünür (grafik, tablo); anahtarı değiştirilmiş adres 404 döner."
+        },
+        {
+          "id": "f18k1",
+          "baslik": "Paket hazırlama ve imzalama",
+          "yapilacaklar": [
+            "Bilgisayarda bir klasör: <code>defter/package.json</code> = <code>{\"name\":\"defter\",\"version\":\"1.0.0\",\"title\":\"Defter\",\"publisher\":\"Ben\"}</code>, <code>defter/config.json</code> = <code>{\"collections\":[{\"name\":\"entries\",\"fields\":[{\"name\":\"text\",\"type\":\"text\",\"required\":true}]}]}</code>, <code>defter/sample/entries.json</code> = <code>[{\"text\":\"ilk not\"}]</code>.",
+            "CLI ile anahtar üretip paketleyin:"
+          ],
+          "komut": "node droidserver.mjs package key -o yayimci.key && node droidserver.mjs package build defter -o defter-1.0.0.zip --key yayimci.key",
+          "beklenen": "<code>defter-1.0.0.zip  imzalı ab:cd:…</code> çıktısı."
+        },
+        {
+          "id": "f18k2",
+          "baslik": "Plan ve kurulum (uygulama)",
+          "yapilacaklar": [
+            "Zip'i telefona kopyalayın. Sunucu &gt; <b>Paketler</b> &gt; Dosyadan (.zip) ile seçin.",
+            "Planı okuyun, <b>Kur ve deploy et</b>."
+          ],
+          "beklenen": "Planda \"İmzalı: Ben (ab:cd:…)\", eklenecek koleksiyon entries, örnek kayıt uyarısı. Kurulumdan sonra entries koleksiyonunda \"ilk not\" kaydı; paket listede 1.0.0."
+        },
+        {
+          "id": "f18k3",
+          "baslik": "Güncelleme, çakışma ve kaldırma (panel / CLI)",
+          "yapilacaklar": [
+            "package.json'da sürümü 1.1.0 yapıp yeniden paketleyin; panelde Konfigürasyon &gt; Paketler &gt; Dosyadan ile planlayıp Güncelle.",
+            "İmzasız bir kopya (--key olmadan) ve zip içinde bir dosyası değiştirilmiş imzalı kopya deneyin.",
+            "Son olarak <code>node droidserver.mjs package remove defter</code>."
+          ],
+          "beklenen": "Güncellemede \"Güncellenecek: koleksiyon entries\"; imzasız pakette uyarı (kurulabilir); değiştirilmiş pakette \"İmza geçersiz\" ve Kur düğmesi kapalı. Kaldırmadan sonra koleksiyon tanımı gider, şema planı tabloyu \"kullanılmıyor\" gösterir."
+        },
+        {
+          "id": "f18y1",
+          "baslik": "Model indirme",
+          "yapilacaklar": [
+            "Wi-Fi'da ve şarjdayken: Sunucu &gt; Yapay zekâ &gt; Yerel modeller.",
+            "<b>Qwen2.5 0.5B</b> ve <b>all-MiniLM-L6-v2</b>'yi indirin; birinin indirmesini yarıda Durdur'la kesip Sürdür'le devam ettirin."
+          ],
+          "beklenen": "İlerleme çubuğu ilerler; durdurulan indirme kaldığı yerden sürer; bitince \"İndirildi\". 32 bit bir telefonda ekranda \"yerel YZ yok\" uyarısı."
+        },
+        {
+          "id": "f18y2",
+          "baslik": "Yerel sohbet",
+          "yapilacaklar": [
+            "Yapay zekâ'da sağlayıcı <b>Telefonda (yerel model)</b>, model Qwen2.5 0.5B; kaydet. Uçak modunu açın (Wi-Fi'ı kapatıp yalnızca yerel ağda deneyin)."
+          ],
+          "komut": "curl -X POST http://{IP}:8080/api/ai/chat -H \"Authorization: Bearer {KEY}\" -H \"Content-Type: application/json\" -d '{\"prompt\":\"Bir cümleyle: telefon sunucu olarak nasıl kullanılır?\"}'",
+          "beklenen": "İnternetsiz yanıt gelir (birkaç saniye-dakika). Logcat'te droidserver-llama satırları. 5 dk sonra bellek boşalır (Ayarlar &gt; Bellek)."
+        },
+        {
+          "id": "f18y3",
+          "baslik": "Yerel anlamsal arama ve YZ adımı",
+          "yapilacaklar": [
+            "Gömme: Telefonda, model all-MiniLM; notes koleksiyonunun metin alanını dizinleyin.",
+            "Otomasyon: notes eklenince <b>YZ ile alan doldur</b>, istem <code>Bir cümleyle özetle: {body}</code>, alan summary.",
+            "İngilizce bir not ekleyin, sonra <code>/api/ai/search/notes?q=…</code> ile anlamca yakın bir sözcükle arayın."
+          ],
+          "beklenen": "Notun summary alanı birkaç saniye içinde dolar; arama kelime geçmese de notu bulur."
+        },
+        {
+          "id": "f18y4",
+          "baslik": "Bellek/ısı koruması",
+          "yapilacaklar": [
+            "Az bellekli bir telefonda Qwen2.5 1.5B'yi indirip seçin (veya çok sayıda uygulama açıkken deneyin)."
+          ],
+          "beklenen": "İstek 503 \"Bellek yetersiz…\" döner ve sağlık uyarısı (Yerel YZ çalıştırılamadı) gelir; sunucu çökmez."
+        }
+      ]
+    },
+    {
       "id": "secenekler",
       "baslik": "Kullanıcı seçenekleri",
       "adimlar": [
@@ -1299,6 +2030,147 @@
             "Sihirbaz &gt; Veritabanı &gt; PostgreSQL &gt; <b>PostgreSQL verisini sil…</b> &gt; onaylayın. Sihirbazdan çıkıp deploy etmeden bırakın."
           ],
           "beklenen": "Onay diyaloğu çıkar; silme sonrası hata yok. Sonraki Postgres deploy'unda <code>initdb</code> yeniden çalışır."
+        }
+      ]
+    },
+    {
+      "id": "faz18d",
+      "baslik": "Ödemeler (Faz 18 Grup 4)",
+      "adimlar": [
+        {
+          "id": "f18o1",
+          "baslik": "Erişim denetimi",
+          "yapilacaklar": [
+            "Erişim <b>Yalnızca yerel ağ</b> iken Sunucu &gt; <b>Ödemeler</b>'i açın, Stripe'ı açıp bir test anahtarı yazın, <b>Kaydet ve uygula</b>.",
+            "Erişimi kendi alan adınızla Cloudflare Tunnel (veya DuckDNS ile doğrudan erişim) yapın; Ödemeler'de <b>Erişim ayarından kullan</b> ve <b>Denetle</b>."
+          ],
+          "beklenen": "Yerel ağda kaydetme internet erişimi gerektiğini söyleyen hatayla reddedilir; hızlı tünelde de reddedilir. Alan adıyla Denetle \"Adres yanıt veriyor\" der."
+        },
+        {
+          "id": "f18o2",
+          "baslik": "Stripe test ödemesi",
+          "yapilacaklar": [
+            "Stripe test modunda (sk_test_) Geliştiriciler &gt; Webhook'lar: ekrandaki bildirim adresini ekleyin, olaylar checkout.session.*, charge.refunded. İmza sırrını (whsec_) Ödemeler'e yazıp kaydedin.",
+            "Panelde Konfigürasyon &gt; <b>Ödemeler</b>: tutar 10, para birimi TRY, açıklama Deneme, <b>Bağlantı oluştur</b>; bağlantıyı açıp test kartı 4242 4242 4242 4242 ile ödeyin.",
+            "Ödemeden sonra dönülen sayfada <b>Makbuz</b>'a dokunun; Stripe panelinden ödemeyi tam iade edin."
+          ],
+          "beklenen": "Dönüş sayfası \"Ödendi\" ve 10,00 TRY gösterir; makbuz Stripe'ın makbuzunu açar. İadeden birkaç saniye sonra panel ve uygulamadaki son ödemelerde \"İade edildi\". Stripe'ın webhook geçmişinde bildirimler 200."
+        },
+        {
+          "id": "f18o3",
+          "baslik": "iyzico sandbox ve makbuz PDF",
+          "yapilacaklar": [
+            "iyzico sandbox hesabının API ve gizli anahtarını Ödemeler &gt; iyzico'ya yazın (Test ortamı açık), kaydedin.",
+            "Bilgisayardan: <code>curl -X POST https://ALAN/api/_payments -H 'Authorization: Bearer ANAHTAR' -H 'Content-Type: application/json' -d '{\"amount\":\"25\",\"description\":\"Ders\",\"provider\":\"iyzico\",\"email\":\"siz@example.com\",\"buyer\":{\"name\":\"Ali\",\"surname\":\"Veli\",\"identityNumber\":\"11111111111\",\"gsmNumber\":\"+905350000000\",\"address\":\"Adres\",\"city\":\"İstanbul\"}}'</code>",
+            "Yanıttaki <code>url</code>'yi açın, iyzico'nun sandbox test kartıyla ödeyin (3D kodu 123456). Dönüş sayfasında Makbuz'u açın."
+          ],
+          "beklenen": "Ödeme sayfası iyzico'nun sayfası; dönüşte \"Ödendi\". Makbuz PDF'inde satıcı adı ve Türkçe harfler (ğ, ş, ı, İ) doğru, tutar 25,00 TRY."
+        },
+        {
+          "id": "f18o4",
+          "baslik": "Ödemeli randevu şablonu",
+          "yapilacaklar": [
+            "Stripe açıkken yeni profilde Sihirbaz &gt; Koleksiyonlar &gt; Hazır uygulama &gt; <b>Randevu</b> (örnek veri ve site ile) kurun.",
+            "Sitede bir hizmet seçip e-postanızla randevu isteyin. Uygulamada Kayıtlar &gt; appointments'a bakın."
+          ],
+          "beklenen": "Randevu kaydında payment_url dolu ve payment_status pending; bağlantıdaki tutar hizmetin fiyatı. E-posta açıksa ödeme bağlantısı gelir. Ödeyince payment_status paid olur."
+        },
+        {
+          "id": "f18o5",
+          "baslik": "Ödemeli sipariş şablonu",
+          "yapilacaklar": [
+            "Stripe açıkken Hazır uygulama &gt; <b>Mağaza ve sipariş</b> kurun. Sitede hesap açıp sipariş verin.",
+            "Uygulamada siparişin durumunu <b>onaylandı</b> yapın; sitede Siparişlerim'e bakın, <b>Öde</b>'ye dokunup test kartıyla ödeyin."
+          ],
+          "beklenen": "Onaydan önce ödeme bağlantısı yok; onaydan sonra Siparişlerim'de Öde bağlantısı. Ödemeden sonra bağlantı kaybolur, siparişin payment_status'u paid. Siparişi yeniden güncellemek yeni bağlantı üretmez."
+        },
+        {
+          "id": "f18o6",
+          "baslik": "Abonelik ve rol",
+          "yapilacaklar": [
+            "Kullanıcılar'da <code>pro</code> rolü ekleyin. Stripe'ta test modunda aylık bir ürün ve fiyat oluşturun; Stripe webhook'una customer.subscription.* olaylarını ekleyin.",
+            "Ödemeler &gt; Abonelik planları: kısa ad pro, fiyat kimliği price_…, rol pro; kaydedin.",
+            "Bir kullanıcıyla <code>POST /api/payments/subscribe {\"plan\":\"pro\"}</code> (token ile) çağırın, adresi açıp test kartıyla ödeyin. Sonra Stripe panelinden aboneliği hemen iptal edin."
+          ],
+          "beklenen": "Ödemeden sonra <code>/api/auth/me</code> rol: pro; <code>/api/payments/subscriptions</code> active. İptalden sonra rol yeniden user, abonelik canceled."
+        },
+        {
+          "id": "f18o7",
+          "baslik": "Paddle sandbox",
+          "yapilacaklar": [
+            "Paddle sandbox: API anahtarı, istemci token'ı ve Notifications'ta ekrandaki bildirim adresi (transaction.*, adjustment.*, subscription.*); bildirim sırrını yazın. Checkout settings'te varsayılan ödeme bağlantısını ekrandaki adres yapın.",
+            "Panelden Paddle ile 5 USD bağlantı oluşturun (sağlayıcı paddle, para birimi USD), açıp Paddle test kartıyla ödeyin; Makbuz'a dokunun."
+          ],
+          "beklenen": "Paddle ödeme penceresi sunucunun /payments/paddle sayfasında açılır; bitince durum sayfası \"Ödendi\"; Makbuz Paddle'ın faturasını (PDF) açar."
+        },
+        {
+          "id": "f18o8",
+          "baslik": "Uygulamadan iade",
+          "yapilacaklar": [
+            "Stripe test modunda yeni bir 10 TRY ödeme yapın (f18o2 gibi). Uygulamada Sunucu &gt; Ödemeler &gt; Son ödemeler'de ödemenin yanındaki <b>İade et</b>'e dokunup onaylayın.",
+            "Paddle sandbox'ta bir ödemeyi panelin Ödemeler kartındaki <b>İade et</b> ile iade edin; 10-15 dakika bekleyin (sandbox iadeleri onaylar)."
+          ],
+          "beklenen": "Stripe iadesi hemen \"İade edildi\"; Stripe panelinde iade görünür. Paddle'da önce \"İade istendi\" iletisi, onaydan sonra durum \"İade edildi\"."
+        },
+        {
+          "id": "f18o9",
+          "baslik": "iyzico panelinden iade",
+          "yapilacaklar": [
+            "f18o3'teki iyzico ödemesini iyzico sandbox üye işyeri panelinden iade edin.",
+            "Sunucuyu yeniden başlatmadan altı saat bekleyin (ya da ertesi gün bakın); Ödemeler'deki son ödemelere bakın."
+          ],
+          "beklenen": "Ödeme \"İade edildi\" olur; bağlı kaydın payment_status'u refunded."
+        },
+        {
+          "id": "f18o10",
+          "baslik": "Aboneliği dönem sonunda bitirme",
+          "yapilacaklar": [
+            "f18o6'daki gibi abone olun. Sonra kullanıcının token'ıyla <code>GET /api/payments/subscriptions</code>'tan kimliği alıp <code>POST /api/payments/subscriptions/&lt;id&gt;/cancel</code> çağırın.",
+            "Stripe panelinde aboneliğe bakın; kullanıcının rolünü denetleyin."
+          ],
+          "beklenen": "Yanıtta canceling: true; Stripe'ta abonelik \"dönem sonunda iptal\" olarak görünür; rol dönem bitene kadar pro kalır. Stripe'ta dönemi bitirince (ya da aboneliği hemen iptal edince) rol user'a döner."
+        }
+      ]
+    },
+    {
+      "id": "mqtt-tls",
+      "baslik": "MQTT TLS (17.5)",
+      "adimlar": [
+        {
+          "id": "mt1",
+          "baslik": "TLS'i açma ve kökü alma",
+          "yapilacaklar": [
+            "Sunucu &gt; <b>MQTT (IoT)</b>: MQTT açıkken <b>TLS açık</b>'ı açın (port 8883), Kaydet ve deploy et.",
+            "TLS bölümünde <b>Kökü paylaş</b> ile kökü bilgisayara gönderin (ya da panelde MQTT kartında <b>Kök sertifikayı indir</b>); <code>droidserver-ca.pem</code> olarak kaydedin."
+          ],
+          "beklenen": "MQTT ekranının alt başlığında 1883, 8883 (TLS); Loglar'da \"MQTT 1883, 8883 (TLS) portunda dinliyor\" ve \"MQTT sunucu sertifikası imzalandı: &lt;telefonun IP'si&gt;\"."
+        },
+        {
+          "id": "mt2",
+          "baslik": "mosquitto ile TLS",
+          "yapilacaklar": [
+            "Bilgisayarda: <code>mosquitto_sub -h {IP} -p 8883 --cafile droidserver-ca.pem -u device -P PAROLA -t '#' -v</code>",
+            "Başka bir terminalde aynı seçeneklerle <code>mosquitto_pub ... -t ev/test -m merhaba</code>.",
+            "Kök olmadan deneyin: <code>mosquitto_sub -h {IP} -p 8883 -u device -P PAROLA -t '#'</code>"
+          ],
+          "beklenen": "Kökle bağlanır (ad doğrulaması da geçer, --insecure gerekmez), mesaj gelir; uygulamadaki Durum'da cihazın yanında TLS yazar. Köksüz deneme sertifika hatasıyla reddedilir; Loglar'da el sıkışma uyarısı."
+        },
+        {
+          "id": "mt3",
+          "baslik": "Home Assistant veya ESP32",
+          "yapilacaklar": [
+            "Home Assistant: MQTT entegrasyonunu yeniden yapılandırın, port 8883, Gelişmiş seçenekler &gt; Broker sertifika doğrulaması: Özel, <code>droidserver-ca.pem</code>'i yükleyin. (Ya da ESP32'de <code>WiFiClientSecure</code> + <code>setCACert</code> ile 8883'e bağlanın.)"
+          ],
+          "beklenen": "Bağlantı kurulur; sensörler ve sahneler eskisi gibi çalışır."
+        },
+        {
+          "id": "mt4",
+          "baslik": "Düz portu kapatma ve IP değişimi",
+          "yapilacaklar": [
+            "MQTT ekranında <b>Düz bağlantı da açık</b>'ı kapatıp kaydedin; <code>mosquitto_sub -h {IP} -p 1883 ...</code> deneyin.",
+            "Telefonun Wi-Fi'ını kapatıp açın (ya da modemden farklı IP verin); sunucuyu yeniden başlatmadan mt2'deki TLS bağlantısını yeni IP ile deneyin."
+          ],
+          "beklenen": "1883 bağlantıyı reddeder, 8883 çalışır. Yeni IP'de de kökle bağlanılır (Loglar'da yeni IP için \"sertifika imzalandı\"); cihazlarda ayar değişmez."
         }
       ]
     }
