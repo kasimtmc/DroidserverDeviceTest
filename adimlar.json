@@ -173,7 +173,7 @@
         {
           "id": "p7",
           "baslik": "Postgres çökerse (isteğe bağlı, adb gerekir)",
-          "komut": "adb shell run-as dev.droidserver.app pkill -9 postgres",
+          "komut": "adb shell run-as com.plyg.droidserver pkill -9 postgres",
           "beklenen": "Birkaç saniye API <b>503</b> döner (\"Veritabanına şu an ulaşılamıyor\"), sonra kendiliğinden düzelir."
         }
       ]
@@ -1279,7 +1279,7 @@
             "Durum &gt; ⚙ Ayarlar &gt; <b>Tasker ve otomasyon</b>'u açın; <b>Komut anahtarı</b>nı <b>Anahtarı kopyala</b> ile alın.",
             "Bilgisayardan (adb ile) komutu anahtarla, sonra <code>STOP</code> yerine <code>START</code> ile çalıştırın. Bir de yanlış anahtarla deneyin. Tasker kuruluysa aynısını Görev &gt; Sistem &gt; Send Intent ile yapın (ekrandaki <b>Tasker'da kurulum</b> alanları)."
           ],
-          "komut": "adb shell am broadcast -a dev.droidserver.action.STOP -n dev.droidserver.app/.service.TaskerReceiver --es token <anahtar>",
+          "komut": "adb shell am broadcast -a com.plyg.droidserver.action.STOP -n com.plyg.droidserver/com.plyg.droidserver.app.service.TaskerReceiver --es token <anahtar>",
           "beklenen": "Doğru anahtarla sunucu durur, START ile başlar. Yanlış anahtarla bir şey olmaz; Loglar'da \"reddedildi\"."
         },
         {
@@ -1287,7 +1287,7 @@
           "baslik": "Tasker: sunucu olayları (isteğe bağlı, Tasker veya MacroDroid gerekir)",
           "yapilacaklar": [
             "<b>Olayların gideceği uygulamalar</b>'da Tasker'ı (veya MacroDroid'i) seçin.",
-            "Tasker'da Profil &gt; Olay &gt; Sistem &gt; <b>Intent Received</b>, Action <code>dev.droidserver.event.STARTED</code>; görev olarak <code>%url</code> ile bir bildirim (Alert &gt; Notify). Sunucuyu durdurup başlatın."
+            "Tasker'da Profil &gt; Olay &gt; Sistem &gt; <b>Intent Received</b>, Action <code>com.plyg.droidserver.event.STARTED</code>; görev olarak <code>%url</code> ile bir bildirim (Alert &gt; Notify). Sunucuyu durdurup başlatın."
           ],
           "beklenen": "Sunucu başlayınca Tasker bildirimi yerel ağ adresiyle çıkar. Uygulama listeden kaldırılınca olay gelmez; komutlar yine çalışır."
         },
@@ -1402,7 +1402,7 @@
             "Sunucu çalışırken bilgisayarda birinci komutla süreç numarasını alın, ikinci komutla süreci öldürün (yalnızca Android Studio'dan kurulan debug sürümde çalışır).",
             "10-30 saniye bekleyin. Bildirimlere, Loglar'a ve Durum &gt; Sorun giderici'ye bakın."
           ],
-          "komut": "adb shell pidof dev.droidserver.app\nadb shell run-as dev.droidserver.app kill -9 <pid>",
+          "komut": "adb shell pidof com.plyg.droidserver\nadb shell run-as com.plyg.droidserver kill -9 <pid>",
           "beklenen": "Sunucu kendiliğinden yeniden başlar. Loglar'da \"… sistem sunucu servisini durdurup yeniden başlattı.\" ve Android 11+'da \"Önceki süreç … bitti: sistem sonlandırdı (sinyal 9).\" Sağlık uyarıları açıksa \"Sistem sunucuyu yeniden başlattı\" bildirimi (sessiz saatte gelmez). Sorun gidericide aynı açıklamayla sarı bulgu. Uygulamayı kendiniz Durdur'la kapatınca bu uyarı çıkmaz."
         },
         {
@@ -1412,7 +1412,7 @@
             "Sorun gidericide kırmızı/sarı pil bulgusu olmasın (pil optimizasyonundan muaf, Kısıtlanmamış). Telefonu şarj cihazından ayırın, ekranı kapatıp 24 saat normal kullanımda bırakın; sunucuya ara sıra istek gelsin (ör. başka bir cihazdan saatte bir a4 komutu ya da bir izleme servisi).",
             "Başta ve sonda: Durum'daki pil yüzdesini ve birinci komutun <code>TOTAL PSS</code> satırını not edin; sonunda ikinci komutla son yeniden başlatmaları da alın."
           ],
-          "komut": "adb shell dumpsys meminfo dev.droidserver.app | grep -i \"TOTAL\"\nadb shell dumpsys activity exit-info dev.droidserver.app | head -40",
+          "komut": "adb shell dumpsys meminfo com.plyg.droidserver | grep -i \"TOTAL\"\nadb shell dumpsys activity exit-info com.plyg.droidserver | head -40",
           "beklenen": "24 saatte sunucu hiç durmaz: Sorun gidericide \"Sistem sunucuyu yeniden başlattı\" bulgusu yok, istekler hep yanıtlanır. Notlara pil düşüşünü (% / 24 sa), bellekteki değişimi ve telefon modelini yazın. Yeniden başlatma olduysa nedenini (bulgudaki metin) not edin."
         },
         {
