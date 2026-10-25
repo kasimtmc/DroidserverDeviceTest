@@ -2173,6 +2173,189 @@
           "beklenen": "1883 bağlantıyı reddeder, 8883 çalışır. Yeni IP'de de kökle bağlanılır (Loglar'da yeni IP için \"sertifika imzalandı\"); cihazlarda ayar değişmez."
         }
       ]
+    },
+    {
+      "id": "faz19a",
+      "baslik": "Play sürümü: yapı türleri ve API 36 (19.1–19.2)",
+      "adimlar": [
+        {
+          "id": "p1",
+          "baslik": "Play türünü kurma",
+          "yapilacaklar": [
+            "Android 13 veya üstü bir telefonda ya da öykünücüde (tercihen Android 16 / API 36) deneyin. Paket adı GitHub sürümüyle aynı ama imza farklı: telefonda GitHub sürümü varsa önce yedek alıp kaldırın (ya da yedek telefon/öykünücü kullanın).",
+            "Bilgisayarda: <code>./gradlew :app:assemblePlayDebug</code>, ardından <code>adb install -r app/build/outputs/apk/play/debug/app-play-debug.apk</code>",
+            "<code>adb shell dumpsys package com.plyg.droidserver | grep -E 'targetSdk|SEND_SMS|REQUEST_INSTALL'</code>"
+          ],
+          "beklenen": "Kurulur; çıktıda yalnızca <code>targetSdk=36</code> var, SEND_SMS ve REQUEST_INSTALL_PACKAGES geçmez."
+        },
+        {
+          "id": "p2",
+          "baslik": "Bildirim izni",
+          "yapilacaklar": [
+            "Uygulamayı ilk kez açın.",
+            "İzni verin, sunucuyu başlatın; ardından uygulamayı kapatıp yeniden açın."
+          ],
+          "beklenen": "İlk açılışta bildirim izni sorulur, sonraki açılışlarda sorulmaz. Sunucu başlayınca kalıcı bildirim görünür."
+        },
+        {
+          "id": "p3",
+          "baslik": "Play'de kapalı olanlar",
+          "yapilacaklar": [
+            "Ayarlar ekranını aşağı kaydırın; Durum ekranına bakın.",
+            "Bileşenler: bir bileşende <b>Kur</b>'a dokunun.",
+            "Sihirbaz &gt; Genel &gt; <b>Telefon özellikleri</b>.",
+            "Bir script'ten <code>ctx.sms.send</code> deneyin (SMS daha önce açık bir yapılandırma içe aktarıldıysa)."
+          ],
+          "beklenen": "Ayarlar'da Güncelleme bölümü, Durum'da güncelleme kartı yok. Bileşenler'in üstünde \"Bu sürümde bileşenler henüz kurulamıyor\" uyarısı; Kur açıklamalı hatayla düşer, bir şey indirilmez. Telefon özelliklerinde SMS anahtarı yerine \"Bu sürümde SMS, SIM kartından doğrudan gönderilemez.\" yazısı; script'te aynı hata. Konum ve cihaz durumu çalışır."
+        },
+        {
+          "id": "p4",
+          "baslik": "Arka planda başlatma",
+          "yapilacaklar": [
+            "Ayarlar'da <b>Cihaz açılınca başlat</b>'ı açıp telefonu yeniden başlatın.",
+            "Sunucu çalışırken ekranı kilitleyip birkaç dakika sonra bilgisayardan <code>curl http://{IP}:8080/</code>.",
+            "Tasker/MacroDroid varsa: uygulama kapalı ve sunucu durmuşken sunucuyu niyetle (intent) başlatan görevi çalıştırın."
+          ],
+          "beklenen": "Açılışta sunucu kendiliğinden başlar; kilitliyken istekler yanıtlanır. Niyetle başlatma ya çalışır ya da Android engellerse uygulama çökmez, Loglar'da \"Sunucu arka plandan başlatılamadı … pil iyileştirmesinden muaf tutun\" yazar."
+        },
+        {
+          "id": "p5",
+          "baslik": "GitHub türü değişmedi",
+          "yapilacaklar": [
+            "GitHub (full) sürümünü yeniden kurun (p1'deki gibi kaldırarak): <code>./gradlew :app:assembleFullDebug</code>, <code>adb install -r app/build/outputs/apk/full/debug/app-full-debug.apk</code>",
+            "Ayarlar, Bileşenler ve Telefon özelliklerine bakın; bir bileşen kurun."
+          ],
+          "beklenen": "Güncelleme bölümü, SMS anahtarı ve bileşen kurulumu eskisi gibi; Bileşenler'de uyarı yok."
+        }
+      ]
+    },
+    {
+      "id": "faz19b",
+      "baslik": "Play sürümünde bileşenler (19.3–19.4)",
+      "adimlar": [
+        {
+          "id": "pb1",
+          "baslik": "Modülü Play'den kurma",
+          "yapilacaklar": [
+            "Play'in iç test kanalından kurulan sürümde (Grup 4) Bileşenler ekranını açın: depo adresi ve yenile düğmesi yok, liste uygulamayla gelir.",
+            "Redis'te <b>Kur ve çalıştır</b>'a dokunun; Play onay isterse onaylayın."
+          ],
+          "beklenen": "Düğmede \"Play'den indiriliyor… %…\" ve \"Kuruluyor…\" görünür; sonra Redis çalışır (Durum'da işlem sayısı artar). Uygulama Play'den kurulmamışsa açıklamalı hata: modüller yalnızca Play'den kurulan uygulamaya gelir."
+        },
+        {
+          "id": "pb2",
+          "baslik": "PostgreSQL",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Veritabanı: PostgreSQL'i seçin, bileşeni kurun, kaydedip deploy edin.",
+            "Bilgisayardan <code>curl http://{IP}:8080/api/health</code>"
+          ],
+          "beklenen": "Loglar'da initdb adımları ve \"[postgres] başladı\"; \"selecting default max_connections\" adımında takılmaz. Sağlık yanıtı gelir, kayıtlar Postgres'te tutulur."
+        },
+        {
+          "id": "pb3",
+          "baslik": "Hızlı tünel",
+          "yapilacaklar": [
+            "Sihirbaz &gt; Erişim: Cloudflare hızlı tüneli, bileşeni kurun, deploy edin.",
+            "Durum'daki https://…trycloudflare.com/api/health adresini bilgisayarda açın."
+          ],
+          "beklenen": "Adres Durum'da görünür ve sağlık yanıtı gelir."
+        },
+        {
+          "id": "pb4",
+          "baslik": "Node.js, Python, Java uygulamaları",
+          "yapilacaklar": [
+            "Bileşenler &gt; Çalışma ortamları: Node.js, Python ve OpenJDK'yı kurun.",
+            "Uygulamalar'da üç küçük uygulama ekleyin: Node (<code>node server.js</code>, kurulum <code>npm install</code>), Python (<code>python3 app.py</code>, kurulum <code>pip install -r requirements.txt</code>), Java (<code>java Server.java</code>); her biri PORT'u dinleyen basit bir HTTP sunucusu.",
+            "Bilgisayardan <code>curl http://{IP}:8080/apps/&lt;ad&gt;/</code>"
+          ],
+          "beklenen": "Üç uygulama da yanıt verir; npm ve pip kurulum adımları başarılı."
+        },
+        {
+          "id": "pb5",
+          "baslik": "Derlenmiş kodlu uygulama",
+          "yapilacaklar": [
+            "Yerel eklentili bir paket kullanan Node uygulaması yükleyin (örn. <code>package.json</code>'da <code>better-sqlite3</code>, zip'te node_modules ile)."
+          ],
+          "beklenen": "Uygulama başlatılmaz; Loglar'da \"uygulamanın klasöründe derlenmiş kod var (…node)\" ve GitHub sürümü önerisi."
+        },
+        {
+          "id": "pb6",
+          "baslik": "Uygulama güncellemesi sonrası",
+          "yapilacaklar": [
+            "Play'den yeni bir sürüm gelince (iç test kanalına yeni sürüm yükleyin) uygulamayı açıp sunucuyu yeniden başlatın."
+          ],
+          "beklenen": "Kurulu bileşenler yeniden kurmadan çalışır (Postgres verisi yerinde); Loglar'da gerekirse \"kuruldu (Play modülü)\" satırı."
+        },
+        {
+          "id": "pb7",
+          "baslik": "Java'dan alt süreç",
+          "yapilacaklar": [
+            "pb4'teki Java uygulamasında bir istekte <code>new ProcessBuilder(\"/system/bin/sh\", \"-c\", \"echo alt-surec\").start()</code> çalıştırın ve çıktıyı döndürün."
+          ],
+          "beklenen": "Çıktı \"alt-surec\", çıkış kodu 0 (OpenJDK uygulamanın kendi libandroid-spawn.so'sunu kullanır; Play'in 16 KB kuralı için)."
+        }
+      ]
+    },
+    {
+      "id": "faz19c",
+      "baslik": "SMS yolları, konum ve pil (19.5–19.6)",
+      "adimlar": [
+        {
+          "id": "sc1",
+          "baslik": "Onaylı SMS: açık bilgilendirme",
+          "yapilacaklar": [
+            "SIM takılı telefonda Sihirbaz &gt; Genel &gt; Telefon özellikleri: SMS gönderme'yi açın.",
+            "SIM'den gönderim: <b>Her SMS'te onayımla</b>'yı seçin; önce Vazgeç, sonra tekrar seçip Kabul ediyorum."
+          ],
+          "beklenen": "Tam sayfa bilgilendirme çıkar; Vazgeç'te kip değişmez. Kabulde kip seçilir, bildirim izni yoksa sorulur. Play sürümünde \"Doğrudan\" seçeneği yoktur ve SMS açılınca SIM kapalı başlar."
+        },
+        {
+          "id": "sc2",
+          "baslik": "Onaylı SMS: kuyruk ve gönderim",
+          "yapilacaklar": [
+            "Kaydedip deploy edin.",
+            "Bilgisayardan iki istek: <code>curl -H \"Authorization: Bearer ANAHTAR\" -H 'Content-Type: application/json' -d '{\"to\":\"+90KENDİ_NUMARANIZ\",\"text\":\"Deneme 1\"}' http://{IP}:8080/api/_phone/sms</code> (ikincisinde \"Deneme 2\").",
+            "Bildirimde <b>SMS'i gönder</b>'e dokunun, SMS uygulamasında gönderin; ikincisinde <b>Atla</b>.",
+            "Telefonu kilitleyip yeni bir istek gönderin, kilit ekranına bakın."
+          ],
+          "beklenen": "Yanıtta <code>\"status\": \"awaiting_user\"</code>. Bildirim \"… numarasına SMS — 1/2\"; gönderince SMS uygulaması numara ve metinle açılır, SMS size gelir; sıradaki \"1/1\" olur, Atla ile bildirim kalkar. Kilit ekranında numara ve metin görünmez (\"Onay bekleyen SMS\")."
+        },
+        {
+          "id": "sc3",
+          "baslik": "SMS ile giriş kodu",
+          "yapilacaklar": [
+            "Kullanıcılar adımında SMS ile girişi açın, telefon numaralı bir kullanıcı olsun.",
+            "<code>POST /api/auth/request-sms-code</code> ile iki kez kod isteyin."
+          ],
+          "beklenen": "Kuyrukta o numaraya tek istek kalır (yeni kod eskisinin yerine geçer); 10 dakika sonra bildirim kendiliğinden kalkar."
+        },
+        {
+          "id": "sc4",
+          "baslik": "SMS sağlayıcısı",
+          "yapilacaklar": [
+            "Netgsm, İleti Merkezi ya da Twilio hesabınız varsa: SMS sağlayıcısı alanlarını doldurup kaydedin.",
+            "sc2'deki istekle kendi numaranıza SMS gönderin; sonra parolayı bilerek yanlış girip yeniden deneyin."
+          ],
+          "beklenen": "Doğru bilgilerle SMS sağlayıcıdan gelir, yanıtta <code>\"via\": \"provider\"</code>. Yanlış parolada SIM yolu açıksa ona düşer (denetim kaydında \"sağlayıcı başarısız\"), kapalıysa 503 ve sağlayıcının hata iletisi."
+        },
+        {
+          "id": "sc5",
+          "baslik": "Konum (Play sürümü)",
+          "yapilacaklar": [
+            "Konum'u açıp izin verin; uygulama ekrandayken <code>GET /api/_phone/location</code>.",
+            "Ana ekrana dönüp aynı isteği yineleyin."
+          ],
+          "beklenen": "Ekrandayken konum gelir; arka plandayken 503 ve \"yalnızca DroidServer ekrandayken\" iletisi. GitHub sürümünde arka planda da gelir."
+        },
+        {
+          "id": "sc6",
+          "baslik": "Pil muafiyeti (Play sürümü)",
+          "yapilacaklar": [
+            "Ayarlar &gt; Pil optimizasyonu'na dokunun."
+          ],
+          "beklenen": "Android'in pil iyileştirmesi listesi açılır ve yönerge görünür (GitHub sürümünde doğrudan soran pencere)."
+        }
+      ]
     }
   ]
 }
