@@ -2356,6 +2356,46 @@
           "beklenen": "Android'in pil iyileştirmesi listesi açılır ve yönerge görünür (GitHub sürümünde doğrudan soran pencere)."
         }
       ]
+    },
+    {
+      "id": "faz19d",
+      "baslik": "Play: uygulama içi güncelleme ve değerlendirme (19.8)",
+      "adimlar": [
+        {
+          "id": "pu1",
+          "baslik": "Güncelleme kartı",
+          "yapilacaklar": [
+            "Play'den kurulu sürüm açıkken kapalı test kanalına daha yüksek sürüm yükleyin (Play'de görünmesi birkaç saat sürebilir).",
+            "Play Store'da uygulama sayfasını bir kez açıp kapatın, sonra DroidServer'ı açın; Durum ekranına bakın."
+          ],
+          "beklenen": "\"Play'de yeni sürüm var\" kartı ve İndir düğmesi çıkar. GitHub'ın \"Uygulama güncellemesi\" kartı ve Ayarlar'da Güncelleme bölümü görünmez."
+        },
+        {
+          "id": "pu2",
+          "baslik": "İndirme ve kurulum",
+          "yapilacaklar": [
+            "Sunucu çalışırken İndir'e dokunun, Play penceresinde onaylayın.",
+            "İnince Yeniden başlat ve kur'a dokunun."
+          ],
+          "beklenen": "İndirme yüzdesi kartta ilerler, sunucu bu sırada istek almaya devam eder. Kurulumdan sonra uygulama yeniden açılır, sunucu kendiliğinden yeniden başlar ve sürüm Ayarlar/Hakkında'da yenidir."
+        },
+        {
+          "id": "pu3",
+          "baslik": "Play'de değerlendir",
+          "yapilacaklar": [
+            "Ayarlar → Google Play → Play'de değerlendir."
+          ],
+          "beklenen": "Play Store'da DroidServer'ın sayfası açılır."
+        },
+        {
+          "id": "pu4",
+          "baslik": "Değerlendirme penceresi",
+          "yapilacaklar": [
+            "Kurulumdan bir hafta sonra sunucu çalışırken uygulamayı açın."
+          ],
+          "beklenen": "Play'in değerlendirme penceresi bir kez çıkabilir (Play kotası yüzünden çıkmayabilir; çıkmaması hata değil). Sonraki açılışlarda yeniden istenmez."
+        }
+      ]
     }
   ]
 }
