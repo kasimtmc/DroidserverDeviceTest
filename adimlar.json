@@ -805,7 +805,7 @@
             "Sihirbaz &gt; Güvenlik &gt; <b>Güvenlik duvarı</b> açık; eşik 5 deneme. Deploy. Başka bir cihazdan yanlış anahtarla 6 istek gönderin (komutu tekrarlayın)."
           ],
           "komut": "curl -i -H \"Authorization: Bearer yanlis-anahtar\" http://{IP}:8080/api/collections/todos/records",
-          "beklenen": "İlk denemeler 401, sonra <b>403</b> \"Bu adres geçici olarak engellendi\". Sunucu &gt; <b>Güvenlik duvarı</b> ekranında adres ve bitiş zamanı; <b>Engeli kaldır</b> ile hemen açılır. Telefonun kendisi (127.0.0.1) hiç engellenmez."
+          "beklenen": "İlk denemeler 401, sonra <b>429</b> \"Çok fazla istek; … saniye sonra tekrar deneyin\" (Retry-After). Sunucu &gt; <b>Güvenlik duvarı</b> ekranında adres ve bitiş zamanı; <b>Engeli kaldır</b> ile hemen açılır. Telefonun kendisi (127.0.0.1) hiç engellenmez."
         },
         {
           "id": "f13g2",
@@ -891,7 +891,7 @@
             "Ekranlara, web paneline ve bir hata yanıtına bakın (komut). Sonra <b>Türkçe</b>'ye (veya <b>Telefonun dili</b>'ne) dönün."
           ],
           "komut": "curl -i http://{IP}:8080/api/collections/todos/records -H \"Authorization: Bearer yanlis\"",
-          "beklenen": "Uygulama ve panel İngilizce; 401 yanıtının <code>message</code>'ı İngilizce. Sunucu çalışıyorsa dil değişiminden sonra kendiliğinden yeniden başlar. Loglar Türkçe kalır."
+          "beklenen": "Uygulama ve panel İngilizce; 401 yanıtının <code>message</code>'ı İngilizce. Sunucu çalışıyorsa dil değişiminden sonra kendiliğinden yeniden başlar. Yeni log satırları da seçilen dilde (önceki satırlar değişmez)."
         }
       ]
     },
@@ -1556,7 +1556,7 @@
             "Bilgisayarda komutu çalıştırın (Node 22+), açık bırakın. Telefondan veya panelden <code>todos</code>'a bir kayıt ekleyin, düzenleyin, silin."
           ],
           "komut": "node -e 'const w=new WebSocket(\"ws://{IP}:8080/api/graphql/ws\",\"graphql-transport-ws\");w.onopen=()=>w.send(JSON.stringify({type:\"connection_init\",payload:{token:\"{KEY}\"}}));w.onmessage=e=>{console.log(e.data);if(JSON.parse(e.data).type===\"connection_ack\")w.send(JSON.stringify({id:\"1\",type:\"subscribe\",payload:{query:\"subscription { todos { action record { id title } } }\"}}))}'",
-          "beklenen": "Önce <code>connection_ack</code>; her değişiklikte <code>{\"id\":\"1\",\"type\":\"next\",\"payload\":{\"data\":{\"todos\":{\"action\":\"create\",…}}}}</code> (sonra <code>update</code>, <code>delete</code>; silmede kayıtta yalnızca id). Anahtarı yanlış yazınca bağlantı 4403 ile kapanır."
+          "beklenen": "Önce <code>connection_ack</code>; her değişiklikte <code>{\"id\":\"1\",\"type\":\"next\",\"payload\":{\"data\":{\"todos\":{\"action\":\"create\",…}}}}</code> (sonra <code>update</code>, <code>delete</code>; silmede kayıtta yalnızca id). Anahtarı yanlış yazınca bağlantı anonim sayılır: abonelik \"Bu işlem için giriş yapın\" hatası alır, veri gelmez."
         },
         {
           "id": "f17d1",

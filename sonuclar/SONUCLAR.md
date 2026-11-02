@@ -2,120 +2,98 @@
 
 > Bu dosya `sonuclar/sonuclar.json`'dan otomatik üretilir; elle düzenlemeyin.
 
-- Son güncelleme: 2026-10-14T14:00:45.505Z
-- 176 adım: Tamam 77, Sorun 0, Atlandı 0, Bekliyor 99
+- Son güncelleme: 2026-11-02T12:53:46.787Z
+- 246 adım: Tamam 178, Sorun 3, Atlandı 1, Bekliyor 64
 
-## Sorunlar (0)
+## Sorunlar (3)
 
-Yok.
+- **ui5** · Yeni arayüz › Web paneli
+  - Beklenen: Panel yeni renklerle açılır; telefon genişliğinde menü ve tablolar taşmadan kullanılır.
+  - Not: 0.9.7, panel Cloudflare tüneli üzerinden (https://plyground.org/_admin, eşleştirme kodu + doğrulayıcı kodu) bilgisayardaki tarayıcıda açıldı; yeni renkler, sol menü. 375 px telefon genişliğinde (tarayıcı öykünmesi) menü üstte kaydırılabilir sekme çubuğu; 12 sayfa gezildi: Metrikler, Loglar, Sayfalar ve panolar, Otomasyon, Servisler, API, Yedekler, Şema, SQL sığdı, tablolar kendi kaydırma kutusunda. TAŞMA: Kayıtlar (463 px; filtre alanı size=40), Denetim ve Konfigürasyon (427 px; size=36 alanlar) — flex satırdaki geniş metin alanı küçülmüyor. Düzeltildi (a010e62: input/select/textarea max-width 100%); kural CSSOM ile eklenince üç sayfa da 375/375 ölçüldü. Telefonun kendi tarayıcısında denenmedi.
+  - Zaman: 2026-11-02T12:18:34.354Z
+- **f17y1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › İlk açılış rehberi ve örnek proje
+  - Beklenen: Üç tanıtım sayfası ve başlangıç sayfası görünür; seçimden sonra sihirbaz projeler ve görevler koleksiyonlarıyla açılır. Deploy'dan sonra örnek kayıtlar vardır. Uygulama yeniden açıldığında rehber bir daha çıkmaz.
+  - Not: GitHub 0.9.6 (imzalı full) temiz kurulum: üç tanıtım sayfası (Telefonunuz bir sunucu / Veriniz sizde / Ev ağından internete) ve 'Nasıl başlamak istersiniz?' sayfası. Görev takibi seçilince sihirbaz projects ve tasks ile açıldı (yanında varsayılan todos ve notes da var). Kaydet ve deploy et çalıştı; Loglar: 'Görev takibi şablonu kuruldu: örnek kayıt eklenmedi (koleksiyonlar boş değil), web sitesi'. Örnek kayıt YOK: AppTemplate.TASKS için SAMPLES tanımlı değil, ileti nedeni yanlış söylüyor (koleksiyonlar boştu). Uygulama zorla kapatılıp açılınca rehber çıkmadı. Ayrıca 0.9.6 şema planı temiz kurulumda '1 tablo artık kullanılmıyor' (android_metadata) diyor; cf1caa6 ile düzeldi, 0.9.7'de bakılacak.
+  - Zaman: 2026-11-01T15:46:01.392Z
+- **f18p1** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Herkese açık sayfa
+  - Beklenen: Kartlarda başlık ve görseller; yalnızca yayındakiler; arama ve sıralama çalışır; detay sayfasında tüm alanlar, görsel büyük. Sayfa kaynağında script yok.
+  - Not: 0.9.7, konfigürasyon API'siyle: posts (title, body, status taslak/yayında, image file), list/view herkes, arama title; sayfa blog (posts, filter status=yayında). 3 kayıt (2 yayında, 1 taslak) görselle. Bilgisayarda https://plyground.org/pages/blog (tünel): kartlarda başlık, alanlar ve 100×100 görseller; yalnızca yayındakiler. Arama q=Pil yalnızca 'Pil sağlığı'; sort=-title doğru sıra; detay /pages/blog/2 tüm alanlar, görsel 800 px. Sayfa kaynağında script yok, CSP default-src 'none'. SORUN: listede olmayan taslak /pages/blog/3 doğrudan adresle 200 açılıyordu (detay ve dosya ucu sabit süzgeci uygulamıyordu) — düzeltildi (PagePages: süzgece uymayan kayıt 404; PagesTest'e eklendi). Telefonun tarayıcısında denenmedi.
+  - Zaman: 2026-11-02T11:46:32.413Z
 
-## Atlananlar (0)
+## Atlananlar (1)
 
-Yok.
+- **f17b1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Sorun giderici: Kısıtlı pil ayarı
+  - Not: Xiaomi (HyperOS/MIUI): Pil tasarrufu > 'Arka plan uygulamalarını kısıtla' seçildi. Bu MIUI PowerKeeper ayarı; Android'e arka plan kısıtı olarak yansımıyor (RUN_ANY_IN_BACKGROUND allow, isBackgroundRestricted false), yalnızca pil optimizasyonu muafiyeti kalkıyor. Sorun giderici kırmızı 'Arka plan kullanımı kısıtlı' yerine en üstte sarı 'Battery optimization is on' gösterdi; 'Open battery setting' sistemin 'Uygulamaların pil kullanımı' sayfasını açtı ('Arka planda kullanıma izin ver' anahtarı). Stok 'Kısıtlı' seçeneği bu telefonda yok; beklenen kırmızı bulgu için stok Android (Pixel vb.) gerekir.
+  - Zaman: 2026-11-01T15:33:53.958Z
 
-## Bekleyenler (99)
+## Bekleyenler (64)
 
-- **fk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Seçim alanı ve kurallar
-- **fk2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Hesaplanan alan
-- **gc1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Geçmiş
-- **gc2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Çöp kutusu
-- **kt1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Kotalar
-- **td1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › İki adımlı doğrulama
 - **td2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › E-postayla kodla giriş
-- **td3** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Panelde doğrulayıcı kodu
-- **pf1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Tam metin dizini
-- **pf2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › ETag ve sıkıştırma
 - **by1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Bulut yedeği
 - **by2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Buluttan geri yükleme
-- **sdk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › İstemci SDK'sı
-- **sm1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Panelden şema düzenleme
-- **f13a1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Denetim kaydı
-- **f13g1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Güvenlik duvarı: otomatik engel
 - **f13g2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Güvenlik duvarı: izin listesi
-- **f13s1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Sağlık uyarıları: Telegram
 - **f13s2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Sağlık uyarıları: gerçek durum
-- **f13j1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Arka plan iş kuyruğu
-- **f13t1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Hazır uygulama şablonu
 - **f13q1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › QR ile bağlanma ve panel girişi
-- **f13q2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Yerel ağ keşfi
 - **f13r1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Canlı kopya: kurulum
 - **f13r2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Canlı kopya: devralma
-- **f13l1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › İngilizce arayüz
-- **f14r1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Özel rol
-- **f14e1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Şifreli alan
 - **f14t1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Saklama süresi
-- **f14v1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Görünüm ve rapor
-- **f14w1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › WebSocket kanalı
 - **f14s1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › SMS ve konum
 - **f14l1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Uygulama kilidi
 - **f14d1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Sorun giderici
-- **f15e1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Ortam ve sırlar
-- **f15e2** · Ortam, kendi uygulamalar ve katalog (Faz 15) › .env metni, içe ve dışa aktarma
-- **f15k1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Katalog: Node.js kur
-- **f15a1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › İlk uygulama (zip)
-- **f15a2** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Bozuk sürüm geri alınır
-- **f15a3** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Giriş gerektiren uygulama
 - **f15g1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Git'ten deploy (isteğe bağlı)
-- **f15r1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Redis
 - **f15p1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Python ve Java (isteğe bağlı)
-- **ui1** · Yeni arayüz › Tema
-- **ui2** · Yeni arayüz › Sunucu ekranı ve arama
-- **ui3** · Yeni arayüz › Durum panosu
-- **ui4** · Yeni arayüz › Boş durumlar ve ipuçları
-- **ui5** · Yeni arayüz › Web paneli
-- **f16o1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Otomasyon: kayıt eklenince
-- **f16o2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Otomasyon: zamanlanmış ve Şimdi dene
-- **f16f1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Form: oluştur ve gönder
-- **f16f2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Form: spam koruması
-- **f16g1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › GraphQL: sorgu ve ekleme
-- **f16g2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › GraphQL: şema, hata ve yetki
-- **f16y1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: sağlayıcı ve anahtar
-- **f16y2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: sohbet
-- **f16y3** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: erişim ve günlük sınır
-- **f16y4** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: kayıtlara soru
 - **f16y5** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Anlamsal arama
 - **f16y6** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Başka sağlayıcı veya yerel model (isteğe bağlı)
 - **f16h1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Hızlı ayar kutucuğu
 - **f16h2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ana ekran widget'ı
 - **f16s1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › SMS ile giriş: kod iste ve gir
 - **f16s2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › SMS ile giriş: sınırlar ve kayıtsız numara
-- **f16t1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Tasker: komutla durdur ve başlat
 - **f16t2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Tasker: sunucu olayları (isteğe bağlı, Tasker veya MacroDroid gerekir)
-- **f16d1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ağ sürücüsü: bağlan ve dosya kopyala
-- **f16d2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ağ sürücüsü: salt okunur paylaşımlar
 - **f16v1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Otomatik devralma (ikinci telefon gerekir)
 - **f16v2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ana rolünü geri alma (isteğe bağlı)
-- **f16k1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Takımlar: kur ve üye ekle
-- **f16k2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Takımlar: üyeyi çıkar
-- **f16c1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Komut satırı aracı (CLI)
-- **f16m1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › MQTT: mesaj kayda dönüşür
-- **f16m2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › MQTT: kayıt olayları ve komut
-- **f17b1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sorun giderici: Kısıtlı pil ayarı
-- **f17b2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sistem sunucuyu öldürünce
-- **f17b3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › 24 saat kesintisiz çalışma
-- **f17r1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › İlk imzalı sürüm (0.9.0)
-- **f17r2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Uygulama içi güncelleme (0.9.0 → 0.9.1)
-- **f17p1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: Otomasyon ve Formlar
-- **f17p2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: Servisler
-- **f17p3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: Takımlar ve devralma (isteğe bağlı)
-- **f17m1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › MQTT yalnızca yerel ağ
-- **f17m2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › MQTT tutulan mesaj
-- **f17m3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › MQTT cihaz kimliği
-- **f17k1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Passkey ile panel girişi
-- **f17s1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Açık oturumlar
-- **f17h1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Otomasyonda MQTT
-- **f17h2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sahneler ve widget
-- **f17h3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Sensör panosu ve eşik uyarısı
-- **f17h4** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Home Assistant keşfi (isteğe bağlı)
-- **f17g1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › GraphQL aboneliği (WebSocket)
-- **f17d1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: salt okunur SQL konsolu
-- **f17d2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: örnek veri
-- **f17d3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Zip ile dosyalı dışa / içe aktarma
-- **f17d4** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › CSV şablonu
-- **f17d5** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Panel: toplu düzenleme ve silme
-- **f17d6** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu ve geliştirici araçları (Faz 17) › Geçmişte tek alanı geri alma
+- **f17b3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › 24 saat kesintisiz çalışma
+- **f17m1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › MQTT yalnızca yerel ağ
+- **f17k1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Passkey ile panel girişi
+- **f17h4** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Home Assistant keşfi (isteğe bağlı)
+- **f17e1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › E-posta şablonu
+- **f17e2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Toplu e-posta ve abonelikten çıkma
+- **f17y2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Yardım
+- **f18r1** · Çevrimdışı eşitleme ve kopyalarla ölçek (Faz 18 Grup 1) › Kopyaya yazma ana sunucuya iletilir (iki telefon)
+- **f18r2** · Çevrimdışı eşitleme ve kopyalarla ölçek (Faz 18 Grup 1) › Kopya tablosu
+- **f18r3** · Çevrimdışı eşitleme ve kopyalarla ölçek (Faz 18 Grup 1) › Ana sunucu kapalıyken kopyaya yazma
+- **f18g4** · Konum, takvim ve medya (Faz 18 Grup 2) › Uygulamada harita
+- **f18t2** · Konum, takvim ve medya (Faz 18 Grup 2) › Takvim aboneliği
+- **f18t3** · Konum, takvim ve medya (Faz 18 Grup 2) › Telefon takvimiyle iki yönlü eşitleme (CalDAV)
+- **f18t4** · Konum, takvim ve medya (Faz 18 Grup 2) › Rehber eşitlemesi (CardDAV)
+- **f18m4** · Konum, takvim ve medya (Faz 18 Grup 2) › YZ ile etiket ve OCR
+- **f18k1** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Paket hazırlama ve imzalama
+- **f18k2** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Plan ve kurulum (uygulama)
+- **f18k3** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Güncelleme, çakışma ve kaldırma (panel / CLI)
+- **f18y1** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Model indirme
+- **f18y2** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Yerel sohbet
+- **f18y3** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Yerel anlamsal arama ve YZ adımı
+- **f18y4** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Bellek/ısı koruması
+- **f18o1** · Ödemeler (Faz 18 Grup 4) › Erişim denetimi
+- **f18o2** · Ödemeler (Faz 18 Grup 4) › Stripe test ödemesi
+- **f18o3** · Ödemeler (Faz 18 Grup 4) › iyzico sandbox ve makbuz PDF
+- **f18o4** · Ödemeler (Faz 18 Grup 4) › Ödemeli randevu şablonu
+- **f18o5** · Ödemeler (Faz 18 Grup 4) › Ödemeli sipariş şablonu
+- **f18o6** · Ödemeler (Faz 18 Grup 4) › Abonelik ve rol
+- **f18o7** · Ödemeler (Faz 18 Grup 4) › Paddle sandbox
+- **f18o8** · Ödemeler (Faz 18 Grup 4) › Uygulamadan iade
+- **f18o9** · Ödemeler (Faz 18 Grup 4) › iyzico panelinden iade
+- **f18o10** · Ödemeler (Faz 18 Grup 4) › Aboneliği dönem sonunda bitirme
+- **mt3** · MQTT TLS (17.5) › Home Assistant veya ESP32
+- **mt4** · MQTT TLS (17.5) › Düz portu kapatma ve IP değişimi
+- **pb4** · Play sürümünde bileşenler (19.3–19.4) › Node.js, Python, Java uygulamaları
+- **pb5** · Play sürümünde bileşenler (19.3–19.4) › Derlenmiş kodlu uygulama
+- **pb7** · Play sürümünde bileşenler (19.3–19.4) › Java'dan alt süreç
+- **sc1** · SMS yolları, konum ve pil (19.5–19.6) › Onaylı SMS: açık bilgilendirme
+- **sc2** · SMS yolları, konum ve pil (19.5–19.6) › Onaylı SMS: kuyruk ve gönderim
+- **sc3** · SMS yolları, konum ve pil (19.5–19.6) › SMS ile giriş kodu
+- **sc4** · SMS yolları, konum ve pil (19.5–19.6) › SMS sağlayıcısı
 
-## Tamamlananlar (77)
+## Tamamlananlar (178)
 
 - **h1** · Hazırlık › APK'yı kur
   - Zaman: 2026-10-13T16:10:29.205Z
@@ -148,9 +126,9 @@ Yok.
 - **p3** · PostgreSQL › Taşıma seçimleri
   - Zaman: 2026-10-13T16:26:23.025Z
 - **p4** · PostgreSQL › Deploy ve veri taşıma
-  - Zaman: 2026-10-13T17:53:57.654Z
+  - Zaman: 2026-11-02T12:24:59.908Z
 - **p5** · PostgreSQL › Kayıtlar taşındı
-  - Zaman: 2026-10-13T17:54:58.685Z
+  - Zaman: 2026-11-02T12:32:23.875Z
 - **p6** · PostgreSQL › Yeniden başlatmalarda Postgres geri gelir
   - Zaman: 2026-10-13T18:08:45.667Z
 - **p7** · PostgreSQL › Postgres çökerse (isteğe bağlı, adb gerekir)
@@ -255,6 +233,258 @@ Yok.
   - Zaman: 2026-10-14T14:00:19.593Z
 - **pr1** · Entegrasyon ve ince yetki (Faz 11) › Sunucu profilleri
   - Zaman: 2026-10-14T14:00:45.505Z
+- **fk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Seçim alanı ve kurallar
+  - Not: Xiaomi 14 Ultra, 0.9.7+: 400 details title 'en az 3 karakter' ve durum2 'seçeneklerden biri'; doğru değerlerle 201. Ayarlar panel konfigürasyon API'siyle yapıldı (sihirbaz ekranı kullanılmadı).
+  - Zaman: 2026-11-01T12:03:58.555Z
+- **fk2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Hesaplanan alan
+  - Not: tutar=37.5; tutar gönderince 400 'hesaplanan alan; yazılamaz'.
+  - Zaman: 2026-11-01T12:03:58.641Z
+- **gc1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Geçmiş
+  - Not: Geçmiş: sürümler, işlem (create/update), kim (admin); sürüme dönünce eski değer ve geçmişe 'revert'. Panelin kullandığı uçlarla denendi, panel ekranındaki düğmeler denenmedi.
+  - Zaman: 2026-11-01T12:03:58.733Z
+- **gc2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Çöp kutusu
+  - Not: Silinen kayıt çöp kutusundan aynı kimlikle geri geldi; kalıcı silinen 404. Panelin uçlarıyla denendi, panel ekranı denenmedi.
+  - Zaman: 2026-11-01T12:03:58.830Z
+- **kt1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Kotalar
+  - Not: Üçüncü kayıt 403 'Kota doldu'; yönetici anahtarı sınırsız; kartta 'todos 2/2'. Kartta istek sayısı hep 0 görünüyordu (sayaç yalnızca günlük sınır varken işliyordu): düzeltildi (30dba2b), sonra '5 requests today'.
+  - Zaman: 2026-11-01T12:03:58.938Z
+- **td1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › İki adımlı doğrulama
+  - Not: Giriş twoFactorRequired+challenge döner; doğrulayıcı koduyla verify token verir; 10 yedek koddan biri bir kez çalışır, ikinci kez 401. Aynı TOTP kodu aynı dilimde ikinci kez kabul edilmez (tekrar koruması). Kullanıcılar ekranında 'two-step' ve 'Reset 2FA' var.
+  - Zaman: 2026-11-01T12:03:59.024Z
+- **td3** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Panelde doğrulayıcı kodu
+  - Not: Panel girişi: doğru eşleştirme + yanlış doğrulayıcı 401, doğrulayıcısız 401, ikisi doğruyken oturum. Giriş API'siyle denendi; giriş sayfasındaki ikinci alan görsel olarak denenmedi.
+  - Zaman: 2026-11-01T12:03:59.112Z
+- **pf1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Tam metin dizini
+  - Not: q=sü: 'süt süt kahve' önce, sütlaç ve sütçü de geliyor; q=üt boş.
+  - Zaman: 2026-11-01T12:03:59.193Z
+- **pf2** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › ETag ve sıkıştırma
+  - Not: Hata bulundu ve düzeltildi (b079523): gzip'li yanıtlarda ETag yoktu, 304 dönmüyordu. Düzeltmeden sonra: ETag W/..., Content-Encoding gzip, If-None-Match ile 304.
+  - Zaman: 2026-11-01T12:03:59.275Z
+- **sdk1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › İstemci SDK'sı
+  - Not: export interface Todos (durum2: 'açık' | 'kapalı'), new DroidServer(...) örneği; anahtarsız 401. Not: SDK içindeki örnek yorumlar ve hata metinleri arayüz İngilizceyken de Türkçe.
+  - Zaman: 2026-11-01T12:03:59.354Z
+- **sm1** · Veri kalitesi, güvenlik ve geliştirici araçları (Faz 12) › Panelden şema düzenleme
+  - Not: 0.9.7, panel tünel üzerinden: Şema > todos'a 'oncelik' (Tam sayı) eklendi, 'due' Tarih-saat → Metin yapıldı; 'Tip değişti' seçimi çıktı (dönüştürülsün / silinsin). Planı göster: 'Değişiklikler: 1 sütun eklenecek, 1 alanın tipi değişecek, 2 tablo artık kullanılmıyor'; 'silinsin' seçilince kırmızı (error) 'Veri kaybı: todos.due: kayıtlı değerler silinecek'. Kaydet ve deploy et: onay 'Kaydedilip deploy edilsin mi?…', 'Deploy başladı; sonuç loglarda'; log 'sütun+: [todos.oncelik], tip: [todos.due datetime → text]'. Telefonda sihirbaz > todos: 5 alan, due Tip: Metin, oncelik Tip: Tam sayı. Sonra API'den geri alındı (due datetime, oncelik kaldırıldı). Not: '2 tablo artık kullanılmıyor' içinde android_metadata (master'da düzeltildi).
+  - Zaman: 2026-11-01T21:55:06.096Z
+- **f13a1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Denetim kaydı
+  - Not: config.save, panel.login, panel.login.failed, record.purge/restore/revert satırları; kim, hedef, adres var. CSV iniyor; anahtar, parola, TOTP sırrı yazmıyor. Uygulamadaki ekran ve Share CSV var. Panelin Denetim sekmesi görsel olarak denenmedi. Dil eksiği: CSV başlıkları ve kim sütunundaki 'uygulama' İngilizce arayüzde Türkçe.
+  - Zaman: 2026-11-01T12:17:36.643Z
+- **f13g1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Güvenlik duvarı: otomatik engel
+  - Not: Eşik 5: yerel ağdaki bilgisayardan 5 kez 401, sonra 429 'Too many requests; try again in 900 seconds' (Retry-After); adımdaki 403 beklentisi eskiydi, metni güncellendi. Güvenlik duvarı ekranında adres, neden ve bitiş; Unblock ile hemen açıldı. 127.0.0.1 hiç engellenmedi.
+  - Zaman: 2026-11-01T12:28:04.438Z
+- **f13s1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Sağlık uyarıları: Telegram
+  - Not: Kullanıcı: Find chat ile sayısal sohbet kimliği bulundu, 'Send test' Telegram'a geldi. Sunucudan /api/_alerts/test de hatasız gönderildi. (İlk denemede alana botun kendi adı yazılmıştı: 'bot can't send messages to the bot'.) Sessiz saatler denenmedi.
+  - Zaman: 2026-11-01T13:01:08.492Z
+- **f13j1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Arka plan iş kuyruğu
+  - Not: Betik paketle kuruldu. hata:true işi 3 denemeden sonra failed (Error: bilerek), hata:false işi done; Retry ile tekrar queued; bekleyen iş sunucu yeniden başlayınca kaybolmadı. Uygulamadaki İşler ekranı doğru.
+  - Zaman: 2026-11-01T12:17:36.721Z
+- **f13t1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Hazır uygulama şablonu
+  - Not: Yeni profil 'Randevu' + Appointment şablonu: services/appointments eklendi, örnek hizmetler kuruldu, / adresinde randevu sitesi. Girişsiz randevu 201 (bekliyor); 'onaylandı' ile oluşturma reddedildi; liste girişsiz 401. Sonra Default'a dönüldü. Not: şablonun seçenek değerleri (bekliyor/onaylandı) İngilizce arayüzde de Türkçe; profil değiştirme düğmesi İngilizcede yanlışlıkla 'Skip'.
+  - Zaman: 2026-11-01T12:17:36.801Z
+- **f13q2** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › Yerel ağ keşfi
+  - Not: Aynı Wi-Fi'de avahi: droidserver, port 8080, path=/api, anahtar yok. Keşif kapatılınca telefon mDNS sorgusuna yanıt vermiyor, açınca yine veriyor (telefonun kaydında 'Removing service'). avahi-browse kapalıyken de eski kaydı önbellekten gösteriyor; bilgisayarın önbelleği, uygulamayla ilgisi yok.
+  - Zaman: 2026-11-01T12:28:04.554Z
+- **f13l1** · İşletim, güvenlik ve yaygınlaştırma (Faz 13) › İngilizce arayüz
+  - Not: Arayüz, panel kataloğu ve 401 iletisi İngilizce; dil değişince sunucu yeniden başladı. Loglar artık seçili dilde (166b7cc), adımın 'Loglar Türkçe kalır' beklentisi eskidi. Birkaç kaçak Türkçe ifade var (ayrıca taranacak).
+  - Zaman: 2026-11-01T12:17:36.876Z
+- **f14r1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Özel rol
+  - Not: editor rolü + güncelleme: sahibi ve editor. Sıradan kullanıcı başkasının kaydını güncelleyince 404; rolü editor yapılınca (PATCH /auth/users) 200. Panelin Kullanıcılar sekmesindeki rol listesi görsel olarak denenmedi.
+  - Zaman: 2026-11-01T12:40:05.224Z
+- **f14e1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Şifreli alan
+  - Not: tc şifreli: API'de açık görünüyor; tc ile filtre 400 'şifreli; filtre, sıralama, özet olmaz'. Yedek zip'te db/todos.jsonl'da enc:v1:… (düz metin yok). Sihirbazdaki 'Anahtarı kopyala' denenmedi. Not: yedek dosya adında '-elle' eki İngilizce arayüzde de Türkçe.
+  - Zaman: 2026-11-01T12:40:05.337Z
+- **f14v1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › Görünüm ve rapor
+  - Not: todos_view kimliksiz JSON, yalnızca title ve created_at; CSV text/csv + BOM, dosya adı todos_view-tarih.csv. Rapor created_at:day gruplu, sum_adet. Paneldeki Görünümler sekmesi görsel olarak denenmedi.
+  - Zaman: 2026-11-01T12:40:05.433Z
+- **f14w1** · Ek güvenlik, veri yaşam döngüsü ve telefon özellikleri (Faz 14) › WebSocket kanalı
+  - Not: Node ile iki istemci: B önce presence join, sonra message 'selam'; A kapanınca B'ye leave geldi.
+  - Zaman: 2026-11-01T12:40:05.537Z
+- **f15e1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Ortam ve sırlar
+  - Not: Ortam ve sırlar ekranından MESAJ (düz) ve GIZLI_ANAHTAR (sır) eklendi, sır maskeli. Betik paketle kuruldu: {"m":"merhaba","var":true}. Konfigürasyonda GIZLI_ANAHTAR = secret:env_…. 'Değerleri göster'in kilitle doğrulama istemesi denenmedi (kilit kapalı).
+  - Zaman: 2026-11-01T12:49:52.565Z
+- **f15e2** · Ortam, kendi uygulamalar ve katalog (Faz 15) › .env metni, içe ve dışa aktarma
+  - Not: Hatalı satırda 'Line 4: Invalid name: BOS LUKLU' ve 'Apply to list' kapalı; düzeltince listeye uygulandı. Dışa aktarmada düz metin uyarısı. Silinen değişken içe aktarmayla geri geldi ('4 variables imported … don't forget to save'), kaydedince kalıcı. Not: dışa aktarılan dosyanın adı droidserver.env.txt oluyor (Android .txt ekliyor). Deneme dosyası sonra silindi.
+  - Zaman: 2026-11-01T13:14:37.527Z
+- **f15k1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Katalog: Node.js kur
+  - Not: Bileşenler > nodejs > Install: 'Installed' (24.22.1), Loglar'da 'nodejs installed (Play modülü)'. Play modülü olarak kurulu telefonda; indirme süresi gözlenmedi.
+  - Zaman: 2026-11-01T12:49:52.703Z
+- **f15a1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › İlk uygulama (zip)
+  - Not: Zip 'Upload zip' ile yüklendi: {"yol":"/merhaba?x=1","kullanici":null,"mesaj":"merhaba"}; Loglar'da starting ve running release. Küçük tutarsızlık: kart çalışan sürüm için 'Pending … (goes live on deploy)' gösteriyor.
+  - Zaman: 2026-11-01T12:49:52.815Z
+- **f15a2** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Bozuk sürüm geri alınır
+  - Not: Bozuk zip 60 sn sağlık denetiminden geçmedi; 'Rolling back to the previous version'; uygulama yine yanıt verdi. Sürümler: yeni 'failed', eski 'running', 'Revert to this version' var. Not: denetim süresince eski sürüm de duruyor (~1 dk kesinti).
+  - Zaman: 2026-11-01T12:49:52.931Z
+- **f15a3** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Giriş gerektiren uygulama
+  - Not: access=auth: token'sız 401; token'la kullanici gerçek id (7); sahte X-DroidServer-User token'sız 401, token'la gerçek id ile eziliyor.
+  - Zaman: 2026-11-01T12:49:53.078Z
+- **f15r1** · Ortam, kendi uygulamalar ve katalog (Faz 15) › Redis
+  - Not: redis RUNNING; Ortam ve sırlar'da kilitli REDIS_PASSWORD. Node uygulaması 127.0.0.1:6379'a bu parolayla bağlandı: +OK, +PONG. Kurulumdaki 'üretildi' iletisi gözlenmedi (Redis önceden kuruluydu).
+  - Zaman: 2026-11-01T12:49:53.197Z
+- **ui1** · Yeni arayüz › Tema
+  - Not: 0.9.7, Xiaomi (gece modu açık): Ayarlar > Tema Koyu → arka plan koyu (parlaklık 27), Açık → açık (243), Telefon → telefonun gece moduna göre koyu. Duvar kâğıdı renkleri açılınca renkler değişti (yeşilimsi → duvar kâğıdının sarımsı tonu), kapatınca geri döndü. Açık seçiliyken uygulama zorla kapatılıp açıldı: açık tema korundu. Sonra Telefon'a ve renkler kapalıya geri alındı. Not: Ayarlar'da bölüm başlıkları 'DIL', 'GÜVENLIK' (Türkçe İ yok).
+  - Zaman: 2026-11-01T21:38:26.512Z
+- **ui2** · Yeni arayüz › Sunucu ekranı ve arama
+  - Not: 0.9.7 (Türkçe): Sunucu sekmesinde araçlar TASARIM, VERI, GELIŞTIRICI, GÜVENLIK VE IŞLETIM gruplarında. Arama 'yedek': yalnızca Yedekler (Veri) ve Komut satırı (CLI) (alt yazısında 'yedek') kaldı; arama silinince tüm gruplar geri geldi. 'webhook': ''webhook' ile eşleşen araç yok.' — Webhook'lar aracı yalnızca konfigürasyonda webhook varsa listeleniyor (bu konfigürasyonda yok). Kartlar ilgili ekranı açıyor (Yedekler, Ortam ve sırlar, Ağ sürücüsü denendi). Not: grup başlıkları Türkçe büyük harfte İ yerine I ('VERI', 'GELIŞTIRICI', 'GÜVENLIK VE IŞLETIM').
+  - Zaman: 2026-11-01T21:33:20.469Z
+- **ui3** · Yeni arayüz › Durum panosu
+  - Not: 0.9.7: Durum ekranında Son 1 saat (67 istek, hata yok), Pil (%64, 34,4 °C · şarjda), Süreçler (1/1, 1 bileşen 0 uygulama), Uyarılar (0, her şey yolunda) kartları ve ARAÇLAR altında Sorun giderici, Bağlan (QR), İstemci erişimi / token görünüyor. Bilgisayardan 10 istek (todos, 200): sayı hemen değil, ~1 dk içinde 77'ye çıktı (dakikalık toplama). Not: pil '%64' biçimi (Türkçede doğru).
+  - Zaman: 2026-11-01T21:34:40.095Z
+- **ui4** · Yeni arayüz › Boş durumlar ve ipuçları
+  - Not: 0.9.7: Sunucu > Formlar (0) boşken 'Henüz form yok', açıklama ve ortada 'Form ekle' düğmesi (üst çubukta da Form ekle). Ortam ve sırlar ekranındaki ipucu kartı ✕ (İpucunu kapat) ile kapatıldı, ekrandan çıkıp girince bir daha çıkmadı.
+  - Zaman: 2026-11-01T21:35:58.238Z
+- **f16o1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Otomasyon: kayıt eklenince
+  - Not: Kural konfigürasyon API'siyle kuruldu (ekran kullanılmadı). done=false kayıt Loglar'a "Automation 'yeni-gorev': Yeni görev: ekmek al"; done=true tetiklemedi; son çalışmalarda ok satırı. E-posta eylemi denenmedi.
+  - Zaman: 2026-11-01T13:07:15.306Z
+- **f16o2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Otomasyon: zamanlanmış ve Şimdi dene
+  - Not: Zamanlanmış kural (0 3 * * *) + Şimdi dene: '1 records updated'; ikinci çalıştırmada '0 records updated' (aynı değer yeniden yazılmadı). Kural sonra silindi. Kartlardaki düğmeler değil, aynı uç (/_automations/{ad}/run) kullanıldı.
+  - Zaman: 2026-11-01T13:07:15.501Z
+- **f16f1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Form: oluştur ve gönder
+  - Not: Form tarayıcı gibi açılıp gönderildi: boş slug 400, alanın altında 'required field', yazılan metin korunuyor; doğru gönderimde 'Thank you, submitted.', notes'ta form-1. Çok hızlı gönderimde 'submitted too quickly'. Telefon ekranında görünüm denenmedi.
+  - Zaman: 2026-11-01T13:07:15.639Z
+- **f16f2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Form: spam koruması
+  - Not: Doğrudan POST: 400 'The form has expired; reload the page'; kayıt eklenmedi. Arka arkaya gönderimde sınır dolunca 429 'Too many submissions'.
+  - Zaman: 2026-11-01T13:07:15.759Z
+- **f16g1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › GraphQL: sorgu ve ekleme
+  - Not: Sorgu {data:{todos:{totalItems,items}}}; mutation create_todos yeni id (17) döndü, REST'te görünüyor.
+  - Zaman: 2026-11-01T13:07:15.913Z
+- **f16g2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › GraphQL: şema, hata ve yetki
+  - Not: Şemada 'type Query {' ve 'create_todos(data: JSON!)'; olmayan alan: errors 'Cannot query field 'yok''; anahtarsız: todos null, extensions.code 401.
+  - Zaman: 2026-11-01T13:07:16.084Z
+- **f16y1** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: sağlayıcı ve anahtar
+  - Not: Claude açık, kullanıcının gerçek anahtarıyla deploy sorunsuz; ekranda 'The saved key is kept'; konfigürasyonda apiKey = secret:ai_api_key_… (düz metin değil). Sunucu ekranındaki YZ kartı ayrıca bakılmadı.
+  - Zaman: 2026-11-01T13:09:55.632Z
+- **f16y2** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: sohbet
+  - Not: /api/ai/chat: 200, model claude-opus-5-5, stopReason end_turn, refused false, usage 29/82 token; Türkçe tek cümlelik tanıtım. /api/_ai today: 1 istek ve token sayıları.
+  - Zaman: 2026-11-01T13:09:55.906Z
+- **f16y3** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: erişim ve günlük sınır
+  - Not: dailyLimit 2: anahtarsız 401; kullanıcıyla 200 (remaining 1), 200 (remaining 0), 429 'Daily AI limit reached (2 requests)'. Sınır sonra varsayılana döndü.
+  - Zaman: 2026-11-01T13:09:56.146Z
+- **f16y4** · Otomasyon, formlar, GraphQL ve yapay zekâ (Faz 16) › Yapay zekâ: kayıtlara soru
+  - Not: Yanıt yalnızca kayıtlara dayanıyor, [#19] [#18] kaynaklı; sources [19, 18]. İlk denemede metnin başına modelin '<reasoning>…</reasoning>' bloğu sızdı: düzeltildi (talimat + temizleme), gerçek modelle yeniden denendi, temiz.
+  - Zaman: 2026-11-01T13:20:32.313Z
+- **f16t1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Tasker: komutla durdur ve başlat
+  - Not: Ayarlar > Tasker ve otomasyon açıldı, anahtar 'Copy key' ile alındı. adb broadcast: yanlış anahtarla bir şey olmadı (Loglar: 'Automation command refused (STOP)'); doğru anahtarla STOP sunucuyu durdurdu, START başlattı. Tasker uygulamasıyla denenmedi (kurulu değil).
+  - Zaman: 2026-11-01T13:32:01.440Z
+- **f16d1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ağ sürücüsü: bağlan ve dosya kopyala
+  - Not: curl --digest ile: PROPFIND kökte drive; PUT 201, GET içerik, değiştirme 204, DELETE 204 → 404. Yanlış parola 401. Parola konfigürasyonda secret:webdav_…. Dosya yöneticisiyle (Windows/Dolphin/GNOME) bağlanma ve hatalı denemenin güvenlik duvarı sayacına girmesi denenmedi. Parola API'den verildi (ekranda üretme denenmedi).
+  - Zaman: 2026-11-01T13:24:14.053Z
+- **f16d2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Ağ sürücüsü: salt okunur paylaşımlar
+  - Not: readOnly + uploads + site: paylaşımlar drive, site, uploads; drive ve uploads'a yazma 403, uploads listelenebiliyor (207). site'a geçici dosya 201 ve hemen yayında; silince 404. (Canlı sitenin index.html'ine dokunulmadı.)
+  - Zaman: 2026-11-01T13:24:14.189Z
+- **f16k1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Takımlar: kur ve üye ekle
+  - Not: Takımlar açık, tasks koleksiyonu takım kurallı (konfigürasyon API'siyle). A takım kurdu, B'yi e-postayla ekledi; A'nın kaydında team kendiliğinden doldu. B görüyor ve güncelliyor (200); C'nin listesi boş, doğrudan istekte 404. Uygulamadaki Takımlar ekranında takım ve iki üye (owner, member). Dil: takım kurma düğmesi 'Install', başlıkta '1 teams'.
+  - Zaman: 2026-11-01T13:23:27.256Z
+- **f16k2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Takımlar: üyeyi çıkar
+  - Not: Uygulamadaki Takımlar ekranında B'nin satırında Remove (onay sorulmadan): B'nin listesi hemen 0.
+  - Zaman: 2026-11-01T13:23:27.353Z
+- **f16c1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › Komut satırı aracı (CLI)
+  - Not: CLI indirildi (node). login (ayar dosyası geçici klasörde), status, list todos --sort -id (tablo), export -o todos.json (18 kayıt), logs -f yeni kaydın otomasyon satırını canlı akıttı. Hata bulundu ve düzeltildi: status, telefon özellikleri kapalıyken pil ve boş alanı göstermiyordu (/_phone/status yoktu); artık metriklerden okuyor. Panel kapalıyken logs iletisi denenmedi. CLI dili bilgisayarın diline göre (Türkçe).
+  - Zaman: 2026-11-01T13:26:12.223Z
+- **f16m1** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › MQTT: mesaj kayda dönüşür
+  - Not: readings + yönlendirme sensors/+/temp (konfigürasyon API'siyle). Python ile yazılmış küçük MQTT 3.1.1 istemcisiyle (mosquitto yok) sensors/salon/temp 23.5 → readings temp 23.5, device salon. Yanlış parola CONNACK 4. MQTT ekranının Son mesajlar bölümünde mesaj ve sonucu (→ readings #1).
+  - Zaman: 2026-11-01T13:29:35.467Z
+- **f16m2** · Telefon, entegrasyon ve dayanıklılık (Faz 16, devamı) › MQTT: kayıt olayları ve komut
+  - Not: Kayıt olayları: droidserver/readings/create konusunda kaydın JSON'u geldi. /api/_mqtt/publish ile ev/salon/lamba 'on' abonede görüldü (delivered 1); bağlı istemcilerde iki abone. Uygulamadaki 'Cihazlara mesaj gönder' formu denenmedi (API'yle aynı iş).
+  - Zaman: 2026-11-01T13:29:35.613Z
+- **f17b2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Sistem sunucuyu öldürünce
+  - Not: playDebug kuruldu, sunucu çalışırken run-as kill -9. İlk denemede MIUI Otomatik başlatma kapalıydı: sistem servisi yeniden başlatmadı (restart planlanmadı, 2 dk beklendi). Kullanıcı Otomatik başlatma'yı açınca: 'Scheduling restart of crashed service … 1000ms', sunucu ~3 sn'de geri geldi. Loglar'da 'the system stopped and restarted the server service' ve 'The previous process ended …: terminated by the system (signal 9)', bildirim 'DroidServer: The system restarted the server', sorun gidericide sarı 'The system restarted the server' bulgusu. Zamanlar ham UTC ISO yazılıyordu ve başlık 'Default:' idi; düzeltildi (a52aa85), düzeltilmiş sürümle yeniden doğrulandı. Not: Durum'daki Alerts kutusu '0 all good' kaldı; sessiz saat ve Durdur'la kapatma denenmedi.
+  - Zaman: 2026-11-01T15:26:02.962Z
+- **f17r1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › İlk imzalı sürüm (0.9.0)
+  - Not: Releases'taki droidserver-0.9.6.apk indirildi, .sha256 tuttu (sha256sum -c Tamam). Önce yedek (bilgisayara), .env dışa aktarma, alan anahtarı Kopyala (kimlik 67b0c1b9). Kaldırıp kuruldu (MIUI USB kurulum onayı gerekti); versionName 0.9.6, Ayarlar > Güncelleme 'Kurulu sürüm: 0.9.6'. Geri yükleme: önce 'başka anahtarla şifrelenmiş (67b0c1b9)' hatası; anahtar girilince geri yükleme başarılı ('Geri yüklendi; sunucu yeniden başlatılıyor', 300 kayıt), .env İçe aktar ile 4 değişken geri geldi. SORUNLAR: (1) şifreli alan yokken Alan şifreleme bölümü görünmüyordu, anahtar girilemiyordu (28f67e2 ile düzeltildi; testte geçici şifreli alanla aşıldı). (2) Yedekte olmayan sistem sırları (API anahtarı, JWT, TOTP, MQTT, WebDAV, YZ, Telegram, tünel) yüzünden sunucu açılmadı; JWT API anahtarı modunda sihirbazda üretilemiyor, WebDAV/MQTT/YZ ayrı ekranlarda, eksik sırla deploy döngüsü (Sorunlar 88). Kullanıcı sonra yapılandırmayı sadeleştirip tüneli yeniden kurdu. Sürüm sayfasındaki not metni bu adımda kontrol edilmedi.
+  - Zaman: 2026-11-01T20:58:06.085Z
+- **f17r2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Uygulama içi güncelleme (0.9.0 → 0.9.1)
+  - Not: Kullanıcı doğruladı: GitHub sürümünde uygulama içi güncelleme çalışıyor. Paket kaydı da destekliyor: 0.9.6 (imzalı GitHub) → 0.9.7, lastUpdateTime 2026-11-01 20:03, installer/initiating com.plyg.droidserver (uygulama içinden kuruldu).
+  - Zaman: 2026-11-02T12:53:46.787Z
+- **f17p1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Panel: Otomasyon ve Formlar
+  - Not: Panel (uygulama içi tarayıcı): yeni-gorev kartında 'on update' işaretlenip Save and deploy; konfigürasyonda events [create, update], Denetim'de config.save (panel). Try now: kart altında 'written to the log'. Form başlığı panelden değiştirildi, /forms/iletisim yeni başlıkla açılıyor. Bozuk koşul qty[xx]=1: kırmızı 'yeni-gorev condition: Unknown field in condition: qty', kaydedilmedi. Telefondaki Otomasyonlar ekranına bakılmadı (konfigürasyon güncel).
+  - Zaman: 2026-11-01T13:58:12.342Z
+- **f17p2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Panel: Servisler
+  - Not: Panel > Servisler: MQTT kartında durum ve bağlı cihaz (deneme-sub · 192.168.0.182 · device · ev/#); 'Send a message to devices' ile ev/salon/lamba gönderildi, abone aldı, kartta '1 devices received it'. Ağ sürücüsü kartında Generate password + Save and deploy: yeni parola 207, eski 401; server.json'da secret:webdav_…. Kapalı özellik kartı 'Replication is off'; YZ kartında kullanım, uygulamalar kartında deneme RUNNING ve Redeploy. uploads anahtarı zaten açıktı (değiştirilmedi). Not: '1 devices'.
+  - Zaman: 2026-11-01T14:01:32.586Z
+- **f17p3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Panel: Takımlar ve devralma (isteğe bağlı)
+  - Not: Panel > Kullanıcılar > Takımlar: telefonda kurulan Ev ve Ev2 panelde de görünüyor. 'Panel takimi' kuruldu, üye e-postayla eklendi, Make owner ile sahip yapıldı; tek sahibi çıkarmada 'Last owner of the team; first make another member owner or delete the team'. Canlı kopya/devralma kısmı denenmedi (ikinci telefon gerekir).
+  - Zaman: 2026-11-01T14:03:46.802Z
+- **f17m2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › MQTT tutulan mesaj
+  - Not: Python MQTT istemcisiyle (mosquitto yok): tutulan mesaj abone olunca hemen geldi; sunucu yeniden deploy edilince de geldi; boş içerikli tutulan mesajla silinince yeni abone hiçbir şey almadı. /api/_mqtt retained 1 → 0.
+  - Zaman: 2026-11-01T13:38:23.916Z
+- **f17m3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › MQTT cihaz kimliği
+  - Not: Cihazlar (konfigürasyon API'siyle): esp-salon kendi parolasıyla CONNACK 0; ortak kullanıcı (device) CONNACK 4; esp-salon silinince CONNACK 4, esp-mutfak etkilenmedi (0). Bağlı cihazlar listesinde görünmesi yakalanamadı (abone sorgudan önce kapandı). Sonra ortak parola geri yüklendi.
+  - Zaman: 2026-11-01T13:38:24.065Z
+- **f17s1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Açık oturumlar
+  - Not: Aynı kullanıcıyla iki User-Agent'tan giriş: /auth/sessions listesinde cihaz (User-Agent), adres, son kullanım ve current. İkinci oturum DELETE ile kapatıldı: token'ı hemen 401, diğeri 200. Adres 'local' (istekler USB üzerinden). Uygulamadaki Oturumlar ekranı ve 'Hepsini kapat' denenmedi.
+  - Zaman: 2026-11-01T13:41:47.134Z
+- **f17h1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Otomasyonda MQTT
+  - Not: Kural (MQTT mesajında ev/+/hareket → mqtt ev/salon/lamba on) konfigürasyon API'siyle. ev/koridor/hareket gönderilince abone 'on' aldı; son çalışmalarda trigger 'mqtt:ev/koridor/hareket', ok.
+  - Zaman: 2026-11-01T13:39:57.092Z
+- **f17h2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Sahneler ve widget
+  - Not: Sahne 'Akşam' API'den çalıştırıldı (/api/_mqtt/scenes/Akşam): delivered 2, abone lamba on ve perde kapali'yi sırayla aldı. Uygulamadaki Çalıştır düğmesi ve ana ekran widget'ı denenmedi (widget kullanıcıda).
+  - Zaman: 2026-11-01T13:39:57.218Z
+- **f17h3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Sensör panosu ve eşik uyarısı
+  - Not: Sensör readings.temp Salon °C 15/28; 20, 22, 35 gönderildi. /api/_alerts'te 'Sensor out of range: Salon: 35°C, above the high threshold (28°C)'. Uygulamadaki panoda grafik ve kesikli eşik çizgileri, son değer kırmızı. Paneldeki Servisler > Sensör panosu bakılmadı. Not: başlıkta '1 sensors'; ekleme önerilerinde boolean todos.done da çıkıyor.
+  - Zaman: 2026-11-01T13:39:57.324Z
+- **f17g1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › GraphQL aboneliği (WebSocket)
+  - Not: Node WebSocket (graphql-transport-ws): connection_ack, sonra create/update/delete 'next' olayları sırayla; silmede kayıtta yalnızca id (title null). Yanlış anahtar REST'teki gibi anonim sayılıyor: bağlantı kabul ediliyor, abonelik 'Sign in for this operation' hatası alıyor, veri gelmiyor (adımdaki 4403 beklentisi güncellendi).
+  - Zaman: 2026-11-01T13:41:24.407Z
+- **f17d1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Panel: salt okunur SQL konsolu
+  - Not: SQL konsolu (/api/_sql, panel SQL sekmesiyle aynı uç): SELECT * FROM todos tablo + ms; DELETE 400 'Only SELECT queries can be run' (kayıt silinmedi); _ds_meta 403 'can't be queried from the console'; sonsuz WITH RECURSIVE 5,0 sn'de 408 'didn't finish in 5 seconds', sunucu yanıt vermeye devam etti. İlk denemede yalnızca başarılı sorgu denetime düşüyordu; düzeltildi (5fe96f5): dördü de sql.query olarak, reddedilenler hata ayrıntısıyla.
+  - Zaman: 2026-11-01T14:29:01.038Z
+- **f17d2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Panel: örnek veri
+  - Not: Panelde todos > Sample data > 20 (tarayıcı aracı prompt'u kapattığı için prompt '20' döndürecek şekilde ayarlandı): 20 kayıt, seçimler seçeneklerden, sayılar, hesaplanan tutar, owner var olan kullanıcılardan. Boş hedefli zorunlu ilişki (urunler.marka → boş markalar): 400 'add a record to markalar first', hiç kayıt yok (aynı uç API'den). Not: örnek metinler İngilizce arayüzde de Türkçe sözcükler.
+  - Zaman: 2026-11-01T13:54:35.160Z
+- **f17d3** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Zip ile dosyalı dışa / içe aktarma
+  - Not: 0.9.7, panelin kullandığı uçlarla (telefon bilgisayarla aynı ağda değildi; adb forward): fotonotlar (title + foto file) koleksiyonuna 3 kayıt fotoğrafla yüklendi. export?format=zip: data.json + files/1..3/<ad>.jpg, fotoğraflar yüklenenle birebir aynı. import?format=zip&dryRun=true önizleme: total 3, created 3, hata yok; gerçek içe aktarma 3 yeni kayıt (4-6), fotoğrafları indirildi ve aynı. Bozuk zip (files/2 içinde metin, aynı ad): HTTP 400, satır 2 'dosyanın içeriği (text/plain) uzantısıyla (.jpg → image/jpeg) uyuşmuyor', applied false, kayıt sayısı 6'da kaldı, Durum > Yüklenen dosyalar 6 dosya 4 KB değişmedi. Notlar: hata varken yanıtta 'created: 2'; önizleme örneğinde foto null görünüyor; zip adı UTC tarihli (yerelde 2 Kasım iken 20261101). Panel arayüzü bu adımda kullanılmadı.
+  - Zaman: 2026-11-01T21:06:00.697Z
+- **f17d4** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › CSV şablonu
+  - Not: Şablon (uçtan, panel düğmesiyle aynı): text/csv, UTF-8 BOM, ';' ayırıcı, başlıkta 'slug (required)', kurallara uyan örnek satır, Türkçe karakterler sağlam. İki satır eklenip içe aktarıldı: önizlemede sütunlar kendiliğinden eşlendi, 3 kayıt eklendi. Excel/LibreOffice'te açılmadı; dosya panelden değil API'den yüklendi. Not: dosya adı 'notes-sablon.csv'.
+  - Zaman: 2026-11-01T13:54:35.265Z
+- **f17d5** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Panel: toplu düzenleme ve silme
+  - Not: Panelde 3 satır (done=false) seçildi > Change field… > done = true > Apply: yalnızca seçilenler true oldu, diğerleri değişmedi. Başlıktaki kutuyla sayfanın 20 kaydı seçilip Delete selected: 39 → 19. Telefondaki listelerin canlı yenilenmesi denenmedi.
+  - Zaman: 2026-11-01T13:54:35.364Z
+- **f17d6** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Geçmişte tek alanı geri alma
+  - Not: #43'te title ve adet ayrı ayrı değiştirildi; panelde Geçmiş > sürüm 1 satırında 'One field…' > title: yalnızca title eski değerine döndü, adet 5 kaldı; geçmişe 'reverted to version' (sürüm 4) eklendi.
+  - Zaman: 2026-11-01T13:54:35.462Z
+- **f17t1** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Telegram: yönetici sohbeti ve /durum
+  - Not: Yönetici sohbeti önceden bulunmuştu (adminChatId ayarlı). Telefondaki Telegram'dan bota /durum: 'Running (0 h 3 min)', adres, son saat 16 istek 0 hata, pil %100 şarjda, boş alan 405,7 GB. /loglar 5: son 5 log satırı. /yedek: 'Taking a backup…' ardından 'Backup taken: droidserver-20261101-173104-elle.zip (48,3 MB)'; /_admin/api/backups listesinde var. Başka hesaptan /durum denenmedi (ikinci Telegram hesabı yok). Not: komutlar yalnızca Türkçe, yedek adı '-elle'.
+  - Zaman: 2026-11-01T14:32:15.261Z
+- **f17t2** · Sağlamlaştırma, güvenli bağlantılar, ev otomasyonu, geliştirici araçları ve yaygınlaştırma (Faz 17) › Telegram: /durdur ve /baslat
+  - Not: Telefondaki Telegram'dan /durdur: 'Stop the server? …' mesajı Yes, stop / Cancel düğmeleriyle; Yes, stop'a basınca mesaj 'Server stopped. The app keeps listening for Telegram commands; start it with /baslat.' oldu. Bildirim: 'Stopped; can be started from Telegram with /baslat'. Bilgisayardan http://192.168.0.60:8080/api/health bağlanamadı. Ekran 17:33'te kapatıldı (Dozing); kullanıcı ~18:05'te bilgisayardan /baslat yazdı: log 18:04:59 başlatma, 18:05:00 'Server running', /api/health ok. Bildirimden Durdur denenmedi.
+  - Zaman: 2026-11-01T15:06:56.967Z
+- **f18s1** · Çevrimdışı eşitleme ve kopyalarla ölçek (Faz 18 Grup 1) › Eşitleme ucu
+  - Not: 0.9.7: todos'ta çevrimdışı eşitleme konfigürasyon API'siyle açıldı (sync: {}; sihirbaz yerine), deploy. todos boştu; 2 kayıt eklenip GET /api/sync/todos: epoch dolu, next 2, reset false, 2 değişiklik action upsert version 1 (tam kayıtla). Bir kayıt daha eklenip ?since=2: next 3, yalnızca yeni kayıt (id 3). Not: eşitleme açılmadan önce var olan kayıtların ilk çekişte gelmesi denenemedi (koleksiyon boştu).
+  - Zaman: 2026-11-01T21:56:46.622Z
+- **f18s2** · Çevrimdışı eşitleme ve kopyalarla ölçek (Faz 18 Grup 1) › Çakışma: son yazan kazanır
+  - Not: 0.9.7: kayıt 1 (version 1) sunucuda PATCH ile 'Süt al (2 litre)' yapıldı (uygulama/panel yerine API). POST /api/sync/todos {op update, id 1, base 1, fields {title: eski, done: true}, times şimdi−60 sn}: status merged, version 3, başlık sunucudaki değerde kaldı ('Süt al (2 litre)'), done true oldu, conflicts {title: 'eski'}. Sunucudaki kayıt aynı.
+  - Zaman: 2026-11-01T21:56:46.704Z
+- **f18g1** · Konum, takvim ve medya (Faz 18 Grup 2) › Konum alanı ve yakındakiler
+  - Not: 0.9.7: places (name text, loc geo) konfigürasyon API'siyle eklendi (sihirbaz yerine). Sultanahmet ve Kadıköy POST: ikisi 201, yanıtta loc {lat, lng} nesnesi. loc[near]=40.99,29.028,10: Kadıköy, Sultanahmet (bu sırada); loc[near]=40.99,29.028,1: yalnızca Kadıköy.
+  - Zaman: 2026-11-01T21:57:08.022Z
+- **f18g2** · Konum, takvim ve medya (Faz 18 Grup 2) › Hatalı konum
+  - Not: 0.9.7: loc {lat: 91, lng: 0} → 400 'Doğrulama hatası', details.loc 'enlem -90 ile 90 arasında olmalı'.
+  - Zaman: 2026-11-01T21:57:08.100Z
+- **f18g3** · Konum, takvim ve medya (Faz 18 Grup 2) › Panelde harita ve konum seçme
+  - Not: 0.9.7, panel (tünel, bilgisayar tarayıcısı): Kayıtlar > places > Harita: '2 konumlu kayıt', OpenStreetMap karoları yüklendi, iki işaret (Sultanahmet, Kadıköy). Sürükleme, tekerlek ve +/− ile yakınlaştırma çalıştı (karolar kısa sürede doldu). Kadıköy işaretine tıklayınca 'places #2' düzenleme açıldı; 'loc: haritadan seç' > 'Konum seç' penceresi (Bu cihazın konumu / Seç / Konumu temizle), haritaya tıklayınca üstte koordinat 40.988937, 29.029727 oldu, Seç ile JSON'a yazıldı, Kaydet sonrası işaret haritada yeni yerinde; API'de loc aynı. Notlar: seçilen noktada işaret çizilmiyor (yalnızca üstteki koordinat değişiyor); karo kenarlarında ince çizgiler görünüyor. Telefon özelliklerinde konum kapalı olduğundan 'Telefonun konumu' denenmedi.
+  - Zaman: 2026-11-01T21:59:28.422Z
+- **f18t1** · Konum, takvim ve medya (Faz 18 Grup 2) › Çakışma kuralı
+  - Not: 0.9.7: bookings (title, starts, ends, room) + calendar {title, start starts, end ends, noOverlap, resource room} konfigürasyon API'siyle (sihirbaz yerine). A 10:00-11:00 → 201; A 10:30-11:30 → 409 'Bu zaman aralığı #1 kaydıyla çakışıyor' (details.starts '#1 ile çakışıyor'); B 10:30-11:30 → 201; A 11:00-12:00 → 201.
+  - Zaman: 2026-11-01T22:00:02.190Z
+- **f18m1** · Konum, takvim ve medya (Faz 18 Grup 2) › Fotoğraftaki konum silinir
+  - Not: 0.9.7, photos (image: file, image/*) konfigürasyon API'siyle. Telefon kamerası yerine GPS (41.0054 N, 28.9768 E), Orientation=6, DateTimeOriginal ve Model içeren yapay 4000×3000 JPEG kullanıldı (kişisel fotoğraf alınmadı). Yükle-indir: GPS YOK, orient 6, çekim tarihi 2026:10:31 14:22:05 ve Model duruyor. Alanda keepLocation açılıp yeniden yüklenince GPS bilgisi kaldı.
+  - Zaman: 2026-11-01T22:01:55.703Z
+- **f18m2** · Konum, takvim ve medya (Faz 18 Grup 2) › WebP'ye dönüşüm ve küçültme
+  - Not: 0.9.7: alan convert webp, maxDimension 1600 (keepLocation kapalı). Aynı yapay fotoğraf: yanıttaki ad gpsfoto_….webp; dosya 1.427.648 → 16.666 bayt; boyut 1200×1600 (uzun kenar 1600), Orientation=6 uygulanmış, dik duruyor (sol kenardaki kırmızı bant üstte). Not: WebP'de EXIF tamamen yok (çekim tarihi dahil).
+  - Zaman: 2026-11-01T22:01:55.770Z
+- **f18m3** · Konum, takvim ve medya (Faz 18 Grup 2) › Video akışı (ileri sarma)
+  - Not: 0.9.7: photos'a video alanı (file, video/*, maxSizeMb 200). Telefon videosu yerine ffmpeg ile üretilen 60 sn, 920 KB mp4 yüklendi. curl -r 0-99 (API anahtarı): 206 Partial Content, Content-Range bytes 0-99/920100, Cache-Control private, max-age=31536000, immutable, Accept-Ranges bytes. Tünel üzerinden 600000-600099 aralığı da 206. Tarayıcıda (koleksiyon geçici olarak herkese açık okumaya alınıp) video öğesi: süre 60 sn, 30. saniyeye atlama çalıştı (readyState 4), istekler 206; sonra kural geri alındı. Not: panelde dosya alanı için indirme/oynatma bağlantısı yok, panel oturumu /api/files için 401.
+  - Zaman: 2026-11-01T22:07:09.563Z
+- **f18p2** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Giriş gerektiren sayfa
+  - Not: 0.9.7: kullanıcı hesapları açıldı (kayıt kapalı, doğrulama e-postası kapalı), notes'a owner (relation _users) ve sahip kuralları, sayfa notlarim (login true) konfigürasyon API'siyle. Yönetici API'siyle 2 test kullanıcısı, her biri kendi token'ıyla birer not ekledi. Tarayıcıda /pages/notlarim (adb forward ile localhost; test parolası herkese açık alan adına yazılmadı; tünelde de aynı giriş sayfası geldi): önce /pages/_login?next=… giriş sayfası; deneme1 ile girince yalnızca kendi notu (not-1, owner #1); Çıkış yap sonrası yeniden giriş sayfası. Not: listede owner '#1' olarak görünüyor.
+  - Zaman: 2026-11-02T11:57:55.462Z
+- **f18p3** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Pano (uygulama ve panel)
+  - Not: 0.9.7: görünümler durum (posts, rapor groupBy status) ve son (posts, sütun title) ile pano 'Özet' (grafik: durum, tablo: son) konfigürasyon API'siyle (panel/uygulama editörü yerine). Uygulamada Sunucu > Panolar (1) > Özet: çubuk grafik 'taslak: 1 · yayında: 2' ve tablo (title, 3 satır). Panelde Sayfalar ve panolar: iki kutu sürüklenip yer değiştirildi (tarayıcı sürükle-bırak olaylarıyla), Kaydet ve deploy et → konfigürasyonda sıra [table son, chart durum]; 'Göster (kayıtlı hali)' önce Son yazılar sonra Durum; uygulamadaki pano da yeni sırayla.
+  - Zaman: 2026-11-02T12:11:58.754Z
+- **f18p4** · Sayfalar, panolar, yerel YZ ve paketler (Faz 18 Grup 3) › Panoyu paylaşma
+  - Not: 0.9.7: uygulamada Panolar > Özet > Düzenle > 'Salt okunur adresle paylaş' açıldı; adres gösterildi (http://<ip>:8080/dashboards/ozet?token=…), Kaydet ve deploy et. Başka cihaz yerine giriş bilgisi olmadan curl ile tünelden: doğru anahtarla 200, sayfada Son yazılar tablosu (3 satır) ve Durum grafiği (svg); anahtarın sonuna harf eklenince 404, anahtarsız 404.
+  - Zaman: 2026-11-02T12:14:54.712Z
 - **o1** · Kullanıcı seçenekleri › Alan ekle ve veri gir
   - Zaman: 2026-10-13T20:23:43.696Z
 - **o2** · Kullanıcı seçenekleri › Tipi değiştir: Dönüştür
@@ -271,4 +501,40 @@ Yok.
   - Zaman: 2026-10-13T20:23:55.712Z
 - **o8** · Kullanıcı seçenekleri › Postgres verisini sil (isteğe bağlı, geri alınamaz)
   - Zaman: 2026-10-13T20:23:57.200Z
+- **mt1** · MQTT TLS (17.5) › TLS'i açma ve kökü alma
+  - Not: 0.9.7: Sunucu > MQTT (IoT) ekranında MQTT açık ve TLS açık (port 8883), parola girildi, Kaydet ve deploy et. Başlık 'Açık · port 1883, 8883 (TLS)'; Loglar 'MQTT kök sertifikası üretildi: 84:45:…', 'MQTT 1883, 8883 (TLS) portunda dinliyor' ve ilk TLS bağlantısında 'MQTT sunucu sertifikası imzalandı: 10.14.4.88, 10.39.192.229, <IPv6>'. Kök 'Kökü paylaş' yerine /api/_mqtt/ca.pem ile alındı (CN=DroidServer yerel kök, 2049'a kadar). Not: ekrandaki adres mobil veri IP'si (mqtt://10.39.192.229:1883), Wi-Fi IP'si değil.
+  - Zaman: 2026-11-02T12:48:57.035Z
+- **mt2** · MQTT TLS (17.5) › mosquitto ile TLS
+  - Not: 0.9.7: mosquitto yerine Python ile yazılmış MQTT 3.1.1 istemcisi, adb forward 8883 ve kökle (droidserver-ca.pem), ad doğrulaması telefonun Wi-Fi IP'si (10.14.4.88) ile, --insecure olmadan: CONNACK 0, abone '#', yayın ev/test merhaba → 'MESAJ ev/test merhaba'. Uygulamada MQTT ekranında cihaz 'ds-test-sub-… · 127.0.0.1 · TLS · device · ev/#'. Köksüz deneme: CERTIFICATE_VERIFY_FAILED (self-signed certificate in certificate chain); Loglar 'MQTT TLS: 127.0.0.1 ile el sıkışma başarısız'. Not: telefonda adb ile yazılan parola yanlış kaydedildi (CONNACK 4); parola konfigürasyon API'siyle yeniden verildi.
+  - Zaman: 2026-11-02T12:48:57.087Z
+- **p1** · Play sürümü: yapı türleri ve API 36 (19.1–19.2) › Play türünü kurma
+  - Zaman: 2026-10-13T16:24:15.963Z
+- **p2** · Play sürümü: yapı türleri ve API 36 (19.1–19.2) › Bildirim izni
+  - Zaman: 2026-10-13T16:25:06.706Z
+- **p3** · Play sürümü: yapı türleri ve API 36 (19.1–19.2) › Play'de kapalı olanlar
+  - Zaman: 2026-10-13T16:26:23.025Z
+- **p4** · Play sürümü: yapı türleri ve API 36 (19.1–19.2) › Arka planda başlatma
+  - Zaman: 2026-11-02T12:24:59.908Z
+- **p5** · Play sürümü: yapı türleri ve API 36 (19.1–19.2) › GitHub türü değişmedi
+  - Zaman: 2026-11-02T12:32:23.875Z
+- **pb1** · Play sürümünde bileşenler (19.3–19.4) › Modülü Play'den kurma
+  - Zaman: 2026-11-02T12:24:14.866Z
+- **pb2** · Play sürümünde bileşenler (19.3–19.4) › PostgreSQL
+  - Zaman: 2026-11-02T12:24:09.580Z
+- **pb3** · Play sürümünde bileşenler (19.3–19.4) › Hızlı tünel
+  - Zaman: 2026-11-02T12:23:58.131Z
+- **pb6** · Play sürümünde bileşenler (19.3–19.4) › Uygulama güncellemesi sonrası
+  - Zaman: 2026-11-02T12:31:30.958Z
+- **sc5** · SMS yolları, konum ve pil (19.5–19.6) › Konum (Play sürümü)
+  - Zaman: 2026-11-02T12:23:32.466Z
+- **sc6** · SMS yolları, konum ve pil (19.5–19.6) › Pil muafiyeti (Play sürümü)
+  - Zaman: 2026-11-02T12:23:22.047Z
+- **pu1** · Play: uygulama içi güncelleme ve değerlendirme (19.8) › Güncelleme kartı
+  - Zaman: 2026-11-02T12:23:06.974Z
+- **pu2** · Play: uygulama içi güncelleme ve değerlendirme (19.8) › İndirme ve kurulum
+  - Zaman: 2026-11-02T12:22:36.877Z
+- **pu3** · Play: uygulama içi güncelleme ve değerlendirme (19.8) › Play'de değerlendir
+  - Zaman: 2026-11-02T12:22:40.016Z
+- **pu4** · Play: uygulama içi güncelleme ve değerlendirme (19.8) › Değerlendirme penceresi
+  - Zaman: 2026-11-02T12:22:43.382Z
 
